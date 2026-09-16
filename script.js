@@ -3,7 +3,7 @@
  */
 
 // ================= 1. DATABASE SCHEMA & INITIALIZATION =================
-const DB_STORAGE_KEY = "CODEX_LOCAL_DATABASE_V33";
+const DB_STORAGE_KEY = "CODEX_LOCAL_DATABASE_V34";
 const OPENAI_API_KEY_STORAGE = "CODEX_OPENAI_API_KEY";
 
 const CURRENCY_CONFIG = {
@@ -892,6 +892,9 @@ const SEARCHABLE_PAGES = [
   { title: "Customers Directory", target: "customers", category: "Page", icon: "users", keywords: "users clients emails subscribers leads customers" },
   { title: "Products Inventory", target: "products", category: "Page", icon: "package-open", keywords: "products inventory stock available unavailable buyer delivery upload" },
   { title: "Payment Management", target: "payments", category: "Page", icon: "credit-card", keywords: "payment pending completed transaction settlement" },
+  { title: "Loan Services", target: "loans", category: "Page", icon: "landmark", keywords: "loan schemes eligibility apply emi calculator financing" },
+  { title: "Document Vault", target: "documents", category: "Page", icon: "file-text", keywords: "document upload required verification files" },
+  { title: "MSME Services", target: "msme", category: "Page", icon: "briefcase", keywords: "msme registration udyam government schemes subsidies benefits support" },
   { title: "Cloud Data", target: "cloud", category: "Page", icon: "cloud", keywords: "cloud backup vault storage sync" },
   { title: "Industrial Blog's & News", target: "blogs", category: "Page", icon: "newspaper", keywords: "blog news startup industrial articles reports" },
   { title: "System Settings", target: "settings", category: "Settings", icon: "settings", keywords: "preferences 2fa notifications alerts configuration database reset settings" }
@@ -939,7 +942,7 @@ async function processOpenAIChatAPI(rawPrompt) {
   const apiKey = localStorage.getItem(OPENAI_API_KEY_STORAGE) || "YOUR_OPENAI_API_KEY_HERE";
   
   if (!apiKey || apiKey.includes("YOUR_OPENAI_API_KEY")) {
-    return `⚠️ <strong>OpenAI API Key Required</strong><br><br>Please enter a valid OpenAI API key to use live GPT responses.`;
+    return `⚠️ <strong>OpenAI API Key Missing</strong><br><br>Please configure your OpenAI API key in browser storage or settings to chat with GPT-4o.`;
   }
 
   const db = DB.get();
@@ -1899,6 +1902,13 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
         <div class="form-group"><label>Status</label><select id="m-sup-status"><option value="Delivered">Delivered (Glowing Green)</option><option value="In Transit">In Transit (Alert Red)</option><option value="Pending">Pending (Alert Red)</option><option value="Out of Stock">Out of Stock (Alert Red)</option></select></div>
       `;
+    } else if (action === "loan") {
+      modalTitle.textContent = "Apply for New Loan Scheme";
+      modalFields.innerHTML = `
+        <div class="form-group"><label>Select Scheme</label><select id="m-loan-scheme"><option value="MSME Growth Advance">MSME Growth Advance (Working Capital)</option><option value="Industrial Equipment Leasing">Industrial Equipment Leasing</option></select></div>
+        <div class="form-group"><label>Requested Loan Amount in ${db.currency} (${curSym})</label><input type="number" id="m-loan-amount" required placeholder="500000" /></div>
+        <div class="form-group"><label>Business Registration / PAN</label><input type="text" id="m-loan-pan" required placeholder="ABCDE1234F" /></div>
+      `;
     }
   };
 
@@ -1969,6 +1979,9 @@ document.addEventListener("DOMContentLoaded", () => {
       renderAllFromDB();
       showToast("Company supply record registered!");
       logDatabaseNotification("supply", `Supply contract registered for ${companyName} (${qty} units).`);
+    } else if (currentModalAction === "loan") {
+      showToast("Loan application submitted successfully for review!");
+      logDatabaseNotification("system", "New loan application submitted.");
     }
     closeModal();
   });

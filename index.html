@@ -79,6 +79,27 @@
             </div>
           </a>
 
+          <a href="#" class="nav-item" data-target="loans">
+            <div class="nav-label">
+              <i data-lucide="landmark"></i>
+              <span>Loan Services</span>
+            </div>
+          </a>
+
+          <a href="#" class="nav-item" data-target="documents">
+            <div class="nav-label">
+              <i data-lucide="file-text"></i>
+              <span>Documents</span>
+            </div>
+          </a>
+
+          <a href="#" class="nav-item" data-target="msme">
+            <div class="nav-label">
+              <i data-lucide="briefcase"></i>
+              <span>MSME Services</span>
+            </div>
+          </a>
+
           <a href="#" class="nav-item" data-target="cloud">
             <div class="nav-label">
               <i data-lucide="cloud"></i>
@@ -677,6 +698,267 @@
         </div>
       </section>
 
+      <!-- ================= SECTION: LOAN SERVICES ================= -->
+      <section id="section-loans" class="page-section">
+        <div class="section-title-wrap">
+          <div class="title-with-btn">
+            <div>
+              <h2>Loan Services & Financial Facilities</h2>
+              <p>Explore available loan schemes, check eligibility, apply for loans, and calculate EMIs.</p>
+            </div>
+            <button class="primary-btn" id="apply-loan-btn" onclick="openModal('loan')">
+              <i data-lucide="file-plus" class="w-4 h-4"></i> New Application
+            </button>
+          </div>
+        </div>
+
+        <div class="stat-cards-grid-4">
+          <div class="card stat-card interactive-card" onclick="showToast('Viewing available loan schemes...')">
+            <div class="stat-icon"><i data-lucide="landmark"></i></div>
+            <p class="stat-title">Available Schemes</p>
+            <h3 class="stat-val">5 Active Schemes</h3>
+          </div>
+          <div class="card stat-card interactive-card" id="card-check-eligibility">
+            <div class="stat-icon"><i data-lucide="check-square"></i></div>
+            <p class="stat-title">Check Eligibility</p>
+            <button class="small-btn mt-2" id="instant-check-btn" style="margin-top: 8px; width: 100%;">Instant Check</button>
+          </div>
+          <div class="card stat-card interactive-card" onclick="openModal('loan')">
+            <div class="stat-icon"><i data-lucide="file-plus"></i></div>
+            <p class="stat-title">Apply for Loan</p>
+            <h3 class="stat-val" style="font-size: 15px; color: #10B981; font-weight: 700;">New Application &rarr;</h3>
+          </div>
+          <div class="card stat-card interactive-card" id="card-open-emi-calc">
+            <div class="stat-icon"><i data-lucide="calculator"></i></div>
+            <p class="stat-title">EMI Calculator</p>
+            <button class="small-btn mt-2" id="calculate-emi-btn" style="margin-top: 8px; width: 100%; background: var(--accent-color); color: white;">Calculate</button>
+          </div>
+        </div>
+
+        <!-- Available Loan Schemes Table -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h4 class="card-title">Available Loan Schemes & Business Financing</h4>
+              <p class="card-subtitle">Collateral-free MSME loans, equipment financing, and working capital lines.</p>
+            </div>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Scheme Name</th>
+                <th>Loan Type</th>
+                <th>Max Amount</th>
+                <th>Interest Rate</th>
+                <th>Tenure</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>MSME Growth Advance</strong></td>
+                <td>Working Capital</td>
+                <td>₹50,00,000</td>
+                <td>8.5% p.a.</td>
+                <td>5 Years</td>
+                <td><button class="small-btn" onclick="openModal('loan')">Apply Now</button></td>
+              </tr>
+              <tr>
+                <td><strong>Industrial Equipment Leasing</strong></td>
+                <td>Asset Financing</td>
+                <td>₹1,20,00,000</td>
+                <td>7.9% p.a.</td>
+                <td>7 Years</td>
+                <td><button class="small-btn" onclick="openModal('loan')">Apply Now</button></td>
+              </tr>
+              <tr>
+                <td><strong>Mudramax Business Booster</strong></td>
+                <td>Micro Enterprise</td>
+                <td>₹10,00,000</td>
+                <td>9.2% p.a.</td>
+                <td>3 Years</td>
+                <td><button class="small-btn" onclick="openModal('loan')">Apply Now</button></td>
+              </tr>
+              <tr>
+                <td><strong>Green Energy Transition Fund</strong></td>
+                <td>Sustainable Tech</td>
+                <td>₹75,00,000</td>
+                <td>6.5% p.a.</td>
+                <td>8 Years</td>
+                <td><button class="small-btn" onclick="openModal('loan')">Apply Now</button></td>
+              </tr>
+              <tr>
+                <td><strong>Quick Invoice Discounting</strong></td>
+                <td>Short-term Cashflow</td>
+                <td>₹25,00,000</td>
+                <td>10.0% p.a.</td>
+                <td>1 Year</td>
+                <td><button class="small-btn" onclick="openModal('loan')">Apply Now</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- My Loan Applications Section -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h4 class="card-title">Submitted Loan Applications</h4>
+              <p class="card-subtitle">Track status of active loan requests in the database.</p>
+            </div>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>App ID</th>
+                <th>Scheme Name</th>
+                <th>Amount Requested</th>
+                <th>Submission Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>LN-8812</strong></td>
+                <td>MSME Growth Advance</td>
+                <td>₹15,00,000</td>
+                <td>Sep 02, 2026</td>
+                <td><span class="table-badge delivered">Approved</span></td>
+              </tr>
+              <tr>
+                <td><strong>LN-8849</strong></td>
+                <td>Quick Invoice Discounting</td>
+                <td>₹5,00,000</td>
+                <td>Sep 12, 2026</td>
+                <td><span class="table-badge pending">Under Review</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= SECTION: DOCUMENTS ================= -->
+      <section id="section-documents" class="page-section">
+        <div class="section-title-wrap">
+          <div class="title-with-btn">
+            <div>
+              <h2>Document Management Vault</h2>
+              <p>Upload, organize, and inspect required compliance and business documents.</p>
+            </div>
+            <button class="primary-btn" onclick="showToast('Select document file to upload...')">
+              <i data-lucide="upload" class="w-4 h-4"></i> Upload Documents
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h4 class="card-title">My Documents & Required Verification Files</h4>
+              <p class="card-subtitle">All uploaded certificates, identity proofs, and tax filings.</p>
+            </div>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Document Name</th>
+                <th>Category</th>
+                <th>Upload Date</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>MSME Registration Certificate.pdf</strong></td>
+                <td>Business Proof</td>
+                <td>Aug 15, 2026</td>
+                <td><span class="table-badge delivered">Verified</span></td>
+                <td><button class="small-btn" onclick="showToast('Downloading document...')">Download</button></td>
+              </tr>
+              <tr>
+                <td><strong>GST Returns Q1 2026.xlsx</strong></td>
+                <td>Tax Filing</td>
+                <td>Sep 02, 2026</td>
+                <td><span class="table-badge pending">Pending Review</span></td>
+                <td><button class="small-btn" onclick="showToast('Downloading document...')">Download</button></td>
+              </tr>
+              <tr>
+                <td><strong>Audited Balance Sheet FY25.pdf</strong></td>
+                <td>Financials</td>
+                <td>Jul 20, 2026</td>
+                <td><span class="table-badge delivered">Verified</span></td>
+                <td><button class="small-btn" onclick="showToast('Downloading document...')">Download</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= SECTION: MSME SERVICES ================= -->
+      <section id="section-msme" class="page-section">
+        <div class="section-title-wrap">
+          <h2>MSME Services & Government Support</h2>
+          <p>Access Udyam MSME registration information, government schemes, subsidies, and business support resources.</p>
+        </div>
+
+        <div class="stat-cards-grid-4">
+          <div class="card stat-card interactive-card" onclick="showToast('Opening Udyam MSME Registration guide...')">
+            <div class="stat-icon"><i data-lucide="award"></i></div>
+            <p class="stat-title">MSME Registration</p>
+            <h3 class="stat-val" style="font-size: 16px; color: var(--accent-color);">Udyam Guide &rarr;</h3>
+          </div>
+          <div class="card stat-card interactive-card" onclick="showToast('Loading active central & state schemes...')">
+            <div class="stat-icon"><i data-lucide="shield-check"></i></div>
+            <p class="stat-title">Government Schemes</p>
+            <h3 class="stat-val">24 Available</h3>
+          </div>
+          <div class="card stat-card interactive-card" onclick="showToast('Listing tax rebates & capital subsidies...')">
+            <div class="stat-icon"><i data-lucide="percent"></i></div>
+            <p class="stat-title">Subsidies & Benefits</p>
+            <h3 class="stat-val" style="font-size: 16px; color: #10B981;">View Benefits &rarr;</h3>
+          </div>
+          <div class="card stat-card interactive-card" onclick="showToast('Connecting to MSME business support desk...')">
+            <div class="stat-icon"><i data-lucide="headphones"></i></div>
+            <p class="stat-title">Business Support</p>
+            <h3 class="stat-val" style="font-size: 16px; color: #F59E0B;">24/7 Desk &rarr;</h3>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h4 class="card-title">Key MSME Subsidies & Benefits Summary</h4>
+              <p class="card-subtitle">Overview of financial grants, technology upgradation funds, and market promotion support.</p>
+            </div>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Subsidy / Scheme</th>
+                <th>Ministry / Department</th>
+                <th>Benefit Type</th>
+                <th>Eligibility</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Credit Linked Capital Subsidy (CLCSS)</strong></td>
+                <td>Ministry of MSME</td>
+                <td>15% Capital Subsidy (Up to ₹15 Lakhs)</td>
+                <td>Micro & Small Enterprises</td>
+              </tr>
+              <tr>
+                <td><strong>Zero Defect Zero Effect (ZED) Certification</strong></td>
+                <td>Quality Council of India</td>
+                <td>Up to 80% Subsidy on Assessment Cost</td>
+                <td>All Manufacturing MSMEs</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       <!-- ================= SECTION: CLOUD DATA ================= -->
       <section id="section-cloud" class="page-section">
         <div class="section-title-wrap">
@@ -999,7 +1281,65 @@
     </div>
   </div>
 
-  <!-- Modal for Order/Customer/Company Supply -->
+  <!-- Animated EMI Calculator Popup Modal -->
+  <div class="modal-overlay hidden" id="emi-calc-modal">
+    <div class="modal-card emi-calc-card-popup">
+      <div class="modal-header">
+        <h3 style="display: flex; align-items: center; gap: 8px;"><i data-lucide="calculator" class="w-5 h-5 text-accent"></i> Interactive EMI Calculator</h3>
+        <button class="modal-close-btn" id="emi-calc-close-btn"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Loan Amount (₹)</label>
+          <input type="number" id="emi-loan-amount" value="500000" step="10000" />
+        </div>
+        <div class="form-group">
+          <label>Interest Rate (% P.A.)</label>
+          <input type="number" id="emi-interest-rate" value="8.5" step="0.1" />
+        </div>
+        <div class="form-group">
+          <label>Loan Tenure (Months)</label>
+          <input type="number" id="emi-tenure-months" value="36" />
+        </div>
+        <div class="emi-result-box" style="background: var(--bg-main); padding: 16px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; margin-top: 6px;">
+          <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #94A3B8;">Estimated Monthly EMI</span>
+          <h3 id="emi-result-output" style="font-size: 24px; font-weight: 800; color: var(--accent-color); margin-top: 4px;">₹15,778</h3>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="primary-btn" id="emi-calc-done-btn" style="width: 100%; justify-content: center;">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Animated Eligibility Check Popup Modal -->
+  <div class="modal-overlay hidden" id="eligibility-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 style="display: flex; align-items: center; gap: 8px;"><i data-lucide="check-square" class="w-5 h-5 text-accent"></i> Instant Loan Eligibility Check</h3>
+        <button class="modal-close-btn" id="eligibility-close-btn"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Annual Business Turnover (₹)</label>
+          <input type="number" id="eligibility-turnover" placeholder="e.g. 2500000" required />
+        </div>
+        <div class="form-group">
+          <label>Years in Operation</label>
+          <input type="number" id="eligibility-years" placeholder="e.g. 3" required />
+        </div>
+        <div id="eligibility-output-box" class="hidden" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 14px; border-radius: 10px; text-align: center; color: #059669; font-weight: 700; font-size: 13.5px;">
+          🎉 Congratulations! You are pre-qualified for business loans up to ₹25,00,000.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="small-btn" id="eligibility-cancel-btn">Close</button>
+        <button type="button" class="primary-btn" id="eligibility-check-submit-btn">Check Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Order/Customer/Company Supply/Loan -->
   <div class="modal-overlay hidden" id="db-modal">
     <div class="modal-card">
       <div class="modal-header">
@@ -1038,7 +1378,7 @@
           </div>
           <div>
             <h5>Codex AI <span class="ai-pill">OpenAI GPT-4o</span></h5>
-            <span class="ai-status"><span class="status-dot"></span> API Key Required</span>
+            <span class="ai-status"><span class="status-dot"></span> Live Assistant</span>
           </div>
         </div>
         <div class="chat-header-actions">
@@ -1051,18 +1391,18 @@
 
       <div class="codex-quick-suggestions">
         <button class="suggestion-chip" data-ask="Give me a complete summary of all sections on this website.">🌐 Full System Summary</button>
-        <button class="suggestion-chip" data-ask="Show me the products inventory and buyer records.">📦 Products & Buyers</button>
+        <button class="suggestion-chip" data-ask="Show me available loan schemes and MSME benefits.">💳 Loans & MSME</button>
         <button class="suggestion-chip" data-ask="What is the active revenue target and today's profit?">💰 Revenue & Targets</button>
       </div>
 
       <div class="codex-messages" id="codex-messages">
         <div class="ai-bubble">
-          Hello! I am <strong>Codex AI</strong>. Please enter your OpenAI API key in settings or when prompted to begin live chat responses.
+          Hello! I am <strong>Codex AI</strong>. Ask me anything about your database, loan schemes, or business analytics!
         </div>
       </div>
 
       <form class="codex-input-area" id="codex-form">
-        <input type="text" id="codex-input" placeholder="Message OpenAI GPT-4o..." autocomplete="off" />
+        <input type="text" id="codex-input" placeholder="Message Codex AI..." autocomplete="off" />
         <button type="submit" class="codex-send-btn" title="Send Query">
           <i data-lucide="send"></i>
         </button>

@@ -1976,6 +1976,12 @@ body.dark-mode .modern-delivery-capsule.pending-state {
   align-items: center;
   justify-content: center;
   z-index: 1500;
+  animation: fadeInModal 0.2s ease;
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .modal-overlay.hidden {
@@ -1989,6 +1995,7 @@ body.dark-mode .modern-delivery-capsule.pending-state {
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  animation: modal-pop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .modal-header {
@@ -2631,6 +2638,9 @@ body.dark-mode .modern-delivery-capsule.pending-state {
   #section-calendar,
   #section-products,
   #section-payments,
+  #section-loans,
+  #section-documents,
+  #section-msme,
   #section-cloud,
   #section-blogs,
   #section-profile,
