@@ -3,7 +3,7 @@
  */
 
 // ================= 1. DATABASE SCHEMA & INITIALIZATION =================
-const DB_STORAGE_KEY = "CODEX_LOCAL_DATABASE_V34";
+const DB_STORAGE_KEY = "CODEX_LOCAL_DATABASE_V37";
 const OPENAI_API_KEY_STORAGE = "CODEX_OPENAI_API_KEY";
 
 const CURRENCY_CONFIG = {
@@ -832,6 +832,43 @@ window.openProductDetailModal = function(productId) {
   lucide.createIcons();
 };
 
+// ================= INTERACTIVE LOAN TOOLS =================
+window.openEmiCalculatorModal = function() {
+  document.getElementById("emi-calculator-modal").classList.remove("hidden");
+  calculateEMI();
+};
+
+window.calculateEMI = function() {
+  const p = parseFloat(document.getElementById("emi-loan-amt").value) || 0;
+  const annualRate = parseFloat(document.getElementById("emi-interest-rate").value) || 0;
+  const years = parseFloat(document.getElementById("emi-tenure-years").value) || 1;
+
+  const r = annualRate / 12 / 100;
+  const n = years * 12;
+
+  let emi = 0;
+  if (r > 0) {
+    emi = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  } else {
+    emi = p / n;
+  }
+
+  document.getElementById("emi-result-display").textContent = `₹${Math.round(emi).toLocaleString()}`;
+};
+
+window.openEligibilityChecker = function() {
+  const turnover = prompt("Enter your business annual turnover (in ₹):", "2500000");
+  if (!turnover) return;
+  const score = prompt("Enter your estimated credit score (e.g. 750):", "750");
+  if (!score) return;
+
+  if (parseInt(score, 10) >= 700 && parseInt(turnover, 10) >= 1000000) {
+    showToast("🎉 Congratulations! You are eligible for MSME collateral-free loans up to ₹50 Lakhs.");
+  } else {
+    showToast("⚠️ Based on your inputs, we recommend securing your profile with verified GST filings.");
+  }
+};
+
 // Export Utilities
 function exportSupplyToExcelCSV() {
   const db = DB.get();
@@ -892,7 +929,7 @@ const SEARCHABLE_PAGES = [
   { title: "Customers Directory", target: "customers", category: "Page", icon: "users", keywords: "users clients emails subscribers leads customers" },
   { title: "Products Inventory", target: "products", category: "Page", icon: "package-open", keywords: "products inventory stock available unavailable buyer delivery upload" },
   { title: "Payment Management", target: "payments", category: "Page", icon: "credit-card", keywords: "payment pending completed transaction settlement" },
-  { title: "Loan Services", target: "loans", category: "Page", icon: "landmark", keywords: "loan schemes eligibility apply emi calculator financing" },
+  { title: "Loan Services", target: "loans", category: "Page", icon: "landmark", keywords: "loan schemes eligibility apply emi calculator financing applications" },
   { title: "Document Vault", target: "documents", category: "Page", icon: "file-text", keywords: "document upload required verification files" },
   { title: "MSME Services", target: "msme", category: "Page", icon: "briefcase", keywords: "msme registration udyam government schemes subsidies benefits support" },
   { title: "Cloud Data", target: "cloud", category: "Page", icon: "cloud", keywords: "cloud backup vault storage sync" },
@@ -1905,7 +1942,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (action === "loan") {
       modalTitle.textContent = "Apply for New Loan Scheme";
       modalFields.innerHTML = `
-        <div class="form-group"><label>Select Scheme</label><select id="m-loan-scheme"><option value="MSME Growth Advance">MSME Growth Advance (Working Capital)</option><option value="Industrial Equipment Leasing">Industrial Equipment Leasing</option></select></div>
+        <div class="form-group"><label>Select Scheme</label><select id="m-loan-scheme"><option value="MSME Growth Advance">MSME Growth Advance (Working Capital)</option><option value="Industrial Equipment Leasing">Industrial Equipment Leasing</option><option value="Green Energy Tech Loan">Green Energy Tech Loan</option></select></div>
         <div class="form-group"><label>Requested Loan Amount in ${db.currency} (${curSym})</label><input type="number" id="m-loan-amount" required placeholder="500000" /></div>
         <div class="form-group"><label>Business Registration / PAN</label><input type="text" id="m-loan-pan" required placeholder="ABCDE1234F" /></div>
       `;

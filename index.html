@@ -704,34 +704,34 @@
           <div class="title-with-btn">
             <div>
               <h2>Loan Services & Financial Facilities</h2>
-              <p>Explore available loan schemes, check eligibility, apply for loans, and calculate EMIs.</p>
+              <p>Explore available loan schemes, verify eligibility instantly, apply for financing, and calculate EMI.</p>
             </div>
-            <button class="primary-btn" id="apply-loan-btn" onclick="openModal('loan')">
+            <button class="primary-btn" onclick="openModal('loan')">
               <i data-lucide="file-plus" class="w-4 h-4"></i> New Application
             </button>
           </div>
         </div>
 
         <div class="stat-cards-grid-4">
-          <div class="card stat-card interactive-card" onclick="showToast('Viewing available loan schemes...')">
+          <div class="card stat-card interactive-card">
             <div class="stat-icon"><i data-lucide="landmark"></i></div>
             <p class="stat-title">Available Schemes</p>
-            <h3 class="stat-val">5 Active Schemes</h3>
+            <h3 class="stat-val">12 Active</h3>
           </div>
-          <div class="card stat-card interactive-card" id="card-check-eligibility">
+          <div class="card stat-card interactive-card" onclick="openEligibilityChecker()">
             <div class="stat-icon"><i data-lucide="check-square"></i></div>
             <p class="stat-title">Check Eligibility</p>
-            <button class="small-btn mt-2" id="instant-check-btn" style="margin-top: 8px; width: 100%;">Instant Check</button>
+            <h3 class="stat-val" style="font-size: 16px; color: var(--accent-color);">Instant Check &rarr;</h3>
           </div>
           <div class="card stat-card interactive-card" onclick="openModal('loan')">
             <div class="stat-icon"><i data-lucide="file-plus"></i></div>
             <p class="stat-title">Apply for Loan</p>
-            <h3 class="stat-val" style="font-size: 15px; color: #10B981; font-weight: 700;">New Application &rarr;</h3>
+            <h3 class="stat-val" style="font-size: 16px; color: #10B981;">New Application &rarr;</h3>
           </div>
-          <div class="card stat-card interactive-card" id="card-open-emi-calc">
+          <div class="card stat-card interactive-card" onclick="openEmiCalculatorModal()">
             <div class="stat-icon"><i data-lucide="calculator"></i></div>
             <p class="stat-title">EMI Calculator</p>
-            <button class="small-btn mt-2" id="calculate-emi-btn" style="margin-top: 8px; width: 100%; background: var(--accent-color); color: white;">Calculate</button>
+            <h3 class="stat-val" style="font-size: 16px; color: #F59E0B;">Calculate &rarr;</h3>
           </div>
         </div>
 
@@ -740,7 +740,7 @@
           <div class="card-header">
             <div>
               <h4 class="card-title">Available Loan Schemes & Business Financing</h4>
-              <p class="card-subtitle">Collateral-free MSME loans, equipment financing, and working capital lines.</p>
+              <p class="card-subtitle">Collateral-free MSME loans, equipment leasing, and working capital lines.</p>
             </div>
           </div>
           <table class="data-table">
@@ -772,66 +772,54 @@
                 <td><button class="small-btn" onclick="openModal('loan')">Apply Now</button></td>
               </tr>
               <tr>
-                <td><strong>Mudramax Business Booster</strong></td>
-                <td>Micro Enterprise</td>
-                <td>₹10,00,000</td>
-                <td>9.2% p.a.</td>
-                <td>3 Years</td>
-                <td><button class="small-btn" onclick="openModal('loan')">Apply Now</button></td>
-              </tr>
-              <tr>
-                <td><strong>Green Energy Transition Fund</strong></td>
-                <td>Sustainable Tech</td>
+                <td><strong>Green Energy Tech Loan</strong></td>
+                <td>Sustainability</td>
                 <td>₹75,00,000</td>
                 <td>6.5% p.a.</td>
-                <td>8 Years</td>
-                <td><button class="small-btn" onclick="openModal('loan')">Apply Now</button></td>
-              </tr>
-              <tr>
-                <td><strong>Quick Invoice Discounting</strong></td>
-                <td>Short-term Cashflow</td>
-                <td>₹25,00,000</td>
-                <td>10.0% p.a.</td>
-                <td>1 Year</td>
+                <td>10 Years</td>
                 <td><button class="small-btn" onclick="openModal('loan')">Apply Now</button></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <!-- My Loan Applications Section -->
+        <!-- Loan Applications Table (15 Applications) -->
         <div class="card">
           <div class="card-header">
             <div>
-              <h4 class="card-title">Submitted Loan Applications</h4>
-              <p class="card-subtitle">Track status of active loan requests in the database.</p>
+              <h4 class="card-title">My Loan Applications List</h4>
+              <p class="card-subtitle">Comprehensive tracking log of 15 submitted financing requests.</p>
             </div>
+            <button class="primary-btn" onclick="openModal('loan')">
+              <i data-lucide="plus" class="w-4 h-4"></i> New Application
+            </button>
           </div>
           <table class="data-table">
             <thead>
               <tr>
                 <th>App ID</th>
                 <th>Scheme Name</th>
-                <th>Amount Requested</th>
+                <th>Requested Amount</th>
                 <th>Submission Date</th>
                 <th>Status</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td><strong>LN-8812</strong></td>
-                <td>MSME Growth Advance</td>
-                <td>₹15,00,000</td>
-                <td>Sep 02, 2026</td>
-                <td><span class="table-badge delivered">Approved</span></td>
-              </tr>
-              <tr>
-                <td><strong>LN-8849</strong></td>
-                <td>Quick Invoice Discounting</td>
-                <td>₹5,00,000</td>
-                <td>Sep 12, 2026</td>
-                <td><span class="table-badge pending">Under Review</span></td>
-              </tr>
+            <tbody id="loan-applications-tbody">
+              <tr><td><strong>LN-8810</strong></td><td>MSME Growth Advance</td><td><strong>₹15,00,000</strong></td><td>Sep 02, 2026</td><td><span class="table-badge delivered">Approved & Disbursed</span></td></tr>
+              <tr><td><strong>LN-8942</strong></td><td>Industrial Equipment Leasing</td><td><strong>₹45,00,000</strong></td><td>Sep 12, 2026</td><td><span class="table-badge pending">Under Verification</span></td></tr>
+              <tr><td><strong>LN-8805</strong></td><td>Green Energy Tech Loan</td><td><strong>₹25,00,000</strong></td><td>Aug 28, 2026</td><td><span class="table-badge delivered">Disbursed</span></td></tr>
+              <tr><td><strong>LN-8750</strong></td><td>Working Capital Line #2</td><td><strong>₹10,00,000</strong></td><td>Aug 20, 2026</td><td><span class="table-badge delivered">Approved</span></td></tr>
+              <tr><td><strong>LN-8620</strong></td><td>Tech Infrastructure Upgrade</td><td><strong>₹30,00,000</strong></td><td>Aug 14, 2026</td><td><span class="table-badge cancelled">Rejected</span></td></tr>
+              <tr><td><strong>LN-8591</strong></td><td>MSME Growth Advance</td><td><strong>₹20,00,000</strong></td><td>Aug 05, 2026</td><td><span class="table-badge delivered">Disbursed</span></td></tr>
+              <tr><td><strong>LN-8433</strong></td><td>Warehouse Expansion Loan</td><td><strong>₹80,00,000</strong></td><td>Jul 29, 2026</td><td><span class="table-badge pending">Under Review</span></td></tr>
+              <tr><td><strong>LN-8312</strong></td><td>Solar Panel Install Grant-Loan</td><td><strong>₹12,00,000</strong></td><td>Jul 18, 2026</td><td><span class="table-badge delivered">Approved</span></td></tr>
+              <tr><td><strong>LN-8204</strong></td><td>Logistics Fleet Financing</td><td><strong>₹60,00,000</strong></td><td>Jul 10, 2026</td><td><span class="table-badge delivered">Disbursed</span></td></tr>
+              <tr><td><strong>LN-8155</strong></td><td>Emergency Cashflow Buffer</td><td><strong>₹5,00,000</strong></td><td>Jun 30, 2026</td><td><span class="table-badge delivered">Closed</span></td></tr>
+              <tr><td><strong>LN-8099</strong></td><td>R&D Lab Equipment Line</td><td><strong>₹35,00,000</strong></td><td>Jun 22, 2026</td><td><span class="table-badge delivered">Disbursed</span></td></tr>
+              <tr><td><strong>LN-7980</strong></td><td>Export Working Capital</td><td><strong>₹50,00,000</strong></td><td>Jun 12, 2026</td><td><span class="table-badge delivered">Approved</span></td></tr>
+              <tr><td><strong>LN-7845</strong></td><td>Office Automation Loan</td><td><strong>₹8,00,000</strong></td><td>May 28, 2026</td><td><span class="table-badge delivered">Closed</span></td></tr>
+              <tr><td><strong>LN-7712</strong></td><td>Raw Material Advance</td><td><strong>₹18,00,000</strong></td><td>May 15, 2026</td><td><span class="table-badge delivered">Closed</span></td></tr>
+              <tr><td><strong>LN-7601</strong></td><td>Industrial Equipment Leasing</td><td><strong>₹90,00,000</strong></td><td>May 02, 2026</td><td><span class="table-badge delivered">Disbursed</span></td></tr>
             </tbody>
           </table>
         </div>
@@ -1246,6 +1234,37 @@
     </div>
   </div>
 
+  <!-- EMI Calculator Pop-up Modal -->
+  <div class="modal-overlay hidden" id="emi-calculator-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Interactive EMI Calculator</h3>
+        <button class="modal-close-btn" onclick="document.getElementById('emi-calculator-modal').classList.add('hidden')"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Loan Amount (₹)</label>
+          <input type="number" id="emi-loan-amt" value="500000" oninput="calculateEMI()" />
+        </div>
+        <div class="form-group">
+          <label>Interest Rate (% P.A.)</label>
+          <input type="number" id="emi-interest-rate" step="0.1" value="8.5" oninput="calculateEMI()" />
+        </div>
+        <div class="form-group">
+          <label>Tenure (Years)</label>
+          <input type="number" id="emi-tenure-years" value="5" oninput="calculateEMI()" />
+        </div>
+        <div style="background: var(--bg-main); padding: 16px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; margin-top: 8px;">
+          <span style="font-size: 11.5px; color: #94A3B8; text-transform: uppercase; font-weight: 700;">Estimated Monthly EMI</span>
+          <h2 id="emi-result-display" style="font-size: 24px; font-weight: 800; color: var(--accent-color); margin-top: 4px;">₹10,246</h2>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="primary-btn" onclick="document.getElementById('emi-calculator-modal').classList.add('hidden')">Done</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Crop Modal -->
   <div class="modal-overlay hidden" id="crop-photo-modal">
     <div class="crop-modal-card">
@@ -1281,65 +1300,7 @@
     </div>
   </div>
 
-  <!-- Animated EMI Calculator Popup Modal -->
-  <div class="modal-overlay hidden" id="emi-calc-modal">
-    <div class="modal-card emi-calc-card-popup">
-      <div class="modal-header">
-        <h3 style="display: flex; align-items: center; gap: 8px;"><i data-lucide="calculator" class="w-5 h-5 text-accent"></i> Interactive EMI Calculator</h3>
-        <button class="modal-close-btn" id="emi-calc-close-btn"><i data-lucide="x"></i></button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label>Loan Amount (₹)</label>
-          <input type="number" id="emi-loan-amount" value="500000" step="10000" />
-        </div>
-        <div class="form-group">
-          <label>Interest Rate (% P.A.)</label>
-          <input type="number" id="emi-interest-rate" value="8.5" step="0.1" />
-        </div>
-        <div class="form-group">
-          <label>Loan Tenure (Months)</label>
-          <input type="number" id="emi-tenure-months" value="36" />
-        </div>
-        <div class="emi-result-box" style="background: var(--bg-main); padding: 16px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; margin-top: 6px;">
-          <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #94A3B8;">Estimated Monthly EMI</span>
-          <h3 id="emi-result-output" style="font-size: 24px; font-weight: 800; color: var(--accent-color); margin-top: 4px;">₹15,778</h3>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="primary-btn" id="emi-calc-done-btn" style="width: 100%; justify-content: center;">Done</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Animated Eligibility Check Popup Modal -->
-  <div class="modal-overlay hidden" id="eligibility-modal">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3 style="display: flex; align-items: center; gap: 8px;"><i data-lucide="check-square" class="w-5 h-5 text-accent"></i> Instant Loan Eligibility Check</h3>
-        <button class="modal-close-btn" id="eligibility-close-btn"><i data-lucide="x"></i></button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label>Annual Business Turnover (₹)</label>
-          <input type="number" id="eligibility-turnover" placeholder="e.g. 2500000" required />
-        </div>
-        <div class="form-group">
-          <label>Years in Operation</label>
-          <input type="number" id="eligibility-years" placeholder="e.g. 3" required />
-        </div>
-        <div id="eligibility-output-box" class="hidden" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 14px; border-radius: 10px; text-align: center; color: #059669; font-weight: 700; font-size: 13.5px;">
-          🎉 Congratulations! You are pre-qualified for business loans up to ₹25,00,000.
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="small-btn" id="eligibility-cancel-btn">Close</button>
-        <button type="button" class="primary-btn" id="eligibility-check-submit-btn">Check Now</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal for Order/Customer/Company Supply/Loan -->
+  <!-- Modal for Order/Customer/Company Supply -->
   <div class="modal-overlay hidden" id="db-modal">
     <div class="modal-card">
       <div class="modal-header">
@@ -1391,13 +1352,13 @@
 
       <div class="codex-quick-suggestions">
         <button class="suggestion-chip" data-ask="Give me a complete summary of all sections on this website.">🌐 Full System Summary</button>
-        <button class="suggestion-chip" data-ask="Show me available loan schemes and MSME benefits.">💳 Loans & MSME</button>
+        <button class="suggestion-chip" data-ask="Show me the products inventory and buyer records.">📦 Products & Buyers</button>
         <button class="suggestion-chip" data-ask="What is the active revenue target and today's profit?">💰 Revenue & Targets</button>
       </div>
 
       <div class="codex-messages" id="codex-messages">
         <div class="ai-bubble">
-          Hello! I am <strong>Codex AI</strong>. Ask me anything about your database, loan schemes, or business analytics!
+          Hello! I am <strong>Codex AI</strong>. Ask me anything about loan schemes, MSME services, or your database!
         </div>
       </div>
 
