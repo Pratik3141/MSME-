@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CODEX Dashboard & Database</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">Action completed successfully!</div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="app-sidebar">
+    <div class="sidebar-inner">
+      <div class="brand">
+        <div class="brand-icon">
+          <i data-lucide="terminal"></i>
+        </div>
+        <span class="brand-title">CODEX</span>
+      </div>
+
+      <div class="menu-section">
+        <div class="menu-header-bar">
+          <p class="menu-heading">Menu</p>
+          <button class="menu-dots-btn" id="toggle-sidebar-dots-btn" title="Toggle Sidebar Menu">
+            <i data-lucide="more-horizontal" class="w-4 h-4"></i>
+          </button>
+        </div>
+        
+        <div class="menu-items-wrapper" id="menu-items-container">
+          <a href="#" class="nav-item active" data-target="dashboard">
+            <div class="nav-label">
+              <i data-lucide="layout-dashboard"></i>
+              <span>Dashboard</span>
+            </div>
+          </a>
+
+          <a href="#" class="nav-item" data-target="ecommerce">
+            <div class="nav-label">
+              <i data-lucide="shopping-bag"></i>
+              <span>eCommerce</span>
+            </div>
+            <span class="badge">New</span>
+          </a>
+
+          <a href="#" class="nav-item" data-target="analytics">
+            <div class="nav-label">
+              <i data-lucide="boxes"></i>
+              <span>Stock & Orders</span>
+            </div>
+          </a>
+
+          <a href="#" class="nav-item" data-target="customers">
+            <div class="nav-label">
+              <i data-lucide="users"></i>
+              <span>Customers</span>
+            </div>
+          </a>
+
+          <a href="#" class="nav-item" data-target="products">
+            <div class="nav-label">
+              <i data-lucide="package-open"></i>
+              <span>Products</span>
+            </div>
+          </a>
+
+          <a href="#" class="nav-item" data-target="payments">
+            <div class="nav-label">
+              <i data-lucide="credit-card"></i>
+              <span>Payment</span>
+            </div>
+          </a>
+
+          <a href="#" class="nav-item" data-target="cloud">
+            <div class="nav-label">
+              <i data-lucide="cloud"></i>
+              <span>Cloud Data</span>
+            </div>
+          </a>
+
+          <a href="#" class="nav-item" data-target="blogs">
+            <div class="nav-label">
+              <i data-lucide="newspaper"></i>
+              <span>Blog's & News</span>
+            </div>
+          </a>
+
+          <a href="#" class="nav-item" data-target="calendar">
+            <div class="nav-label">
+              <i data-lucide="calendar"></i>
+              <span>Calendar</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Wrapper -->
+  <div class="main-wrapper" id="app-main-wrapper">
+    
+    <!-- Top Header -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="icon-btn menu-toggle-btn" id="topbar-menu-toggle-btn" title="Toggle Sidebar Menu">
+          <i data-lucide="more-horizontal"></i>
+        </button>
+
+        <div class="search-outer-container">
+          <div class="animated-search-wrapper" id="animated-search-container">
+            <button class="search-trigger-btn" id="search-trigger-btn" title="Search (⌘K)">
+              <i data-lucide="search" class="search-icon"></i>
+            </button>
+            <input type="text" id="global-search" class="expandable-search-input" placeholder="search...." autocomplete="off" />
+            <span class="search-shortcut">⌘K</span>
+          </div>
+
+          <div id="search-suggestions-box" class="search-suggestions-panel hidden">
+            <div class="suggestions-header">Quick Results & Navigation</div>
+            <div class="suggestions-list" id="suggestions-list-container"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <!-- Modern Anime/Chibi Currency Logo -->
+        <div class="relative-wrap" id="currency-widget-wrapper">
+          <button class="currency-anime-orb-btn" id="currency-dropdown-btn" title="Switch Global Currency">
+            <div class="anime-orb-frame">
+              <div class="anime-neon-ring-1"></div>
+              <div class="anime-neon-ring-2"></div>
+              <div class="anime-core-backdrop">
+                <span class="anime-currency-glyph" id="active-currency-symbol">₹</span>
+                <span class="anime-sparkle-dot"></span>
+              </div>
+            </div>
+          </button>
+          
+          <div id="currency-menu-dropdown" class="dropdown-panel dropdown-menu-small hidden">
+            <span class="dropdown-heading">Select Currency</span>
+            <button class="currency-opt active" data-cur="INR" data-sym="₹">INR (₹) - Indian Rupee</button>
+            <button class="currency-opt" data-cur="USD" data-sym="$">USD ($) - US Dollar</button>
+            <button class="currency-opt" data-cur="EUR" data-sym="€">EUR (€) - Euro</button>
+            <button class="currency-opt" data-cur="GBP" data-sym="£">GBP (£) - British Pound</button>
+            <button class="currency-opt" data-cur="JPY" data-sym="¥">JPY (¥) - Japanese Yen</button>
+          </div>
+        </div>
+
+        <!-- Settings with Hover-Bridge -->
+        <div class="relative-wrap" id="settings-hover-wrapper">
+          <button class="icon-btn settings-gear-btn" id="settings-gear-trigger" title="Settings">
+            <i data-lucide="settings"></i>
+          </button>
+
+          <div id="settings-hover-dropdown" class="dropdown-panel settings-popup-panel hidden">
+            <span class="dropdown-heading">System Settings</span>
+            <a href="#" class="setting-popup-item" data-target="settings">
+              <i data-lucide="sliders" class="w-4 h-4"></i>
+              <span>Preferences & 2FA</span>
+            </a>
+            <button class="setting-popup-item danger" id="reset-db-btn" title="Restore initial demo database">
+              <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+              <span>Reset Database</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button class="icon-btn" id="theme-btn" title="Toggle Theme">
+          <i data-lucide="moon"></i>
+        </button>
+        
+        <!-- Notifications with Hover-Bridge -->
+        <div class="relative-wrap" id="notif-wrapper">
+          <button class="icon-btn notif-bell-btn" id="notif-btn" title="Notifications">
+            <i data-lucide="bell"></i>
+            <span class="notif-badge-counter hidden" id="notif-badge-counter">0</span>
+          </button>
+          
+          <div id="notif-dropdown" class="dropdown-panel notif-popup-panel hidden">
+            <div class="notif-popup-header">
+              <div class="notif-header-title">
+                <i data-lucide="bell-ring" class="w-4 h-4"></i>
+                <span>Database & Activity Logs</span>
+              </div>
+              <span class="notif-tag-count" id="notif-total-records">0 logs</span>
+            </div>
+            <div class="notif-scroll-area" id="notif-list"></div>
+          </div>
+        </div>
+        
+        <!-- Topbar Profile Logo -->
+        <button class="topbar-profile-logo-btn" id="topbar-profile-btn" title="Open User Profile & Security">
+          <div class="profile-logo-ring">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop" class="user-profile-img" alt="User Profile Logo" />
+            <span class="profile-online-dot"></span>
+          </div>
+        </button>
+      </div>
+    </header>
+
+    <!-- Page Body -->
+    <main class="content-container">
+
+      <!-- ================= SECTION 1: DASHBOARD ================= -->
+      <section id="section-dashboard" class="page-section active">
+        <div class="welcome-banner">
+          <h2>Welcome back, <span class="user-display-name text-accent">Pratik Narkhede</span> 👋</h2>
+          <p>Live synchronized records from your local storage database.</p>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="metrics-column">
+            <div class="stat-cards-grid">
+              
+              <div class="card stat-card interactive-card clickable-nav-card" id="card-to-customers" data-goto="customers" title="Click to open Customers page">
+                <div class="card-top-action">
+                  <div class="stat-icon"><i data-lucide="users"></i></div>
+                  <div class="corner-arrow-badge" title="Go to Customers"><i data-lucide="arrow-up-right"></i></div>
+                </div>
+                <p class="stat-title">Registered Customers</p>
+                <div class="stat-val-group">
+                  <h3 class="stat-val" id="db-customer-count">3,782</h3>
+                  <span class="trend-badge positive">↑ 11.01%</span>
+                </div>
+              </div>
+
+              <div class="card stat-card interactive-card clickable-nav-card" id="card-to-orders" data-goto="ecommerce" title="Click to view eCommerce customer orders">
+                <div class="card-top-action">
+                  <div class="stat-icon"><i data-lucide="package"></i></div>
+                  <div class="corner-arrow-badge" title="Go to Orders"><i data-lucide="arrow-up-right"></i></div>
+                </div>
+                <p class="stat-title">Orders Processed</p>
+                <div class="stat-val-group">
+                  <h3 class="stat-val" id="db-order-count">5,359</h3>
+                  <span class="trend-badge negative">↓ 9.05%</span>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="card chart-card modern-animated-card">
+              <div class="card-header">
+                <div>
+                  <h4 class="card-title" id="sales-chart-title">Monthly Sales & Revenue Velocity</h4>
+                  <p class="card-subtitle" id="sales-chart-subtitle">Viewing data for: <strong id="sales-selected-date-label">September 2026</strong></p>
+                </div>
+                
+                <div class="sales-header-actions">
+                  <div class="relative-wrap">
+                    <button class="date-picker-btn sales-cal-trigger" id="sales-date-picker-btn" title="Pick Month/Year or Day for Sales">
+                      <i data-lucide="calendar"></i>
+                      <span id="sales-picker-btn-text">Select Date</span>
+                    </button>
+
+                    <div id="sales-calendar-popup" class="cycle-calendar-popup hidden">
+                      <div class="cal-popup-controls">
+                        <select id="sales-cal-month-select" class="cal-select"></select>
+                        <select id="sales-cal-year-select" class="cal-select"></select>
+                        <button class="cal-close-btn" id="close-sales-cal"><i data-lucide="x"></i></button>
+                      </div>
+                      <div class="cal-popup-weekdays">
+                        <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+                      </div>
+                      <div class="cal-popup-days" id="sales-cal-days"></div>
+                    </div>
+                  </div>
+
+                  <div class="relative-wrap">
+                    <button class="card-action-btn" id="sales-menu-btn" title="Switch Sales Timeline">
+                      <i data-lucide="more-vertical"></i>
+                    </button>
+                    <div id="sales-menu-dropdown" class="dropdown-panel dropdown-menu-small hidden">
+                      <span class="dropdown-heading">Sales View</span>
+                      <button class="sales-select-option" data-view="yearly">Yearly Sales</button>
+                      <button class="sales-select-option active" data-view="monthly">Monthly Sales</button>
+                      <button class="sales-select-option" data-view="day">Day Sales</button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="canvas-box modern-animated-chart-wrapper">
+                <canvas id="salesBarChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Monthly Revenue with Animated Bar Chart Linked to View Selector -->
+          <div class="card target-card">
+            <div class="card-header">
+              <div>
+                <h4 class="card-title" id="revenue-period-title">Monthly Revenue</h4>
+                <p class="card-subtitle" id="revenue-period-subtitle">Target set for this calendar month</p>
+              </div>
+              
+              <div class="relative-wrap">
+                <button class="card-action-btn" id="revenue-period-menu-btn" title="Switch Revenue Timeframe">
+                  <i data-lucide="more-vertical"></i>
+                </button>
+                <div id="revenue-period-dropdown" class="dropdown-panel dropdown-menu-small hidden">
+                  <span class="dropdown-heading">Select Revenue View</span>
+                  <button class="period-select-option active" data-period="monthly">Monthly Revenue</button>
+                  <button class="period-select-option" data-period="weekly">Weekly Revenue</button>
+                  <button class="period-select-option" data-period="day">Day Revenue</button>
+                  <button class="period-select-option" data-period="yearly">Yearly Revenue</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="stylish-revenue-bar-section">
+              <div class="revenue-bar-chart-container">
+                <canvas id="monthlyRevenueBarChart"></canvas>
+              </div>
+              <p class="gauge-desc" id="gauge-description-text" style="margin-top: 14px; text-align: center;">
+                Today's revenue is <strong id="db-today-earned">₹274,464.5</strong>, outperforming target velocity.
+              </p>
+            </div>
+
+            <div class="target-footer">
+              <div class="target-metric">
+                <span class="label" id="footer-target-label">Target</span>
+                <p class="val" id="db-monthly-target">₹1,670,000</p>
+              </div>
+              <div class="target-metric border-sides">
+                <span class="label" id="footer-rev-label">Revenue</span>
+                <p class="val" id="db-monthly-revenue">₹1,670,000 <span class="arrow positive">↑</span></p>
+              </div>
+              <div class="target-metric">
+                <span class="label" id="footer-period-label">Today</span>
+                <p class="val" id="db-today-stat">₹274,464.5 <span class="arrow positive">↑</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card line-chart-card">
+          <div class="card-header">
+            <div>
+              <h4 class="card-title">Performance Analysis</h4>
+              <p class="card-subtitle">Aggregated metrics by database transaction logs</p>
+            </div>
+            <div class="filter-controls">
+              <div class="pill-group" id="stats-filter-group">
+                <button class="pill active" data-type="overview">Overview</button>
+                <button class="pill" data-type="sales">Sales</button>
+                <button class="pill" data-type="revenue">Revenue</button>
+              </div>
+
+              <div class="relative-wrap">
+                <button class="date-picker-btn" id="date-btn" title="Choose specific Year, Month, and Day">
+                  <i data-lucide="calendar"></i>
+                  <span id="date-label">Current Cycle</span>
+                </button>
+
+                <div id="cycle-calendar-popup" class="cycle-calendar-popup hidden">
+                  <div class="cal-popup-controls">
+                    <select id="perf-cal-month-select" class="cal-select"></select>
+                    <select id="perf-cal-year-select" class="cal-select"></select>
+                    <button class="cal-close-btn" id="close-cycle-cal"><i data-lucide="x"></i></button>
+                  </div>
+                  <div class="cal-popup-weekdays">
+                    <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+                  </div>
+                  <div class="cal-popup-days" id="cycle-cal-days"></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="canvas-box-large">
+            <canvas id="statisticsLineChart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 2: ECOMMERCE ================= -->
+      <section id="section-ecommerce" class="page-section">
+        <div class="section-title-wrap">
+          <div class="title-with-btn">
+            <div>
+              <h2>eCommerce Inventory & Orders</h2>
+              <p>Direct relational records stored in the database.</p>
+            </div>
+            <button class="primary-btn" id="add-order-btn">
+              <i data-lucide="plus-circle" class="w-4 h-4"></i> New Order
+            </button>
+          </div>
+        </div>
+
+        <div class="stat-cards-grid-4">
+          <div class="card stat-card interactive-card">
+            <p class="stat-title">Catalog Inventory</p>
+            <h3 class="stat-val" id="ecom-total-products">1,248</h3>
+          </div>
+          <div class="card stat-card interactive-card">
+            <p class="stat-title">Pending Orders</p>
+            <h3 class="stat-val" id="ecom-pending-orders">34</h3>
+          </div>
+          <div class="card stat-card interactive-card">
+            <p class="stat-title">Completed Orders</p>
+            <h3 class="stat-val" id="ecom-completed-orders">4,980</h3>
+          </div>
+          <div class="card stat-card interactive-card">
+            <p class="stat-title">Refund Allocations</p>
+            <h3 class="stat-val" id="ecom-refunds">₹1,120</h3>
+          </div>
+        </div>
+
+        <div class="card printable-order-card" id="printable-order-section">
+          <div class="card-header no-print">
+            <div>
+              <h4 class="card-title">Customer Orders (<span id="active-order-filter-label">All Orders</span>)</h4>
+              <p class="card-subtitle">Showing filtered database transactions with purchase timestamps</p>
+            </div>
+
+            <div class="order-table-actions">
+              <div class="relative-wrap">
+                <div class="split-button-group">
+                  <button class="split-btn-main" id="print-orders-btn" title="Print Current Cycle Filter View as A4 Page">
+                    <i data-lucide="printer" class="w-4 h-4"></i>
+                    <span>Print (<span id="print-btn-filter-label">All</span>)</span>
+                  </button>
+                  <button class="split-btn-arrow" id="export-dropdown-arrow-btn" title="More Export Options">
+                    <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+
+                <div id="export-options-dropdown" class="dropdown-panel dropdown-menu-small hidden">
+                  <button class="export-opt-btn" id="opt-print-a4">
+                    <i data-lucide="file-text" class="w-4 h-4"></i>
+                    <span>Print Filtered A4</span>
+                  </button>
+                  <button class="export-opt-btn" id="opt-export-excel">
+                    <i data-lucide="sheet" class="w-4 h-4"></i>
+                    <span>Import Excel (.csv / .xls)</span>
+                  </button>
+                </div>
+              </div>
+
+              <button class="round-cycle-arrow-btn" id="cycle-filter-arrow-btn" title="Cycle Filter: All ➔ Pending ➔ Completed ➔ Cancelled">
+                <i data-lucide="rotate-cw" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="print-header-area">
+            <h2>Customer Orders Report</h2>
+            <p>Generated by CODEX on <span id="print-report-date"></span> &bull; Cycle Filter Status: <span id="print-report-filter">All Orders</span></p>
+          </div>
+
+          <table class="data-table" id="orders-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Purchase Date</th>
+                <th>Customer</th>
+                <th>Purchased Item</th>
+                <th>Total</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="orders-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 3: STOCK & ORDERS ================= -->
+      <section id="section-analytics" class="page-section">
+        <div class="section-title-wrap">
+          <div class="title-with-btn">
+            <div>
+              <h2>Stock & Orders Management</h2>
+              <p>Warehouse inventory metrics, vendor dispatch pipelines, and modern delivery fulfillment states.</p>
+            </div>
+            <button class="primary-btn" id="add-company-supply-btn">
+              <i data-lucide="plus-circle" class="w-4 h-4"></i> Add Supply Record
+            </button>
+          </div>
+        </div>
+
+        <div class="stat-cards-grid-4">
+          <div class="card stat-card interactive-card">
+            <div class="card-top-action">
+              <div class="stat-icon"><i data-lucide="layers"></i></div>
+            </div>
+            <p class="stat-title">Stock Details</p>
+            <div class="stat-val-group">
+              <h3 class="stat-val" id="analytics-stock-details">14,850</h3>
+              <span class="trend-badge positive">Catalog</span>
+            </div>
+          </div>
+
+          <div class="card stat-card interactive-card">
+            <div class="card-top-action">
+              <div class="stat-icon"><i data-lucide="shopping-cart"></i></div>
+            </div>
+            <p class="stat-title">Stock Sold</p>
+            <div class="stat-val-group">
+              <h3 class="stat-val" id="analytics-stock-sold">9,420</h3>
+              <span class="trend-badge positive">↑ 18.2%</span>
+            </div>
+          </div>
+
+          <div class="card stat-card interactive-card">
+            <div class="card-top-action">
+              <div class="stat-icon"><i data-lucide="check-circle"></i></div>
+            </div>
+            <p class="stat-title">Available Stock</p>
+            <div class="stat-val-group">
+              <h3 class="stat-val" id="analytics-stock-available">5,180</h3>
+              <span class="trend-badge positive">In Stock</span>
+            </div>
+          </div>
+
+          <div class="card stat-card interactive-card">
+            <div class="card-top-action">
+              <div class="stat-icon"><i data-lucide="alert-triangle"></i></div>
+            </div>
+            <p class="stat-title">Unavailable Stock</p>
+            <div class="stat-val-group">
+              <h3 class="stat-val" id="analytics-stock-unavailable">250</h3>
+              <span class="trend-badge negative">Backordered</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card printable-supply-card" id="printable-supply-section">
+          <div class="card-header no-print">
+            <div>
+              <h4 class="card-title">
+                Company Supply & Wholesale Distribution
+                <span class="active-cycle-badge" id="active-supply-filter-badge">All Supplies</span>
+              </h4>
+              <p class="card-subtitle">Showing procurement milestones and modern delivery timeline statuses</p>
+            </div>
+
+            <div class="order-table-actions">
+              <div class="relative-wrap">
+                <div class="split-button-group">
+                  <button class="split-btn-main" id="print-supply-btn" title="Print Supply Table to A4 Page">
+                    <i data-lucide="printer" class="w-4 h-4"></i>
+                    <span>Print</span>
+                  </button>
+                  <button class="split-btn-arrow" id="export-supply-arrow-btn" title="Export Formats">
+                    <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+
+                <div id="supply-export-dropdown" class="dropdown-panel dropdown-menu-small hidden">
+                  <button class="export-opt-btn" id="opt-print-supply-a4">
+                    <i data-lucide="file-text" class="w-4 h-4"></i>
+                    <span>Print (A4 Format)</span>
+                  </button>
+                  <button class="export-opt-btn" id="opt-export-supply-excel">
+                    <i data-lucide="sheet" class="w-4 h-4"></i>
+                    <span>Import Excel (.csv / .xls)</span>
+                  </button>
+                </div>
+              </div>
+
+              <button class="round-cycle-arrow-btn" id="cycle-supply-filter-btn" title="Cycle Supply Filter: All ➔ Delivered ➔ In Transit ➔ Pending ➔ Out of Stock">
+                <i data-lucide="rotate-cw" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="print-header-area print-supply-header">
+            <h2>Company Supply & Delivery Schedule Report</h2>
+            <p>Generated by CODEX on <span id="print-supply-date"></span> &bull; Status: <span id="print-supply-filter">ALL SUPPLIES</span></p>
+          </div>
+
+          <table class="data-table" id="supply-table">
+            <thead>
+              <tr>
+                <th>Company Name</th>
+                <th>Product</th>
+                <th>Purchase Date</th>
+                <th>Delivery Schedule</th>
+                <th>Quantity</th>
+                <th>Gross Price</th>
+                <th>Shipment Status</th>
+              </tr>
+            </thead>
+            <tbody id="supply-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 4: CUSTOMERS ================= -->
+      <section id="section-customers" class="page-section">
+        <div class="section-title-wrap">
+          <div class="title-with-btn">
+            <div>
+              <h2>Customer Directory</h2>
+              <p>Database table of verified clients and their tiers.</p>
+            </div>
+            <button class="primary-btn" id="add-customer-btn">
+              <i data-lucide="user-plus" class="w-4 h-4"></i> Add Customer
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Customer Name</th>
+                <th>Contact Email</th>
+                <th>Subscription Tier</th>
+                <th>Joined</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="customers-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 5: PRODUCTS ================= -->
+      <section id="section-products" class="page-section">
+        <div class="section-title-wrap">
+          <div class="title-with-btn">
+            <div>
+              <h2>Products Catalog & Upload Manager</h2>
+              <p>Upload new product inventories, manage specifications, and review catalog items.</p>
+            </div>
+            <button class="primary-btn" id="upload-new-product-btn">
+              <i data-lucide="upload-cloud" class="w-4 h-4"></i> Upload Product List
+            </button>
+          </div>
+        </div>
+
+        <div class="products-catalog-container" id="products-catalog-grid"></div>
+      </section>
+
+      <!-- ================= SECTION: PAYMENT MANAGEMENT ================= -->
+      <section id="section-payments" class="page-section">
+        <div class="section-title-wrap">
+          <div class="title-with-btn">
+            <div>
+              <h2>Payment Transactions & Invoicing</h2>
+              <p>Track all incoming and outgoing financial settlements (Pending & Completed).</p>
+            </div>
+            <div class="filter-controls">
+              <div class="pill-group" id="payment-filter-group">
+                <button class="pill active" data-payfilter="all">All Payments</button>
+                <button class="pill" data-payfilter="completed">Completed</button>
+                <button class="pill" data-payfilter="pending">Pending</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <table class="data-table" id="payments-table">
+            <thead>
+              <tr>
+                <th>Transaction ID</th>
+                <th>Payer / Client</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Payment Status</th>
+              </tr>
+            </thead>
+            <tbody id="payments-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= SECTION: CLOUD DATA ================= -->
+      <section id="section-cloud" class="page-section">
+        <div class="section-title-wrap">
+          <h2>Cloud Data Synchronizer & Vault</h2>
+          <p>Secure cloud backup storage and distributed ledger synchronization node.</p>
+        </div>
+
+        <div class="card cloud-empty-vault-card" style="text-align: center; padding: 64px 24px;">
+          <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(59,130,246,0.1); color: var(--accent-color); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+            <i data-lucide="cloud-rain" class="w-8 h-8"></i>
+          </div>
+          <h3 style="font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">Cloud Vault is Ready & Connected</h3>
+          <p style="font-size: 13px; color: var(--text-secondary); max-width: 400px; margin: 0 auto 20px;">No custom cloud files currently uploaded in this node session. Upload or sync your database packages anytime.</p>
+          <button class="primary-btn" onclick="showToast('Cloud synchronization node active & secure!')">
+            <i data-lucide="refresh-cw" class="w-4 h-4"></i> Sync Cloud Node Now
+          </button>
+        </div>
+      </section>
+
+      <!-- ================= SECTION: BLOGS & NEWS ================= -->
+      <section id="section-blogs" class="page-section">
+        <div class="section-title-wrap">
+          <h2>Industrial & Startup Blog's & News</h2>
+          <p>Latest insights, technological breakthroughs, and market trends across global industries.</p>
+        </div>
+
+        <div class="blogs-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+          
+          <div class="card interactive-card" style="display: flex; flex-direction: column; gap: 12px;">
+            <span class="badge" style="align-self: flex-start; background: rgba(59, 130, 246, 0.1); color: var(--accent-color);">Industrial Tech</span>
+            <h4 style="font-size: 16px; font-weight: 700; color: var(--text-primary);">Next-Gen Cool Roof Coatings and Thermal Efficiency</h4>
+            <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">Exploring how titanium dioxide and nano-ceramic emulsions reduce indoor ambient temperatures by up to 8°C in commercial facilities.</p>
+            <div style="display: flex; align-items: center; justify-content: space-between; font-size: 11.5px; color: #94A3B8; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border-color);">
+              <span>Sep 14, 2026</span>
+              <span style="color: var(--accent-color); font-weight: 600; cursor: pointer;" onclick="showToast('Opening full industrial article...')">Read Article &rarr;</span>
+            </div>
+          </div>
+
+          <div class="card interactive-card" style="display: flex; flex-direction: column; gap: 12px;">
+            <span class="badge" style="align-self: flex-start; background: rgba(16, 185, 129, 0.1); color: #10B981;">Startup Ecosystem</span>
+            <h4 style="font-size: 16px; font-weight: 700; color: var(--text-primary);">AI Assistants Revolutionizing MSME Supply Chains</h4>
+            <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">How conversational neural engines like CODEX AI are automating invoice tracking, inventory forecasting, and real-time currency conversions.</p>
+            <div style="display: flex; align-items: center; justify-content: space-between; font-size: 11.5px; color: #94A3B8; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border-color);">
+              <span>Sep 12, 2026</span>
+              <span style="color: var(--accent-color); font-weight: 600; cursor: pointer;" onclick="showToast('Opening startup ecosystem report...')">Read Article &rarr;</span>
+            </div>
+          </div>
+
+          <div class="card interactive-card" style="display: flex; flex-direction: column; gap: 12px;">
+            <span class="badge" style="align-self: flex-start; background: rgba(245, 158, 11, 0.1); color: #F59E0B;">Global Market</span>
+            <h4 style="font-size: 16px; font-weight: 700; color: var(--text-primary);">Cross-Border B2B Payments & Multi-Currency Ledger Dynamics</h4>
+            <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">Analyzing exchange rate volatility across INR, USD, EUR, and JPY in digital wholesale transactions and automated settlement gateways.</p>
+            <div style="display: flex; align-items: center; justify-content: space-between; font-size: 11.5px; color: #94A3B8; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border-color);">
+              <span>Sep 10, 2026</span>
+              <span style="color: var(--accent-color); font-weight: 600; cursor: pointer;" onclick="showToast('Opening global market analysis...')">Read Article &rarr;</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= SECTION 6: CALENDAR ================= -->
+      <section id="section-calendar" class="page-section">
+        <div class="section-title-wrap">
+          <h2>Calendar & Milestone Schedule</h2>
+          <p>Click any date to register or review sprint events in the database.</p>
+        </div>
+
+        <div class="card">
+          <div class="calendar-grid" id="calendar-grid-container"></div>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 7: USER PROFILE & SECURITY ================= -->
+      <section id="section-profile" class="page-section">
+        <div class="section-title-wrap">
+          <h2>User Profile & Security Management</h2>
+          <p>Customize your LinkedIn-style professional header, credentials, contact details, and social channels.</p>
+        </div>
+
+        <div class="card profile-card-layout">
+          <!-- Cover Banner Header -->
+          <div class="profile-banner-container" id="profile-banner-element">
+            <div class="banner-overlay-gradient"></div>
+            <input type="file" id="profile-banner-input" accept="image/*" class="hidden" />
+            <button type="button" class="banner-upload-trigger-btn" id="banner-upload-trigger-btn" title="Recommended size 1584 x 396">
+              <i data-lucide="image" class="w-4 h-4"></i>
+              <span>Edit Cover Banner (1584x396)</span>
+            </button>
+          </div>
+
+          <div class="profile-body-content">
+            <div class="profile-avatar-row">
+              <div class="profile-avatar-wrapper-large">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=160&h=160&fit=crop" class="user-profile-img" id="profile-main-avatar" alt="Avatar" />
+                <input type="file" id="profile-photo-input" accept="image/*" class="hidden" />
+                <button type="button" class="avatar-edit-floating-btn" id="avatar-upload-trigger-btn" title="Upload Profile Photo">
+                  <i data-lucide="camera" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="profile-main-meta mb-4">
+              <h3 class="user-display-name">Pratik Narkhede</h3>
+              <p><span id="profile-role-desc">System Administrator</span> &bull; Verified Codex Member</p>
+            </div>
+
+            <form id="profile-form" class="profile-form">
+              <h4 class="form-subheading">Personal & Contact Details</h4>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="input-profile-firstname">First Name</label>
+                  <input type="text" id="input-profile-firstname" placeholder="Pratik" required />
+                </div>
+                <div class="form-group">
+                  <label for="input-profile-lastname">Last Name</label>
+                  <input type="text" id="input-profile-lastname" placeholder="Narkhede" required />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="input-profile-role">Designation / Role</label>
+                  <input type="text" id="input-profile-role" placeholder="System Administrator" required />
+                </div>
+                <div class="form-group">
+                  <label for="input-profile-mobile">Phone Number</label>
+                  <div class="phone-input-group">
+                    <select id="input-country-code" class="country-code-select">
+                      <option value="+91">🇮🇳 +91 (India)</option>
+                      <option value="+1">🇺🇸 +1 (USA)</option>
+                      <option value="+44">🇬🇧 +44 (UK)</option>
+                      <option value="+61">🇦🇺 +61 (Australia)</option>
+                      <option value="+971">🇦🇪 +971 (UAE)</option>
+                      <option value="+81">🇯🇵 +81 (Japan)</option>
+                      <option value="+49">🇩🇪 +49 (Germany)</option>
+                      <option value="+33">🇫🇷 +33 (France)</option>
+                    </select>
+                    <input type="tel" id="input-profile-mobile" placeholder="98765 43210" style="flex:1;" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="input-profile-email">Email Address</label>
+                  <input type="email" id="input-profile-email" placeholder="pratik@example.com" required />
+                </div>
+                <div class="form-group">
+                  <label for="input-profile-dob">Date of Birth (DOB)</label>
+                  <input type="date" id="input-profile-dob" />
+                </div>
+              </div>
+
+              <div class="form-group mb-4" style="margin-bottom: 16px;">
+                <label for="input-profile-loc">Location</label>
+                <input type="text" id="input-profile-loc" placeholder="City, State, Country" required />
+              </div>
+
+              <h4 class="form-subheading">Social Media & Community Links</h4>
+              <div class="social-links-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                
+                <div class="social-input-group">
+                  <div class="social-brand-icon insta">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                  </div>
+                  <input type="url" id="input-social-instagram" placeholder="Instagram Profile URL" />
+                </div>
+
+                <div class="social-input-group">
+                  <div class="social-brand-icon linkedin">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                  </div>
+                  <input type="url" id="input-social-linkedin" placeholder="LinkedIn Profile URL" />
+                </div>
+
+                <div class="social-input-group">
+                  <div class="social-brand-icon twitter">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+                  </div>
+                  <input type="url" id="input-social-twitter" placeholder="Twitter / X Profile URL" />
+                </div>
+
+                <div class="social-input-group">
+                  <div class="social-brand-icon github">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                  </div>
+                  <input type="url" id="input-social-github" placeholder="GitHub Profile URL" />
+                </div>
+
+                <div class="social-input-group">
+                  <div class="social-brand-icon discord">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6h0a14.5 14.5 0 0 0-4-1.5M6 6h0a14.5 14.5 0 0 1 4-1.5M7 13c1.5 1.5 3 2 5 2s3.5-.5 5-2M9 10h.01M15 10h.01"></path><path d="M20.5 16.5C19.8 19.5 16 21 12 21s-7.8-1.5-8.5-4.5c-.3-1.2-.5-3.5-.5-5.5s.2-4.3.5-5.5C4.2 4.5 8 3 12 3s7.8 1.5 8.5 4.5c.3 1.2.5 3.5.5 5.5s-.2 4.3-.5 5.5z"></path></svg>
+                  </div>
+                  <input type="url" id="input-social-discord" placeholder="Discord Invite / Profile URL" />
+                </div>
+
+                <div class="social-input-group">
+                  <div class="social-brand-icon whatsapp">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                  </div>
+                  <input type="url" id="input-social-whatsapp" placeholder="WhatsApp Group Link" />
+                </div>
+
+              </div>
+
+              <div class="profile-action-footer" style="margin-top: 24px; display: flex; align-items: center; justify-content: space-between;">
+                <button type="submit" class="primary-btn" id="save-profile-btn">
+                  <i data-lucide="save" class="w-4 h-4"></i> Save Profile & Links
+                </button>
+
+                <button type="button" class="profile-logout-btn" id="profile-logout-btn" title="Sign out of CODEX" style="background: rgba(239, 68, 68, 0.1); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.2); padding: 10px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                  <i data-lucide="log-out" class="w-4 h-4"></i>
+                  <span>Log Out</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 8: SETTINGS ================= -->
+      <section id="section-settings" class="page-section">
+        <div class="section-title-wrap">
+          <h2>Global Database Flags & Settings</h2>
+          <p>Configure application behavior and security features.</p>
+        </div>
+        <div class="card">
+          <div class="settings-option">
+            <div>
+              <h4>Realtime Order Alerts</h4>
+              <p class="settings-desc">Notify the notification center whenever an order is submitted.</p>
+            </div>
+            <input type="checkbox" id="setting-notify" class="touch-toggle" />
+          </div>
+          <hr class="divider"/>
+          <div class="settings-option">
+            <div>
+              <h4>Two-Factor Authentication (2FA)</h4>
+              <p class="settings-desc">Require OTP verification upon database modifications.</p>
+            </div>
+            <input type="checkbox" id="setting-2fa" class="touch-toggle" />
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Product Details Modal -->
+  <div class="modal-overlay hidden" id="product-detail-modal">
+    <div class="product-detail-card" id="printable-product-modal-card">
+      <div class="product-detail-header no-print">
+        <div class="prod-modal-title-wrap">
+          <i data-lucide="package" class="w-5 h-5 text-accent"></i>
+          <h3 id="modal-product-title">Product Details & Buyer Records</h3>
+        </div>
+        
+        <div class="prod-modal-header-actions">
+          <button type="button" class="icon-btn print-product-modal-btn" id="print-product-detail-btn" title="Print A4 Size Report">
+            <i data-lucide="printer" class="w-4 h-4"></i>
+          </button>
+          <button class="modal-close-btn" id="product-modal-close"><i data-lucide="x"></i></button>
+        </div>
+      </div>
+
+      <div class="print-header-area">
+        <h2>Product Buyer & Delivery Ledger</h2>
+        <p>Product: <strong id="print-product-name-label"></strong> &bull; Generated by CODEX on <span id="print-product-report-date"></span></p>
+      </div>
+
+      <div class="product-detail-body">
+        <table class="data-table" id="product-buyers-table">
+          <thead>
+            <tr>
+              <th>Buyer Name</th>
+              <th>Purchase Date</th>
+              <th>Delivery Status</th>
+            </tr>
+          </thead>
+          <tbody id="product-buyers-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Crop Modal -->
+  <div class="modal-overlay hidden" id="crop-photo-modal">
+    <div class="crop-modal-card">
+      <div class="crop-modal-header">
+        <div class="crop-header-left">
+          <i data-lucide="crop" class="w-4 h-4 text-accent"></i>
+          <h4>Crop Profile Photo</h4>
+        </div>
+        
+        <div class="crop-header-right">
+          <button type="button" class="crop-confirm-check-btn" id="crop-confirm-check-btn" title="Save and Apply Profile Photo">
+            <i data-lucide="check" class="w-4 h-4"></i>
+          </button>
+          <button type="button" class="crop-cancel-btn" id="crop-cancel-btn" title="Cancel">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="crop-modal-body">
+        <div class="crop-viewport-container" id="crop-viewport-container">
+          <div class="crop-circular-mask"></div>
+          <img id="crop-preview-image" src="" alt="Crop Source" />
+        </div>
+
+        <div class="crop-slider-controls">
+          <i data-lucide="zoom-out" class="w-4 h-4 text-muted"></i>
+          <input type="range" id="crop-zoom-slider" min="1" max="3" step="0.05" value="1" />
+          <i data-lucide="zoom-in" class="w-4 h-4 text-muted"></i>
+        </div>
+        <p class="crop-hint">Drag image to position &bull; Click checkmark symbol <strong>(✓)</strong> on top-right to save.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Order/Customer/Company Supply -->
+  <div class="modal-overlay hidden" id="db-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-title">Add Database Record</h3>
+        <button class="modal-close-btn" id="modal-close"><i data-lucide="x"></i></button>
+      </div>
+      <form id="modal-form" class="modal-body">
+        <div id="modal-fields-container"></div>
+        <div class="modal-footer">
+          <button type="button" class="small-btn" id="modal-cancel-btn">Cancel</button>
+          <button type="submit" class="primary-btn">Save Record</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Codex AI -->
+  <div class="codex-ai-container" id="codex-widget">
+    <button class="codex-orb-trigger" id="codex-toggle-btn" title="Open Codex AI Neural Engine">
+      <div class="orb-outer-glow"></div>
+      <div class="orb-ring orb-ring-1"></div>
+      <div class="orb-ring orb-ring-2"></div>
+      <div class="orb-ring orb-ring-3"></div>
+      <div class="orb-core">
+        <i data-lucide="bot" class="orb-ai-icon"></i>
+        <div class="orb-sparkle-center"></div>
+      </div>
+      <span class="orb-label-badge">CODEX AI (GPT)</span>
+    </button>
+
+    <div class="codex-chat-box hidden" id="codex-chat-box">
+      <div class="codex-chat-header">
+        <div class="ai-avatar-info">
+          <div class="ai-avatar-badge">
+            <i data-lucide="sparkles"></i>
+          </div>
+          <div>
+            <h5>Codex AI <span class="ai-pill">OpenAI GPT-4o</span></h5>
+            <span class="ai-status"><span class="status-dot"></span> API Key Required</span>
+          </div>
+        </div>
+        <div class="chat-header-actions">
+          <button class="codex-header-action-btn" id="codex-clear-chat-btn" title="Clear conversation history">
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+          </button>
+          <button class="codex-close-btn" id="codex-close-btn" title="Close"><i data-lucide="x"></i></button>
+        </div>
+      </div>
+
+      <div class="codex-quick-suggestions">
+        <button class="suggestion-chip" data-ask="Give me a complete summary of all sections on this website.">🌐 Full System Summary</button>
+        <button class="suggestion-chip" data-ask="Show me the products inventory and buyer records.">📦 Products & Buyers</button>
+        <button class="suggestion-chip" data-ask="What is the active revenue target and today's profit?">💰 Revenue & Targets</button>
+      </div>
+
+      <div class="codex-messages" id="codex-messages">
+        <div class="ai-bubble">
+          Hello! I am <strong>Codex AI</strong>. Please enter your OpenAI API key in settings or when prompted to begin live chat responses.
+        </div>
+      </div>
+
+      <form class="codex-input-area" id="codex-form">
+        <input type="text" id="codex-input" placeholder="Message OpenAI GPT-4o..." autocomplete="off" />
+        <button type="submit" class="codex-send-btn" title="Send Query">
+          <i data-lucide="send"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
