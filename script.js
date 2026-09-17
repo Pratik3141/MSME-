@@ -298,6 +298,52 @@ const INITIAL_DATABASE = {
   aiChatHistory: []
 };
 
+// ================= DEMO GOVERNMENT SCHEMES DATASET (40 ENTRIES) =================
+const DEMO_GOVERNMENT_SCHEMES = [
+  { id: "DEMO-01", name: "Credit Guarantee Scheme (CGTMSE)", category: "Credit", ministry: "Ministry of MSME", amount: "Up to ₹5.0 Cr", interest: "Collateral-Free", eligibility: "Micro & Small Units", desc: "Provides collateral-free loans to new and existing micro and small enterprises with 85% credit coverage." },
+  { id: "DEMO-02", name: "Prime Minister Employment Generation (PMEGP)", category: "Subsidy", ministry: "KVIC / MSME", amount: "Up to ₹50 Lakhs", interest: "15% - 35% Margin Subsidy", eligibility: "Individuals / SHGs (Age 18+)", desc: "Credit-linked subsidy program targeting employment generation across manufacturing and services." },
+  { id: "DEMO-03", name: "Mudra Yojana (Tarun Scheme)", category: "Credit", ministry: "DFS / Ministry of Finance", amount: "₹5 Lakhs - ₹10 Lakhs", interest: "8.5% - 11.2% p.a.", eligibility: "Non-corporate Small Biz", desc: "Funding for enterprise expansion and working capital needs of established business units." },
+  { id: "DEMO-04", name: "Mudra Yojana (Kishore Scheme)", category: "Credit", ministry: "DFS / Ministry of Finance", amount: "₹50,000 - ₹5 Lakhs", interest: "8.0% - 10.5% p.a.", eligibility: "Early-stage Enterprises", desc: "Working capital assistance for buying machinery and raw materials in early production phases." },
+  { id: "DEMO-05", name: "Mudra Yojana (Shishu Scheme)", category: "Credit", ministry: "DFS / Ministry of Finance", amount: "Up to ₹50,000", interest: "7.5% - 9.0% p.a.", eligibility: "First-time Entrepreneurs", desc: "Micro-credit support to kickstart localized shop-floor, retail, and manufacturing startups." },
+  { id: "DEMO-06", name: "Stand-Up India Scheme", category: "Women", ministry: "SIDBI / DFS", amount: "₹10 Lakhs - ₹1.0 Cr", interest: "Base Rate + 3%", eligibility: "SC/ST and Women Founders", desc: "Empowers greenfield enterprises in manufacturing, services, or trading led by women or SC/ST entrepreneurs." },
+  { id: "DEMO-07", name: "Zero Defect Zero Effect (ZED) Subsidy", category: "Subsidy", ministry: "Quality Council of India", amount: "Up to ₹5 Lakhs", interest: "80% Testing Grant", eligibility: "Udyam Registered MSMEs", desc: "Financial grant reimbursement covering assessment, clean production certifications, and audit consultancies." },
+  { id: "DEMO-08", name: "Rooftop Solar MSME Finance Scheme", category: "Green", ministry: "Ministry of New & Renewable Energy", amount: "Up to ₹1.5 Cr", interest: "6.75% Concessional Rate", eligibility: "Operating Factories / MSMEs", desc: "Subsidized term loan facility for industrial rooftop solar system installations to lower manufacturing carbon overhead." },
+  { id: "DEMO-09", name: "SIDBI Make in India Soft Loan (SMILE)", category: "Credit", ministry: "SIDBI", amount: "Up to ₹2.0 Cr", interest: "7.85% p.a.", eligibility: "New Enterprises & 25 Identified Sectors", desc: "Quasi-equity soft loans and term financing focused on modernizing high-growth manufacturing segments." },
+  { id: "DEMO-10", name: "Credit Linked Capital Subsidy (CLCSS)", category: "Subsidy", ministry: "Ministry of MSME", amount: "Up to ₹15 Lakhs", interest: "15% Upfront Capital Subsidy", eligibility: "Micro & Small Manufacturing", desc: "Capital subsidy for replacing obsolete machinery with modern state-of-the-art technology." },
+  { id: "DEMO-11", name: "Mahila Udyam Nidhi Scheme", category: "Women", ministry: "Punjab National Bank / SIDBI", amount: "Up to ₹10 Lakhs", interest: "7.2% Concessional Rate", eligibility: "Women-owned MSMEs (51%+ stake)", desc: "Soft loan program aiding women entrepreneurs in establishing new tiny manufacturing and service enterprises." },
+  { id: "DEMO-12", name: "PM Vishwakarma Scheme", category: "Credit", ministry: "Ministry of MSME", amount: "Up to ₹3.0 Lakhs", interest: "5.0% Subsidized Interest", eligibility: "Traditional Artisans & Craftsmen", desc: "Holistic collateral-free credit and toolkit grants across 18 specialized artisan and handicraft trades." },
+  { id: "DEMO-13", name: "Technology Upgradation Fund (ATUFS)", category: "Subsidy", ministry: "Ministry of Textiles", amount: "Up to ₹30 Lakhs", interest: "10% - 15% Capital Subsidy", eligibility: "Textile & Garment MSMEs", desc: "Promotes capital investment in high-efficiency spinning, weaving, and processing machinery." },
+  { id: "DEMO-14", name: "Agriculture Infrastructure Fund (AIF)", category: "Green", ministry: "Ministry of Agriculture", amount: "Up to ₹2.0 Cr", interest: "3.0% Interest Subvention", eligibility: "Agri-Entrepreneurs / FPOs", desc: "Credit facility supporting farm-gate post-harvest storage, cold chains, and bio-waste processing units." },
+  { id: "DEMO-15", name: "Emergency Credit Line Guarantee (ECLGS)", category: "Credit", ministry: "National Credit Guarantee Trustee", amount: "Up to 20% of Outstanding", interest: "Capped at 9.25% p.a.", eligibility: "Existing GST Borrowers", desc: "Guaranteed emergency working capital lines assisting manufacturing MSMEs during liquidity swings." },
+  { id: "DEMO-16", name: "National Small Industries Assistance (NSIC)", category: "Credit", ministry: "NSIC", amount: "Up to ₹5.0 Cr", interest: "9.5% p.a.", eligibility: "Manufacturing Units", desc: "Raw material procurement assistance with deferred bank guarantee payments for up to 90 days." },
+  { id: "DEMO-17", name: "SFURTI Scheme for Traditional Industries", category: "Subsidy", ministry: "Ministry of MSME", amount: "Up to ₹2.5 Cr per cluster", interest: "100% Grant-in-aid", eligibility: "Artisan Clusters / NGOs", desc: "Cluster-based funding providing common facility centers, modern machinery, and specialized packaging tools." },
+  { id: "DEMO-18", name: "SIDBI 4E (End-to-End Energy Efficiency)", category: "Green", ministry: "SIDBI & World Bank", amount: "Up to ₹1.5 Cr", interest: "7.75% Concessional Rate", eligibility: "Energy-intensive MSMEs", desc: "Finance for implementing energy audits and adopting power-saving equipment in foundries and workshops." },
+  { id: "DEMO-19", name: "Dena Shakti Scheme for Women", category: "Women", ministry: "Public Sector Banks", amount: "Up to ₹20 Lakhs", interest: "0.25% Rebate on Base Rate", eligibility: "Women Proprietors", desc: "Supports women entrepreneurs in retail trade, allied agriculture, and micro manufacturing activities." },
+  { id: "DEMO-20", name: "ASPIRE Innovation & Incubation Fund", category: "Subsidy", ministry: "Ministry of MSME", amount: "Up to ₹1.0 Cr per center", interest: "Capital Grant", eligibility: "Incubators / Agro Tech Startups", desc: "Setting up Livelihood Business Incubators (LBI) across rural districts for accelerated agro-processing." },
+  { id: "DEMO-21", name: "Export-Import Working Capital (EXIM Bank)", category: "Credit", ministry: "EXIM Bank of India", amount: "Up to ₹10.0 Cr", interest: "LIBOR/SOFR + 2.5%", eligibility: "Verified MSME Exporters", desc: "Pre-shipment and post-shipment export credit financing for international wholesale cargo fulfillment." },
+  { id: "DEMO-22", name: "TReDS Invoice Discounting Facility", category: "Credit", ministry: "RBI / MSME Gateway", amount: "Factoring against Invoices", interest: "Competitive Market Rates", eligibility: "Suppliers to Corporates / PSUs", desc: "Digital platform for unlocking liquidity by factoring trade receivables against approved enterprise buyer bills." },
+  { id: "DEMO-23", name: "Design Clinic Scheme for MSMEs", category: "Subsidy", ministry: "Ministry of MSME", amount: "Up to ₹40 Lakhs", interest: "60% Government Contribution", eligibility: "MSME Clusters & Design Firms", desc: "Subsidizes industrial design consultations to improve commercial appeal and ergonomic specifications." },
+  { id: "DEMO-24", name: "Waste-to-Wealth Green Accelerator Loan", category: "Green", ministry: "Ministry of Environment", amount: "Up to ₹80 Lakhs", interest: "6.9% p.a.", eligibility: "Circular Economy MSMEs", desc: "Financing for industrial effluent treatment plants, recycling equipment, and composting machinery." },
+  { id: "DEMO-25", name: "Cent Kalyani Scheme for Women Entrepreneurs", category: "Women", ministry: "Central Bank of India", amount: "Up to ₹1.0 Cr", interest: "No Processing Fees + Rebate", eligibility: "Women Professionals & Traders", desc: "Loans for business expansion, software procurement, and inventory buildup with zero collateral requirement." },
+  { id: "DEMO-26", name: "Coir Udyami Yojana", category: "Subsidy", ministry: "Coir Board / MSME", amount: "Up to ₹10 Lakhs", interest: "25% Government Subsidy", eligibility: "Coir Manufacturing Units", desc: "Credit-linked subsidy for setting up coir fiber and coir pith processing units across coastal regions." },
+  { id: "DEMO-27", name: "Pradhan Mantri Matsya Sampada Yojana", category: "Subsidy", ministry: "Ministry of Fisheries", amount: "Up to ₹50 Lakhs", interest: "40% - 60% Project Subsidy", eligibility: "Fish Farmers / Processing MSMEs", desc: "Modernizes cold storage, insulated transport vehicles, and biofloc aquaculture infrastructure." },
+  { id: "DEMO-28", name: "Market Development Assistance (MDA)", category: "Subsidy", ministry: "Ministry of Commerce", amount: "Up to ₹3 Lakhs per event", interest: "100% Airfare & Stall Grant", eligibility: "MSME Export Council Members", desc: "Reimburses stall rentals and travel expenses for MSMEs participating in international trade exhibitions." },
+  { id: "DEMO-29", name: "Biomass Pellet Plant Setting-Up Loan", category: "Green", ministry: "Ministry of Power & IREDA", amount: "Up to ₹3.0 Cr", interest: "7.10% p.a.", eligibility: "Bio-pellet Manufacturers", desc: "Encourages conversion of agricultural stubble and bio-residues into industrial thermal heating pellets." },
+  { id: "DEMO-30", name: "Udyogini Scheme for Rural Women", category: "Women", ministry: "State Women Dev Corporations", amount: "Up to ₹3 Lakhs", interest: "Zero Interest / Subsidized", eligibility: "Women in Micro Enterprises", desc: "Financial support for women entrepreneurs in rural cottages, handlooms, food processing, and retail." },
+  { id: "DEMO-31", name: "Lean Manufacturing Competitive Scheme", category: "Subsidy", ministry: "Quality Council of India", amount: "Up to ₹36 Lakhs per cluster", interest: "80% Consultant Subsidy", eligibility: "Manufacturing Clusters (6-10 units)", desc: "Funds 5S, Kaizen, and Lean consultants to eliminate material waste and step up floor productivity." },
+  { id: "DEMO-32", name: "Intellectual Property Protection (S組み)", category: "Subsidy", ministry: "Ministry of MSME", amount: "Up to ₹5 Lakhs per Patent", interest: "Reimbursement Grant", eligibility: "Innovators with Udyam Certificate", desc: "Reimburses government and attorney fees incurred during domestic and foreign patent/trademark registrations." },
+  { id: "DEMO-33", name: "Electric Delivery Fleet Advance", category: "Green", ministry: "Ministry of Heavy Industries", amount: "Up to ₹1.2 Cr", interest: "7.25% p.a.", eligibility: "Supply Chain & Logistics MSMEs", desc: "Asset financing to transition delivery networks from petrol/diesel to commercial electric two/three-wheelers." },
+  { id: "DEMO-34", name: "Stree Shakti Package for Women", category: "Women", ministry: "State Bank of India", amount: "Up to ₹50 Lakhs", interest: "0.5% Concession over Base", eligibility: "Women-managed Enterprises (50%+)", desc: "Provides working capital and capital expenditure credit lines with reduced margin requirements." },
+  { id: "DEMO-35", name: "Food Processing Micro-Enterprises (PMFME)", category: "Subsidy", ministry: "Ministry of Food Processing", amount: "Up to ₹10 Lakhs", interest: "35% Credit-linked Subsidy", eligibility: "Micro Food Units / ODOP", desc: "Supports individual food processors under One District One Product (ODOP) with branding and machinery aid." },
+  { id: "DEMO-36", name: "High-Precision Tooling Equipment Loan", category: "Credit", ministry: "SIDBI Industrial Dept", amount: "Up to ₹4.0 Cr", interest: "8.15% p.a.", eligibility: "CNC / Precision Toolmakers", desc: "Provides financing for purchasing computer numeric control (CNC) systems, wire EDM, and laser cutters." },
+  { id: "DEMO-37", name: "Solar Cold Storage Infrastructure Loan", category: "Green", ministry: "NABARD & Ministry of MSME", amount: "Up to ₹75 Lakhs", interest: "3.5% Subvention Rate", eligibility: "Farmers / Rural Agro MSMEs", desc: "Finances solar-powered decentralized micro-cold rooms for perishables, fruits, and agricultural crops." },
+  { id: "DEMO-38", name: "Incubation Grant for Tech Startups", category: "Subsidy", ministry: "MeitY / MSME Innovation", amount: "Up to ₹25 Lakhs", interest: "Seed Fund Grant", eligibility: "Registered Tech Startups", desc: "Prototype development grants for hardware, IoT sensors, and cloud software platforms with commercial validation." },
+  { id: "DEMO-39", name: "Shringaar Scheme for Beauty & Wellness", category: "Women", ministry: "Public Sector Banks", amount: "Up to ₹15 Lakhs", interest: "8.25% p.a.", eligibility: "Trained Women Cosmetologists", desc: "Equipment and lease advance loans for establishing modern wellness centers, beauty clinics, and salons." },
+  { id: "DEMO-40", name: "National Apprenticeship Promotion (NAPS)", category: "Subsidy", ministry: "Ministry of Skill Development", amount: "₹1,500/month per apprentice", interest: "Stipend Grant Subsidy", eligibility: "MSMEs Hiring Trainees", desc: "Reimburses 25% of prescribed monthly stipends to encourage industrial on-the-job apprenticeship training." }
+];
+
+let activeModalSchemeCategory = "all";
+
 // Database DAO
 const DB = {
   get() {
@@ -476,7 +522,6 @@ function renderAllFromDB() {
 
   document.body.classList.toggle("sidebar-closed", !!data.sidebarClosed);
 
-  // Update active symbol on anime currency orb
   const activeCurSym = document.getElementById("active-currency-symbol");
   if (activeCurSym) activeCurSym.textContent = conf.symbol;
 
@@ -592,7 +637,7 @@ function renderAllFromDB() {
   const schemesGrid = document.getElementById("loan-schemes-cards-grid");
   const schemesCountLabel = document.getElementById("loan-schemes-count-label");
   if (schemesGrid && data.loanSchemes) {
-    if (schemesCountLabel) schemesCountLabel.textContent = `${data.loanSchemes.length} Active`;
+    if (schemesCountLabel) schemesCountLabel.textContent = `40+ Schemes`;
     schemesGrid.innerHTML = data.loanSchemes.map(s => `
       <div class="card interactive-card" style="display: flex; flex-direction: column; gap: 12px;">
         <span class="badge" style="align-self: flex-start; background: rgba(59, 130, 246, 0.1); color: var(--accent-color);">${s.ministry}</span>
@@ -601,7 +646,7 @@ function renderAllFromDB() {
         <div style="font-size: 13px; font-weight: 700; color: var(--text-primary);">Max: ${s.amount} &bull; ${s.benefit}</div>
         <div style="display: flex; gap: 8px; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border-color);">
           <button class="small-btn" onclick="showToast('Viewing details for ${s.name}...')">View Details</button>
-          <button class="small-btn" onclick="openEligibilityChecker()">Check Eligibility</button>
+          <button class="small-btn" onclick="openEligibilityCheckerModal()">Check Eligibility</button>
           <button class="primary-btn" style="padding: 6px 12px; font-size: 11.5px;" onclick="navigateToSection('new-loan-wizard')">Apply Now</button>
         </div>
       </div>
@@ -712,7 +757,7 @@ function renderAllFromDB() {
   const printSupplyDate = document.getElementById("print-supply-date");
   if (printSupplyDate) printSupplyDate.textContent = new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 
-  // Orders Table & Print Button Filter Badge Sync
+  // Orders Table
   const activeOrderFilter = data.ordersFilter || "all";
   const orderFilterLabel = document.getElementById("active-order-filter-label");
   const printBtnFilterLabel = document.getElementById("print-btn-filter-label");
@@ -773,7 +818,7 @@ function renderAllFromDB() {
     }).join("");
   }
 
-  // Payments Table Rendering with filter
+  // Payments Table
   const activePayFilter = data.paymentsFilter || "all";
   let visiblePayments = data.payments || [];
   if (activePayFilter !== "all") {
@@ -797,7 +842,7 @@ function renderAllFromDB() {
     }
   }
 
-  // ================= RENDER PRODUCTS SECTION =================
+  // Products Catalog
   const productsGrid = document.getElementById("products-catalog-grid");
   if (productsGrid) {
     productsGrid.innerHTML = data.productsCatalog.map(prod => {
@@ -853,7 +898,6 @@ function updateRevenueBarChart(period) {
     labels = ["Q1", "Q2", "Q3", "Q4"];
     values = [45000, 58000, 72000, 68000].map(v => v * (rate / 83.5));
   } else {
-    // monthly
     labels = ["Week 1", "Week 2", "Week 3", "Week 4"];
     values = [320000, 450000, 620000, 280000].map(v => v * (rate / 83.5));
   }
@@ -945,41 +989,320 @@ window.openProductDetailModal = function(productId) {
   lucide.createIcons();
 };
 
-// ================= INTERACTIVE LOAN TOOLS =================
+// ================= ALL SCHEMES DIRECTORY MODAL ENGINE =================
+window.openAllSchemesModal = function() {
+  const modal = document.getElementById("all-schemes-modal");
+  if (!modal) return;
+  modal.classList.remove("hidden");
+  activeModalSchemeCategory = "all";
+
+  const searchInput = document.getElementById("modal-scheme-search");
+  if (searchInput) searchInput.value = "";
+
+  document.querySelectorAll("#scheme-cat-pill-group .pill").forEach(p => {
+    p.classList.toggle("active", p.getAttribute("data-schemecat") === "all");
+  });
+
+  renderModalSchemesList();
+  lucide.createIcons();
+};
+
+window.closeAllSchemesModal = function() {
+  const modal = document.getElementById("all-schemes-modal");
+  if (modal) modal.classList.add("hidden");
+};
+
+window.setSchemeCatFilter = function(category, element) {
+  activeModalSchemeCategory = category;
+  document.querySelectorAll("#scheme-cat-pill-group .pill").forEach(p => p.classList.remove("active"));
+  if (element) element.classList.add("active");
+  renderModalSchemesList();
+};
+
+window.filterModalSchemes = function() {
+  renderModalSchemesList();
+};
+
+function renderModalSchemesList() {
+  const container = document.getElementById("schemes-modal-cards-container");
+  if (!container) return;
+
+  const searchQuery = (document.getElementById("modal-scheme-search")?.value || "").toLowerCase().trim();
+
+  let filtered = DEMO_GOVERNMENT_SCHEMES.filter(s => {
+    const matchCat = activeModalSchemeCategory === "all" || s.category === activeModalSchemeCategory;
+    const matchSearch = !searchQuery || 
+      s.name.toLowerCase().includes(searchQuery) || 
+      s.ministry.toLowerCase().includes(searchQuery) || 
+      s.desc.toLowerCase().includes(searchQuery) ||
+      s.eligibility.toLowerCase().includes(searchQuery);
+    return matchCat && matchSearch;
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div style="grid-column: 1 / -1; text-align: center; padding: 48px 16px; color: #94A3B8;">
+        <i data-lucide="search-x" style="width: 40px; height: 40px; margin: 0 auto 12px; display: block; opacity: 0.5;"></i>
+        <h4 style="font-size: 15px; color: var(--text-primary);">No government schemes found</h4>
+        <p style="font-size: 12px; margin-top: 4px;">Try searching different keywords or resetting your category filter.</p>
+      </div>
+    `;
+    lucide.createIcons();
+    return;
+  }
+
+  const catClassMap = {
+    "Credit": "cat-credit",
+    "Subsidy": "cat-subsidy",
+    "Green": "cat-green",
+    "Women": "cat-women"
+  };
+
+  container.innerHTML = filtered.map(s => `
+    <div class="scheme-vault-card">
+      <div class="scheme-vault-top">
+        <span class="scheme-vault-cat ${catClassMap[s.category] || 'cat-credit'}">${s.category}</span>
+        <span class="scheme-vault-tag">Demo #${s.id}</span>
+      </div>
+
+      <div>
+        <h4 class="scheme-vault-title">${s.name}</h4>
+        <span class="scheme-vault-ministry">${s.ministry}</span>
+      </div>
+
+      <div class="scheme-vault-body">
+        <div class="stat-row">
+          <span class="stat-lbl">Max Quantum:</span>
+          <span class="stat-hl">${s.amount}</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-lbl">Benefit / Rate:</span>
+          <span class="stat-hl" style="color: var(--accent-color);">${s.interest}</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-lbl">Eligibility:</span>
+          <span class="stat-hl" style="color: #64748B;">${s.eligibility}</span>
+        </div>
+      </div>
+
+      <p class="scheme-vault-desc">${s.desc}</p>
+
+      <div class="scheme-vault-actions">
+        <button type="button" class="small-btn" style="flex: 1;" onclick="openSchemeDetailDemo('${s.id}')">
+          <i data-lucide="info" class="w-3.5 h-3.5"></i> View Details
+        </button>
+        <button type="button" class="primary-btn" style="padding: 6px 10px; font-size: 11.5px;" onclick="applyDirectFromVault('${s.id}', '${s.name.replace(/'/g, "\\'")}', '${s.ministry.replace(/'/g, "\\'")}', '${s.amount.replace(/'/g, "\\'")}', '${s.interest.replace(/'/g, "\\'")}')">
+          Apply
+        </button>
+      </div>
+    </div>
+  `).join("");
+
+  lucide.createIcons();
+}
+
+window.openSchemeDetailDemo = function(schemeId) {
+  const scheme = DEMO_GOVERNMENT_SCHEMES.find(s => s.id === schemeId);
+  if (!scheme) return;
+
+  alert(
+    `[DEMO SCHEME SPECIFICATIONS]\n\n` +
+    `Scheme Name: ${scheme.name}\n` +
+    `Administering Authority: ${scheme.ministry}\n` +
+    `Classification: ${scheme.category}\n` +
+    `Funding Cap: ${scheme.amount}\n` +
+    `Rates & Subvention: ${scheme.interest}\n` +
+    `Applicable To: ${scheme.eligibility}\n\n` +
+    `Detailed Description:\n${scheme.desc}\n\n` +
+    `(Note: This is simulated demo data loaded into the CODEX vault.)`
+  );
+};
+
+window.applyDirectFromVault = function(id, name, ministry, amount, interest) {
+  closeAllSchemesModal();
+  navigateToSection('new-loan-wizard');
+
+  const nameField = document.getElementById("wiz-scheme-name");
+  const minField = document.getElementById("wiz-ministry");
+  const intField = document.getElementById("wiz-interest");
+  const descField = document.getElementById("wiz-desc");
+
+  if (nameField) nameField.value = name;
+  if (minField) minField.value = ministry;
+  if (intField) intField.value = interest;
+  if (descField) descField.value = `Application for ${name} under ${ministry}. Requested benefit tier: ${interest}.`;
+
+  showToast(`Pre-filled application with ${name}!`);
+};
+
+// ================= INTERACTIVE LOAN TOOLS & ELIGIBILITY MODAL =================
+window.openEligibilityCheckerModal = function() {
+  const modal = document.getElementById("loan-eligibility-modal");
+  const banner = document.getElementById("eligibility-result-banner");
+  const applyBtn = document.getElementById("elig-apply-direct-btn");
+  const form = document.getElementById("loan-eligibility-form");
+
+  if (form) form.reset();
+  if (banner) {
+    banner.className = "hidden";
+    banner.innerHTML = "";
+  }
+  if (applyBtn) applyBtn.classList.add("hidden");
+
+  if (modal) modal.classList.remove("hidden");
+  lucide.createIcons();
+};
+
+window.closeEligibilityCheckerModal = function() {
+  const modal = document.getElementById("loan-eligibility-modal");
+  if (modal) modal.classList.add("hidden");
+};
+
+window.handleEligibilityFormSubmit = function(e) {
+  e.preventDefault();
+
+  const creditScore = parseInt(document.getElementById("elig-credit-score").value, 10) || 0;
+  const turnover = parseFloat(document.getElementById("elig-turnover").value) || 0;
+  const vintage = parseInt(document.getElementById("elig-vintage").value, 10) || 0;
+  const hasGst = document.getElementById("elig-gst").value === "yes";
+
+  const banner = document.getElementById("eligibility-result-banner");
+  const applyBtn = document.getElementById("elig-apply-direct-btn");
+
+  if (!banner) return;
+
+  banner.classList.remove("hidden");
+
+  if (creditScore >= 720 && turnover >= 1500000 && vintage >= 2 && hasGst) {
+    banner.style.background = "rgba(16, 185, 129, 0.12)";
+    banner.style.border = "1px solid rgba(16, 185, 129, 0.3)";
+    banner.style.color = "#065F46";
+    banner.innerHTML = `<strong>🎉 High Approval Likelihood!</strong><br>Your profile qualifies for collateral-free MSME loans up to <strong>₹50,00,000</strong> at preferential rates starting from 7.5% p.a.`;
+    if (applyBtn) applyBtn.classList.remove("hidden");
+    showToast("Eligibility verified: Approved for advance schemes!");
+  } else if (creditScore >= 650 && turnover >= 800000) {
+    banner.style.background = "rgba(245, 158, 11, 0.12)";
+    banner.style.border = "1px solid rgba(245, 158, 11, 0.3)";
+    banner.style.color = "#92400E";
+    banner.innerHTML = `<strong>⚡ Conditional Eligibility:</strong><br>Eligible for micro-growth working capital loans up to <strong>₹15,00,000</strong>. Submitting recent GST and ITR documentation will strengthen your credit score.`;
+    if (applyBtn) applyBtn.classList.remove("hidden");
+    showToast("Eligibility verified: Conditional approval available.");
+  } else {
+    banner.style.background = "rgba(239, 68, 68, 0.12)";
+    banner.style.border = "1px solid rgba(239, 68, 68, 0.3)";
+    banner.style.color = "#991B1B";
+    banner.innerHTML = `<strong>⚠️ Verification Required:</strong><br>Your profile does not currently meet standard automated underwriting benchmarks. We recommend updating your registered turnover and GST filings before submitting an application.`;
+    if (applyBtn) applyBtn.classList.add("hidden");
+    showToast("Assessment complete: Profile updates recommended.");
+  }
+};
+
+// ================= MOBILE PHONE EMI CALCULATOR ENGINE =================
 window.openEmiCalculatorModal = function() {
-  document.getElementById("emi-calculator-modal").classList.remove("hidden");
+  const modal = document.getElementById("emi-calculator-modal");
+  if (modal) modal.classList.remove("hidden");
   calculateEMI();
+  lucide.createIcons();
 };
 
 window.calculateEMI = function() {
-  const p = parseFloat(document.getElementById("emi-loan-amt").value) || 0;
-  const annualRate = parseFloat(document.getElementById("emi-interest-rate").value) || 0;
-  const years = parseFloat(document.getElementById("emi-tenure-years").value) || 1;
+  const amtInput = document.getElementById("emi-loan-amt");
+  const rateInput = document.getElementById("emi-interest-rate");
+  const tenureInput = document.getElementById("emi-tenure-years");
 
-  const r = annualRate / 12 / 100;
-  const n = years * 12;
+  if (!amtInput || !rateInput || !tenureInput) return;
+
+  const principal = parseFloat(amtInput.value) || 0;
+  const annualRate = parseFloat(rateInput.value) || 0;
+  const years = parseFloat(tenureInput.value) || 1;
+
+  const monthlyRate = annualRate / 12 / 100;
+  const totalMonths = years * 12;
 
   let emi = 0;
-  if (r > 0) {
-    emi = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  if (monthlyRate > 0) {
+    emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) / (Math.pow(1 + monthlyRate, totalMonths) - 1);
   } else {
-    emi = p / n;
+    emi = principal / totalMonths;
   }
 
-  document.getElementById("emi-result-display").textContent = `₹${Math.round(emi).toLocaleString()}`;
+  const totalPayment = emi * totalMonths;
+  const totalInterest = totalPayment - principal;
+
+  const emiDisplay = document.getElementById("emi-result-display");
+  const totalIntDisplay = document.getElementById("emi-total-interest");
+  const totalPayDisplay = document.getElementById("emi-total-payment");
+
+  if (emiDisplay) emiDisplay.textContent = `₹${Math.round(emi).toLocaleString()}`;
+  if (totalIntDisplay) totalIntDisplay.textContent = `₹${Math.round(totalInterest).toLocaleString()}`;
+  if (totalPayDisplay) totalPayDisplay.textContent = `₹${Math.round(totalPayment).toLocaleString()}`;
 };
 
-window.openEligibilityChecker = function() {
-  const turnover = prompt("Enter your business annual turnover (in ₹):", "2500000");
-  if (!turnover) return;
-  const score = prompt("Enter your estimated credit score (e.g. 750):", "750");
-  if (!score) return;
-
-  if (parseInt(score, 10) >= 700 && parseInt(turnover, 10) >= 1000000) {
-    showToast("🎉 Congratulations! You are eligible for MSME collateral-free loans up to ₹50 Lakhs.");
-  } else {
-    showToast("⚠️ Based on your inputs, we recommend securing your profile with verified GST filings.");
+window.syncEmiSlider = function(type) {
+  if (type === 'amount') {
+    const val = document.getElementById("emi-loan-amt").value;
+    const range = document.getElementById("emi-loan-amt-range");
+    if (range) range.value = val;
+  } else if (type === 'rate') {
+    const val = document.getElementById("emi-interest-rate").value;
+    const range = document.getElementById("emi-interest-rate-range");
+    if (range) range.value = val;
+  } else if (type === 'tenure') {
+    const val = document.getElementById("emi-tenure-years").value;
+    const range = document.getElementById("emi-tenure-years-range");
+    if (range) range.value = val;
   }
+  calculateEMI();
+};
+
+window.syncEmiInput = function(type) {
+  if (type === 'amount') {
+    const val = document.getElementById("emi-loan-amt-range").value;
+    const input = document.getElementById("emi-loan-amt");
+    if (input) input.value = val;
+  } else if (type === 'rate') {
+    const val = document.getElementById("emi-interest-rate-range").value;
+    const input = document.getElementById("emi-interest-rate");
+    if (input) input.value = val;
+  } else if (type === 'tenure') {
+    const val = document.getElementById("emi-tenure-years-range").value;
+    const input = document.getElementById("emi-tenure-years");
+    if (input) input.value = val;
+  }
+  calculateEMI();
+};
+
+window.setQuickLoan = function(amt, rate, years) {
+  const amtInput = document.getElementById("emi-loan-amt");
+  const amtRange = document.getElementById("emi-loan-amt-range");
+  const rateInput = document.getElementById("emi-interest-rate");
+  const rateRange = document.getElementById("emi-interest-rate-range");
+  const tenureInput = document.getElementById("emi-tenure-years");
+  const tenureRange = document.getElementById("emi-tenure-years-range");
+
+  if (amtInput) amtInput.value = amt;
+  if (amtRange) amtRange.value = amt;
+  if (rateInput) rateInput.value = rate;
+  if (rateRange) rateRange.value = rate;
+  if (tenureInput) tenureInput.value = years;
+  if (tenureRange) tenureRange.value = years;
+
+  calculateEMI();
+  showToast(`Loaded Preset: ₹${(amt / 100000).toFixed(1)} Lakhs @ ${rate}% for ${years} Yrs`);
+};
+
+// ================= UDYAM REGISTRATION GUIDE MODAL =================
+window.openUdyamGuideModal = function() {
+  const modal = document.getElementById("udyam-guide-modal");
+  if (modal) {
+    modal.classList.remove("hidden");
+    lucide.createIcons();
+  }
+};
+
+window.closeUdyamGuideModal = function() {
+  const modal = document.getElementById("udyam-guide-modal");
+  if (modal) modal.classList.add("hidden");
 };
 
 // ================= INTERACTIVE MSME TOOLS =================
@@ -1161,7 +1484,6 @@ function generateLocalDatabaseQueryResponse(prompt) {
   const q = prompt.toLowerCase();
   const db = DB.get();
 
-  // Summary / Overview
   if (q.includes("summary") || q.includes("overview") || q.includes("about") || q.includes("website") || q.includes("system")) {
     const rev = db.revenueViews.data[db.revenueViews.active || "monthly"];
     return `📊 <strong>CODEX Dashboard & Database Summary:</strong><br>
@@ -1171,28 +1493,24 @@ function generateLocalDatabaseQueryResponse(prompt) {
     • <strong>Active Revenue:</strong> ${formatMoney(rev.revenueUSD)} (Target: ${formatMoney(rev.targetUSD)})<br>
     • <strong>Inventory Stock:</strong> ${db.inventoryStock.available.toLocaleString()} available / ${db.inventoryStock.sold.toLocaleString()} sold<br>
     • <strong>MSME Services:</strong> ${db.msmeRequests ? db.msmeRequests.length : 0} submitted requests<br>
-    • <strong>Active Loan Schemes:</strong> ${db.loanSchemes ? db.loanSchemes.length : 0} schemes listed`;
+    • <strong>Active Loan Schemes:</strong> ${db.loanSchemes ? db.loanSchemes.length : 0} featured schemes (40+ demo schemes in vault)`;
   }
 
-  // Customers Query
   if (q.includes("customer") || q.includes("client") || q.includes("user")) {
     const list = db.customers.map(c => `• <strong>${c.name}</strong> (${c.tier}) - ${c.email}`).join("<br>");
     return `👥 <strong>Customer Directory (${db.customers.length} records):</strong><br>${list}<br><br>Total database registered metric: <strong>${db.metrics.registeredCustomers.toLocaleString()}</strong>`;
   }
 
-  // Orders / Sales Queries
   if (q.includes("order") || q.includes("purchase") || q.includes("transaction") || q.includes("sale")) {
     const ordersList = db.orders.slice(0, 5).map(o => `• <strong>#${o.id}</strong>: ${o.item} by ${o.customer} - ${formatMoney(o.amountUSD)} [<em>${o.status}</em>]`).join("<br>");
     return `📦 <strong>Recent Orders (${db.orders.length} total):</strong><br>${ordersList}<br><br>Pending orders: <strong>${db.orders.filter(o => o.status === 'Pending').length}</strong> | Completed: <strong>${db.orders.filter(o => o.status === 'Completed').length}</strong>`;
   }
 
-  // Products / Inventory / Stock
   if (q.includes("product") || q.includes("inventory") || q.includes("stock") || q.includes("item")) {
     const prods = db.productsCatalog.map(p => `• <strong>${p.name}</strong>: ${p.quantity} units (${p.available ? '✅ Available' : '❌ Out of stock'})`).join("<br>");
     return `🏭 <strong>Warehouse & Products Catalog:</strong><br>${prods}<br><br>Total Stock in Warehouse: <strong>${db.inventoryStock.details.toLocaleString()} units</strong> (Available: ${db.inventoryStock.available.toLocaleString()})`;
   }
 
-  // Revenue / Profit / Target / Money
   if (q.includes("revenue") || q.includes("target") || q.includes("profit") || q.includes("earn") || q.includes("currency")) {
     const rev = db.revenueViews.data[db.revenueViews.active || "monthly"];
     return `💰 <strong>Financial Telemetry (${db.currency}):</strong><br>
@@ -1203,26 +1521,22 @@ function generateLocalDatabaseQueryResponse(prompt) {
     • <strong>Refund Allocations:</strong> ${formatMoney(db.inventory.refundsAmountUSD)}`;
   }
 
-  // Company Supplies / Vendors
   if (q.includes("supply") || q.includes("supplier") || q.includes("company") || q.includes("vendor") || q.includes("wholesale")) {
     const sups = db.companySupplies.map(s => `• <strong>${s.company}</strong>: ${s.product} (${s.quantity} units, ${s.status})`).join("<br>");
     return `🚚 <strong>Company Supply Pipeline:</strong><br>${sups}`;
   }
 
-  // Loans / Financing / EMI
-  if (q.includes("loan") || q.includes("emi") || q.includes("financ") || q.includes("scheme")) {
+  if (q.includes("loan") || q.includes("emi") || q.includes("financ") || q.includes("scheme") || q.includes("eligib")) {
     const schemes = db.loanSchemes.map(s => `• <strong>${s.name}</strong> (${s.ministry}): Max ${s.amount} @ ${s.benefit}`).join("<br>");
     const apps = db.loanApplications.map(a => `• <strong>${a.id}</strong>: ${a.name} (${a.amount}) - ${a.status}`).join("<br>");
-    return `🏦 <strong>Loan Facilities:</strong><br>${schemes}<br><br><strong>Your Submitted Applications:</strong><br>${apps}`;
+    return `🏦 <strong>Loan Facilities & Schemes:</strong><br>${schemes}<br><br><strong>Your Submitted Applications:</strong><br>${apps}<br><br><em>Tip: Open the 'View All Schemes' vault to browse 40+ government demo schemes, or compute EMI directly!</em>`;
   }
 
-  // MSME / Udyam / Subsidies
   if (q.includes("msme") || q.includes("udyam") || q.includes("subsidy") || q.includes("grant")) {
     const reqs = db.msmeRequests.map(r => `• <strong>${r.id}</strong>: ${r.type} for <em>${r.business}</em> [Status: ${r.status}]`).join("<br>");
     return `🏛️ <strong>MSME Services Status:</strong><br>${reqs}<br><br>Available government programs include CLCSS (15% capital subsidy) and ZED Certification support.`;
   }
 
-  // Profile / Admin
   if (q.includes("profile") || q.includes("pratik") || q.includes("admin") || q.includes("owner")) {
     return `👤 <strong>System Administrator Profile:</strong><br>
     • <strong>Name:</strong> ${db.profile.name}<br>
@@ -1232,13 +1546,11 @@ function generateLocalDatabaseQueryResponse(prompt) {
     • <strong>Location:</strong> ${db.profile.location}`;
   }
 
-  // Notifications
   if (q.includes("notification") || q.includes("alert") || q.includes("log")) {
     const notifs = db.notifications.slice(0, 4).map(n => `• [${n.type.toUpperCase()}] ${n.msg} (${n.time})`).join("<br>");
     return `🔔 <strong>Latest Activity Logs:</strong><br>${notifs}`;
   }
 
-  // Default fallback guidance
   return `🤖 I am connected directly to your local database! You can ask me about:<br>
   • <strong>Customers</strong> ("Show me registered customers")<br>
   • <strong>Orders</strong> ("What are the latest orders?")<br>
@@ -1252,12 +1564,10 @@ async function processOpenAIChatAPI(rawPrompt) {
   const apiKey = localStorage.getItem(OPENAI_API_KEY_STORAGE) || "";
   const db = DB.get();
 
-  // If no OpenAI key is configured, fallback to our built-in offline database knowledge engine
   if (!apiKey || apiKey.trim() === "" || apiKey.includes("YOUR_OPENAI_API_KEY")) {
     return generateLocalDatabaseQueryResponse(rawPrompt);
   }
 
-  // Prepare full synchronized database snapshot for GPT-4o
   const systemContext = `You are Codex AI, the neural intelligence engine for the CODEX dashboard created for ${db.profile.name}.
 You have direct read access to the live website database provided below:
 
@@ -1311,7 +1621,7 @@ Always provide helpful, well-structured, accurate responses referencing the data
 
 // ================= 4. EVENT LISTENERS & HOVER BRIDGES =================
 document.addEventListener("DOMContentLoaded", () => {
-  // Modern Animated Chart.js Graphs for Monthly Sales
+  // Sales Chart
   const salesBarCtx = document.getElementById("salesBarChart")?.getContext("2d");
   if (salesBarCtx) {
     const barGradient = salesBarCtx.createLinearGradient(0, 0, 0, 280);
@@ -1358,7 +1668,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Modern Animated Bar Chart for Monthly Revenue Section
+  // Monthly Revenue Chart
   const revBarCtx = document.getElementById("monthlyRevenueBarChart")?.getContext("2d");
   if (revBarCtx) {
     const revGradient = revBarCtx.createLinearGradient(0, 0, 0, 180);
@@ -1405,6 +1715,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Performance Chart
   const statsLineCtx = document.getElementById("statisticsLineChart")?.getContext("2d");
   if (statsLineCtx) {
     const gradient = statsLineCtx.createLinearGradient(0, 0, 0, 250);
@@ -1440,7 +1751,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderAllFromDB();
 
-  // Reset database button inside Settings hover popup
+  // Reset database button
   document.getElementById("reset-db-btn")?.addEventListener("click", () => {
     if (confirm("Reset database back to factory initial state?")) {
       DB.reset();
@@ -1459,7 +1770,7 @@ document.addEventListener("DOMContentLoaded", () => {
     showToast("Opened eCommerce Orders");
   });
 
-  // Sidebar toggle
+  // Sidebar toggles
   document.getElementById("toggle-sidebar-dots-btn")?.addEventListener("click", (e) => {
     e.stopPropagation();
     toggleSidebarFullscreen();
@@ -1470,7 +1781,7 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleSidebarFullscreen();
   });
 
-  // Product Modal Close & Print A4
+  // Product Modal Close & Print
   const productModal = document.getElementById("product-detail-modal");
   document.getElementById("product-modal-close")?.addEventListener("click", () => {
     productModal.classList.add("hidden");
@@ -1562,7 +1873,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ================= HOVER-TRIGGERED NOTIFICATION SYSTEM WITH HOVER-BRIDGE =================
+  // Notification hover bridge
   const notifWrapper = document.getElementById("notif-wrapper");
   const notifDropdown = document.getElementById("notif-dropdown");
 
@@ -1575,7 +1886,7 @@ document.addEventListener("DOMContentLoaded", () => {
     notifDropdown.classList.add("hidden");
   });
 
-  // ================= HOVER-TRIGGERED SETTINGS SYSTEM WITH HOVER-BRIDGE =================
+  // Settings hover bridge
   const settingsWrapper = document.getElementById("settings-hover-wrapper");
   const settingsDropdown = document.getElementById("settings-hover-dropdown");
 
@@ -1603,7 +1914,7 @@ document.addEventListener("DOMContentLoaded", () => {
     showToast("Opened User Profile & Security");
   });
 
-  // ================= ECOMMERCE PRINT ACCORDING TO CYCLE FILTER =================
+  // eCommerce Orders Print
   document.getElementById("print-orders-btn")?.addEventListener("click", () => {
     const db = DB.get();
     const filter = (db.ordersFilter || "all").toUpperCase();
@@ -1620,7 +1931,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => window.print(), 200);
   });
 
-  // ================= INTERACTIVE PROFILE & BANNER CROP ENGINE =================
+  // Profile & Banner Crop Engine
   const photoFileInput = document.getElementById("profile-photo-input");
   const bannerFileInput = document.getElementById("profile-banner-input");
   const photoActionBtns = document.querySelectorAll("#photo-action-btn, #avatar-upload-trigger-btn");

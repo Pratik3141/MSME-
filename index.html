@@ -713,36 +713,61 @@
         </div>
 
         <div class="stat-cards-grid-4">
-          <div class="card stat-card interactive-card">
-            <div class="stat-icon"><i data-lucide="landmark"></i></div>
-            <p class="stat-title">Available Schemes</p>
-            <h3 class="stat-val" id="loan-schemes-count-label">12 Active</h3>
+          <div class="card stat-card interactive-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div class="stat-icon"><i data-lucide="landmark"></i></div>
+              <p class="stat-title">Available Schemes</p>
+              <div class="stat-val-group" style="margin-top: 4px;">
+                <h3 class="stat-val" id="loan-schemes-count-label">40+ Schemes</h3>
+                <span class="trend-badge positive">Demo Vault</span>
+              </div>
+              <p style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Explore 30–50 verified MSME grants, subsidies & credit loans</p>
+            </div>
+            <button type="button" class="primary-btn" style="margin-top: 14px; width: 100%; justify-content: center;" onclick="openAllSchemesModal()">
+              <i data-lucide="layout-grid" class="w-4 h-4"></i> View All Schemes
+            </button>
           </div>
-          <div class="card stat-card interactive-card" onclick="openEligibilityChecker()">
-            <div class="stat-icon"><i data-lucide="check-square"></i></div>
-            <p class="stat-title">Check Eligibility</p>
-            <h3 class="stat-val" style="font-size: 16px; color: var(--accent-color);">Instant Check &rarr;</h3>
+
+          <div class="card stat-card interactive-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div class="stat-icon"><i data-lucide="check-square"></i></div>
+              <p class="stat-title">Check Eligibility</p>
+              <p style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Instant evaluation for MSME & startup financing</p>
+            </div>
+            <button type="button" class="primary-btn" style="margin-top: 14px; width: 100%; justify-content: center;" onclick="openEligibilityCheckerModal()">
+              <i data-lucide="check-circle" class="w-4 h-4"></i> Check Eligibility
+            </button>
           </div>
-          <div class="card stat-card interactive-card" onclick="navigateToSection('new-loan-wizard')">
-            <div class="stat-icon"><i data-lucide="file-plus"></i></div>
-            <p class="stat-title">Apply for Loan</p>
-            <h3 class="stat-val" style="font-size: 16px; color: #10B981;">New Application &rarr;</h3>
+
+          <div class="card stat-card interactive-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div class="stat-icon" style="color: #10B981;"><i data-lucide="file-plus"></i></div>
+              <p class="stat-title">Apply for Loan</p>
+              <p style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Submit financing requirements and upload verification files</p>
+            </div>
+            <button type="button" class="primary-btn" style="margin-top: 14px; width: 100%; justify-content: center; background-color: #10B981;" onclick="navigateToSection('new-loan-wizard')">
+              <i data-lucide="file-plus" class="w-4 h-4"></i> New Application
+            </button>
           </div>
-          <div class="card stat-card interactive-card" onclick="openEmiCalculatorModal()">
-            <div class="stat-icon"><i data-lucide="calculator"></i></div>
-            <p class="stat-title">EMI Calculator</p>
-            <h3 class="stat-val" style="font-size: 16px; color: #F59E0B;">Calculate &rarr;</h3>
+
+          <div class="card stat-card interactive-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div class="stat-icon" style="color: #F59E0B;"><i data-lucide="calculator"></i></div>
+              <p class="stat-title">EMI Calculator</p>
+              <p style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Compute monthly instalments, total interest & schedule</p>
+            </div>
+            <button type="button" class="primary-btn" style="margin-top: 14px; width: 100%; justify-content: center; background-color: #F59E0B;" onclick="openEmiCalculatorModal()">
+              <i data-lucide="calculator" class="w-4 h-4"></i> Calculate
+            </button>
           </div>
         </div>
 
-        <!-- Scheme Cards Grid -->
         <div class="section-title-wrap" style="margin-top: 12px;">
           <h3 style="font-size: 18px; font-weight: 700; color: var(--text-primary);">Featured Scheme Cards</h3>
         </div>
 
         <div class="schemes-grid-container" id="loan-schemes-cards-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;"></div>
 
-        <!-- Loan Applications Table -->
         <div class="card" style="margin-top: 20px;">
           <div class="card-header">
             <div>
@@ -893,25 +918,68 @@
         </div>
 
         <div class="stat-cards-grid-4">
-          <div class="card stat-card interactive-card" onclick="openMsmeRegistrationModal()">
-            <div class="stat-icon"><i data-lucide="award"></i></div>
-            <p class="stat-title">MSME Registration</p>
-            <h3 class="stat-val" style="font-size: 16px; color: var(--accent-color);">Udyam Guide &rarr;</h3>
+          <!-- Card 1: MSME Registration (Udyam Guide Button) -->
+          <div class="card stat-card interactive-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div class="stat-icon"><i data-lucide="award"></i></div>
+              <p class="stat-title">MSME Registration</p>
+              <div class="stat-val-group" style="margin-top: 4px;">
+                <h3 class="stat-val" style="font-size: 18px;">Udyam Portal</h3>
+                <span class="trend-badge positive">Govt of India</span>
+              </div>
+              <p style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Official criteria, paperless registration & mandatory paperwork</p>
+            </div>
+            <button type="button" class="primary-btn" style="margin-top: 14px; width: 100%; justify-content: center;" onclick="openUdyamGuideModal()">
+              <i data-lucide="book-open" class="w-4 h-4"></i> Udyam Guide
+            </button>
           </div>
-          <div class="card stat-card interactive-card" onclick="navigateToSection('loans')">
-            <div class="stat-icon"><i data-lucide="shield-check"></i></div>
-            <p class="stat-title">Government Schemes</p>
-            <h3 class="stat-val">24 Available</h3>
+
+          <!-- Card 2: Government Schemes (View Schemes Button) -->
+          <div class="card stat-card interactive-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div class="stat-icon" style="color: #3B82F6;"><i data-lucide="shield-check"></i></div>
+              <p class="stat-title">Government Schemes</p>
+              <div class="stat-val-group" style="margin-top: 4px;">
+                <h3 class="stat-val" style="font-size: 18px;">40+ Listed</h3>
+                <span class="trend-badge positive">Active Vault</span>
+              </div>
+              <p style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Explore active central grants, credit guarantees & subsidies</p>
+            </div>
+            <button type="button" class="primary-btn" style="margin-top: 14px; width: 100%; justify-content: center;" onclick="openAllSchemesModal()">
+              <i data-lucide="layout-grid" class="w-4 h-4"></i> View Schemes
+            </button>
           </div>
-          <div class="card stat-card interactive-card" onclick="openMsmeSubsidyModal()">
-            <div class="stat-icon"><i data-lucide="percent"></i></div>
-            <p class="stat-title">Subsidies & Benefits</p>
-            <h3 class="stat-val" style="font-size: 16px; color: #10B981;">View Benefits &rarr;</h3>
+
+          <!-- Card 3: Subsidies & Benefits (View Benefits Button) -->
+          <div class="card stat-card interactive-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div class="stat-icon" style="color: #10B981;"><i data-lucide="percent"></i></div>
+              <p class="stat-title">Subsidies & Benefits</p>
+              <div class="stat-val-group" style="margin-top: 4px;">
+                <h3 class="stat-val" style="font-size: 18px; color: #10B981;">Up to 80% Off</h3>
+                <span class="trend-badge positive">Grants</span>
+              </div>
+              <p style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Capital subsidies, tax exemptions & technology upgrades</p>
+            </div>
+            <button type="button" class="primary-btn" style="margin-top: 14px; width: 100%; justify-content: center; background-color: #10B981;" onclick="openMsmeSubsidiesModal()">
+              <i data-lucide="gift" class="w-4 h-4"></i> View Benefits
+            </button>
           </div>
-          <div class="card stat-card interactive-card" onclick="openMsmeSupportModal()">
-            <div class="stat-icon"><i data-lucide="headphones"></i></div>
-            <p class="stat-title">Business Support</p>
-            <h3 class="stat-val" style="font-size: 16px; color: #F59E0B;">24/7 Desk &rarr;</h3>
+
+          <!-- Card 4: Business Support (24/7 Desk Button) -->
+          <div class="card stat-card interactive-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div class="stat-icon" style="color: #F59E0B;"><i data-lucide="headphones"></i></div>
+              <p class="stat-title">Business Support</p>
+              <div class="stat-val-group" style="margin-top: 4px;">
+                <h3 class="stat-val" style="font-size: 18px; color: #F59E0B;">AI Desk 24/7</h3>
+                <span class="trend-badge positive">Instant Help</span>
+              </div>
+              <p style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Live expert FAQs, grievance redressal & CODEX AI assistance</p>
+            </div>
+            <button type="button" class="primary-btn" style="margin-top: 14px; width: 100%; justify-content: center; background-color: #F59E0B;" onclick="openMsmeSupportDeskModal()">
+              <i data-lucide="message-square-code" class="w-4 h-4"></i> 24/7 Desk
+            </button>
           </div>
         </div>
 
@@ -1273,33 +1341,371 @@
     </div>
   </div>
 
-  <!-- EMI Calculator Pop-up Modal -->
-  <div class="modal-overlay hidden" id="emi-calculator-modal">
-    <div class="modal-card">
+  <!-- All Schemes Explorer Popup Modal -->
+  <div class="modal-overlay hidden" id="all-schemes-modal">
+    <div class="modal-card all-schemes-modal-card">
+      <div class="modal-header" style="align-items: flex-start; gap: 16px;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <h3 style="font-size: 18px; font-weight: 800; color: var(--text-primary);">Government & MSME Loan Schemes Directory</h3>
+            <span class="demo-vault-badge">Demo / Sample Data</span>
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); margin-top: 4px;">
+            Showing curated credit-linked schemes, technological subsidies, and collateral-free advances for micro and small enterprises.
+          </p>
+        </div>
+        <button class="modal-close-btn" onclick="closeAllSchemesModal()"><i data-lucide="x"></i></button>
+      </div>
+
+      <div class="schemes-modal-toolbar">
+        <div class="schemes-modal-search">
+          <i data-lucide="search" class="w-4 h-4 text-muted"></i>
+          <input type="text" id="modal-scheme-search" placeholder="Search by scheme name, ministry, or keywords..." oninput="filterModalSchemes()" />
+        </div>
+
+        <div class="pill-group" id="scheme-cat-pill-group">
+          <button class="pill active" data-schemecat="all" onclick="setSchemeCatFilter('all', this)">All (40)</button>
+          <button class="pill" data-schemecat="Credit" onclick="setSchemeCatFilter('Credit', this)">Credit & Working Capital</button>
+          <button class="pill" data-schemecat="Subsidy" onclick="setSchemeCatFilter('Subsidy', this)">Subsidies & Grants</button>
+          <button class="pill" data-schemecat="Green" onclick="setSchemeCatFilter('Green', this)">Green & Solar</button>
+          <button class="pill" data-schemecat="Women" onclick="setSchemeCatFilter('Women', this)">Women & SC/ST</button>
+        </div>
+      </div>
+
+      <div class="schemes-modal-grid-scroll" id="schemes-modal-cards-container"></div>
+
+      <div class="modal-footer" style="margin-top: 14px; border-top: 1px solid var(--border-color); padding-top: 12px; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 11.5px; color: #94A3B8;">
+          Notice: All listed metrics, interest subsidies, and guidelines are simulated demo data for dashboard testing.
+        </span>
+        <button type="button" class="small-btn" onclick="closeAllSchemesModal()">Close Window</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Subsidies & Benefits Explorer Modal -->
+  <div class="modal-overlay hidden" id="msme-subsidies-modal">
+    <div class="modal-card all-schemes-modal-card">
+      <div class="modal-header" style="align-items: flex-start; gap: 16px;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <h3 style="font-size: 18px; font-weight: 800; color: var(--text-primary);">MSME Subsidies & Financial Grants</h3>
+            <span class="demo-vault-badge" style="background: rgba(16, 185, 129, 0.12); color: #10B981; border-color: rgba(16, 185, 129, 0.3);">Up to 80% Benefit</span>
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); margin-top: 4px;">
+            Review active capital grants, technology upgradation incentives, and tax reimbursement programs.
+          </p>
+        </div>
+        <button class="modal-close-btn" onclick="closeMsmeSubsidiesModal()"><i data-lucide="x"></i></button>
+      </div>
+
+      <div class="schemes-modal-grid-scroll" id="msme-subsidies-cards-container" style="margin-top: 8px;"></div>
+
+      <div class="modal-footer" style="margin-top: 14px; border-top: 1px solid var(--border-color); padding-top: 12px; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 11.5px; color: #94A3B8;">
+          Click 'Apply Benefit' to initiate subsidy review directly through your business profile.
+        </span>
+        <button type="button" class="small-btn" onclick="closeMsmeSubsidiesModal()">Close Window</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 24/7 Business Support Desk AI Modal -->
+  <div class="modal-overlay hidden" id="msme-support-desk-modal">
+    <div class="modal-card" style="width: 620px; max-width: 95vw; height: 600px; max-height: 90vh; display: flex; flex-direction: column;">
+      <div class="modal-header" style="padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(245, 158, 11, 0.1); color: #F59E0B; display: flex; align-items: center; justify-content: center;">
+            <i data-lucide="headphones" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 style="font-size: 16px; font-weight: 800; color: var(--text-primary);">24/7 MSME Business Support Desk</h3>
+            <span style="font-size: 11px; color: #10B981; font-weight: 600;">● CODEX AI Assistant Online</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeMsmeSupportDeskModal()"><i data-lucide="x"></i></button>
+      </div>
+
+      <div style="flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; font-size: 13px;" id="support-desk-messages">
+        <div class="ai-bubble">
+          👋 Hello <strong>Pratik Narkhede</strong>! I am your 24/7 MSME Support Desk assistant. Ask me anything about Udyam registration, tax filings, government subsidies, or loan eligibility!
+        </div>
+      </div>
+
+      <div style="padding: 8px 16px; background: var(--bg-main); border-top: 1px solid var(--border-color); display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none;">
+        <button class="suggestion-chip" onclick="askSupportDesk('How do I register my enterprise for Udyam?')">📝 Udyam Steps</button>
+        <button class="suggestion-chip" onclick="askSupportDesk('What are the benefits of ZED Certification?')">🛡️ ZED Benefits</button>
+        <button class="suggestion-chip" onclick="askSupportDesk('How can I claim CLCSS capital subsidy?')">💸 CLCSS Subsidy</button>
+      </div>
+
+      <form style="display: flex; border-top: 1px solid var(--border-color); background: var(--bg-card); padding: 6px;" onsubmit="handleSupportDeskSubmit(event)">
+        <input type="text" id="support-desk-input" placeholder="Type your business or compliance question..." autocomplete="off" style="flex: 1; border: none; padding: 12px 14px; font-size: 13px; background: transparent; color: var(--text-primary); outline: none;" required />
+        <button type="submit" class="primary-btn" style="padding: 0 18px; border-radius: 10px;">
+          <i data-lucide="send" class="w-4 h-4"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Loan Eligibility Assessment Modal -->
+  <div class="modal-overlay hidden" id="loan-eligibility-modal">
+    <div class="modal-card" style="width: 500px; max-width: 95vw;">
       <div class="modal-header">
-        <h3>Interactive EMI Calculator</h3>
-        <button class="modal-close-btn" onclick="document.getElementById('emi-calculator-modal').classList.add('hidden')"><i data-lucide="x"></i></button>
+        <h3>MSME & Business Loan Eligibility Assessment</h3>
+        <button class="modal-close-btn" onclick="closeEligibilityCheckerModal()"><i data-lucide="x"></i></button>
       </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label>Loan Amount (₹)</label>
-          <input type="number" id="emi-loan-amt" value="500000" oninput="calculateEMI()" />
+      <form id="loan-eligibility-form" class="modal-body" onsubmit="handleEligibilityFormSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="elig-biz-type">Business Constitution</label>
+            <select id="elig-biz-type" required>
+              <option value="Proprietorship">Sole Proprietorship</option>
+              <option value="Partnership">Partnership / LLP</option>
+              <option value="Pvt Ltd">Private Limited Company</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="elig-credit-score">Estimated Credit Score (CIBIL)</label>
+            <input type="number" id="elig-credit-score" min="300" max="900" placeholder="e.g. 750" required />
+          </div>
         </div>
-        <div class="form-group">
-          <label>Interest Rate (% P.A.)</label>
-          <input type="number" id="emi-interest-rate" step="0.1" value="8.5" oninput="calculateEMI()" />
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="elig-turnover">Annual Turnover (₹)</label>
+            <input type="number" id="elig-turnover" min="0" placeholder="e.g. 2500000" required />
+          </div>
+          <div class="form-group">
+            <label for="elig-vintage">Business Vintage (Years)</label>
+            <input type="number" id="elig-vintage" min="0" placeholder="e.g. 3" required />
+          </div>
         </div>
+
         <div class="form-group">
-          <label>Tenure (Years)</label>
-          <input type="number" id="emi-tenure-years" value="5" oninput="calculateEMI()" />
+          <label for="elig-gst">GST Registered?</label>
+          <select id="elig-gst" required>
+            <option value="yes">Yes, Active GSTIN</option>
+            <option value="no">No / Exempted</option>
+          </select>
         </div>
-        <div style="background: var(--bg-main); padding: 16px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; margin-top: 8px;">
-          <span style="font-size: 11.5px; color: #94A3B8; text-transform: uppercase; font-weight: 700;">Estimated Monthly EMI</span>
-          <h2 id="emi-result-display" style="font-size: 24px; font-weight: 800; color: var(--accent-color); margin-top: 4px;">₹10,246</h2>
+
+        <!-- Result Banner -->
+        <div id="eligibility-result-banner" class="hidden" style="padding: 14px; border-radius: 10px; font-size: 13px; line-height: 1.5; margin-top: 4px;"></div>
+
+        <div class="modal-footer">
+          <button type="button" class="small-btn" onclick="closeEligibilityCheckerModal()">Cancel</button>
+          <button type="submit" class="primary-btn" id="elig-eval-btn">Evaluate Eligibility</button>
+          <button type="button" class="primary-btn hidden" id="elig-apply-direct-btn" onclick="closeEligibilityCheckerModal(); navigateToSection('new-loan-wizard');">Proceed to Apply &rarr;</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Mobile Phone Style EMI Calculator Modal -->
+  <div class="modal-overlay hidden" id="emi-calculator-modal">
+    <div class="mobile-calc-frame">
+      <div class="mobile-calc-notch">
+        <div class="notch-speaker"></div>
+        <div class="notch-lens"></div>
+      </div>
+
+      <div class="mobile-calc-header">
+        <div class="mobile-calc-title">
+          <i data-lucide="smartphone" class="w-4 h-4 text-accent"></i>
+          <span>EMI Smart Desk</span>
+        </div>
+        <button class="modal-close-btn" onclick="document.getElementById('emi-calculator-modal').classList.add('hidden')" title="Close Calculator">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <div class="mobile-calc-screen">
+        <span class="calc-screen-label">Monthly EMI Payable</span>
+        <h2 class="calc-screen-val" id="emi-result-display">₹10,246</h2>
+        <div class="calc-screen-breakdown">
+          <div>
+            <span class="sub-label">Total Interest</span>
+            <p id="emi-total-interest">₹1,14,760</p>
+          </div>
+          <div style="border-left: 1px solid rgba(255, 255, 255, 0.15); padding-left: 10px;">
+            <span class="sub-label">Total Payment</span>
+            <p id="emi-total-payment">₹6,14,760</p>
+          </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="primary-btn" onclick="document.getElementById('emi-calculator-modal').classList.add('hidden')">Done</button>
+
+      <div class="mobile-calc-body">
+        <div class="mobile-calc-field">
+          <div class="calc-field-top">
+            <label for="emi-loan-amt">Loan Amount</label>
+            <div class="calc-input-wrap">
+              <span class="cur-prefix">₹</span>
+              <input type="number" id="emi-loan-amt" value="500000" min="10000" max="10000000" step="5000" oninput="syncEmiSlider('amount')" />
+            </div>
+          </div>
+          <input type="range" id="emi-loan-amt-range" min="50000" max="5000000" step="10000" value="500000" class="calc-range-slider" oninput="syncEmiInput('amount')" />
+        </div>
+
+        <div class="mobile-calc-field">
+          <div class="calc-field-top">
+            <label for="emi-interest-rate">Interest Rate</label>
+            <div class="calc-input-wrap">
+              <input type="number" id="emi-interest-rate" step="0.1" value="8.5" min="1" max="30" oninput="syncEmiSlider('rate')" />
+              <span class="cur-suffix">%</span>
+            </div>
+          </div>
+          <input type="range" id="emi-interest-rate-range" min="5" max="24" step="0.1" value="8.5" class="calc-range-slider" oninput="syncEmiInput('rate')" />
+        </div>
+
+        <div class="mobile-calc-field">
+          <div class="calc-field-top">
+            <label for="emi-tenure-years">Tenure (Duration)</label>
+            <div class="calc-input-wrap">
+              <input type="number" id="emi-tenure-years" value="5" min="1" max="30" oninput="syncEmiSlider('tenure')" />
+              <span class="cur-suffix">Yrs</span>
+            </div>
+          </div>
+          <input type="range" id="emi-tenure-years-range" min="1" max="30" step="1" value="5" class="calc-range-slider" oninput="syncEmiInput('tenure')" />
+        </div>
+
+        <div class="mobile-quick-chips">
+          <button type="button" class="quick-chip" onclick="setQuickLoan(300000, 8.5, 3)">₹3L &bull; 3Y</button>
+          <button type="button" class="quick-chip" onclick="setQuickLoan(1000000, 8.0, 5)">₹10L &bull; 5Y</button>
+          <button type="button" class="quick-chip" onclick="setQuickLoan(2500000, 7.5, 7)">₹25L &bull; 7Y</button>
+        </div>
+
+        <div class="mobile-calc-actions">
+          <button type="button" class="mobile-calc-btn secondary" onclick="document.getElementById('emi-calculator-modal').classList.add('hidden')">
+            Dismiss
+          </button>
+          <button type="button" class="mobile-calc-btn primary" onclick="document.getElementById('emi-calculator-modal').classList.add('hidden'); navigateToSection('new-loan-wizard');">
+            Apply With This EMI &rarr;
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Udyam Guide Step-by-Step Walkthrough Modal -->
+  <div class="modal-overlay hidden" id="udyam-guide-modal">
+    <div class="modal-card udyam-guide-modal-card">
+      <div class="modal-header" style="align-items: flex-start; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
+        <div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <h3 style="font-size: 18px; font-weight: 800; color: var(--text-primary);">Complete Udyam MSME Registration Guide</h3>
+            <span class="udyam-official-pill">Zero Govt Fee &bull; Paperless</span>
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); margin-top: 4px;">
+            Official Ministry of Micro, Small & Medium Enterprises guidelines, classifications, and walkthrough.
+          </p>
+        </div>
+        <button class="modal-close-btn" onclick="closeUdyamGuideModal()"><i data-lucide="x"></i></button>
+      </div>
+
+      <div class="udyam-guide-content-scroll">
+        <div class="udyam-guide-block">
+          <h4 class="udyam-guide-subheading"><i data-lucide="shield-check" class="w-4 h-4 text-accent"></i> Composite Classification Criteria</h4>
+          <div class="udyam-criteria-grid">
+            <div class="criteria-card">
+              <span class="crit-type">Micro Enterprise</span>
+              <p><strong>Investment:</strong> Up to ₹1 Crore</p>
+              <p><strong>Turnover:</strong> Up to ₹5 Crore</p>
+            </div>
+            <div class="criteria-card">
+              <span class="crit-type">Small Enterprise</span>
+              <p><strong>Investment:</strong> Up to ₹10 Crore</p>
+              <p><strong>Turnover:</strong> Up to ₹50 Crore</p>
+            </div>
+            <div class="criteria-card">
+              <span class="crit-type">Medium Enterprise</span>
+              <p><strong>Investment:</strong> Up to ₹50 Crore</p>
+              <p><strong>Turnover:</strong> Up to ₹250 Crore</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="udyam-guide-block">
+          <h4 class="udyam-guide-subheading"><i data-lucide="file-check" class="w-4 h-4 text-accent"></i> Mandatory Documents & Details</h4>
+          <div class="udyam-doc-tags-grid">
+            <div class="udyam-doc-item">
+              <i data-lucide="check" class="w-3.5 h-3.5 text-accent"></i>
+              <span><strong>Aadhaar Card:</strong> Linked with mobile for OTP</span>
+            </div>
+            <div class="udyam-doc-item">
+              <i data-lucide="check" class="w-3.5 h-3.5 text-accent"></i>
+              <span><strong>PAN Card:</strong> Enterprise or proprietor's PAN</span>
+            </div>
+            <div class="udyam-doc-item">
+              <i data-lucide="check" class="w-3.5 h-3.5 text-accent"></i>
+              <span><strong>Bank Account:</strong> Current or savings IFSC code</span>
+            </div>
+            <div class="udyam-doc-item">
+              <i data-lucide="check" class="w-3.5 h-3.5 text-accent"></i>
+              <span><strong>NIC 2/4 Digit Code:</strong> Primary business activity</span>
+            </div>
+            <div class="udyam-doc-item">
+              <i data-lucide="check" class="w-3.5 h-3.5 text-accent"></i>
+              <span><strong>GSTIN (if applicable):</strong> Auto-verified via CBDT</span>
+            </div>
+            <div class="udyam-doc-item">
+              <i data-lucide="check" class="w-3.5 h-3.5 text-accent"></i>
+              <span><strong>Plant / Location Address:</strong> PIN code & unit count</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="udyam-guide-block">
+          <h4 class="udyam-guide-subheading"><i data-lucide="list-ordered" class="w-4 h-4 text-accent"></i> Step-by-Step Registration Walkthrough</h4>
+          <div class="udyam-steps-timeline">
+            <div class="udyam-step-card">
+              <span class="step-badge">Step 1</span>
+              <div class="step-text">
+                <h5>Aadhaar & OTP Verification</h5>
+                <p>Visit udyamregistration.gov.in. Select "For New Entrepreneurs" and authenticate via Aadhaar OTP.</p>
+              </div>
+            </div>
+            <div class="udyam-step-card">
+              <span class="step-badge">Step 2</span>
+              <div class="step-text">
+                <h5>PAN Validation</h5>
+                <p>Enter your PAN number. The portal automatically extracts and validates ITR filing data from income tax databases.</p>
+              </div>
+            </div>
+            <div class="udyam-step-card">
+              <span class="step-badge">Step 3</span>
+              <div class="step-text">
+                <h5>Plant Location & NIC Code Selection</h5>
+                <p>Add all factory/office physical addresses and pick your National Industry Classification (NIC) manufacturing or service code.</p>
+              </div>
+            </div>
+            <div class="udyam-step-card">
+              <span class="step-badge">Step 4</span>
+              <div class="step-text">
+                <h5>Machinery Investment & Final OTP</h5>
+                <p>Enter written-down investment cost in plant & machinery and submit the final mobile verification OTP.</p>
+              </div>
+            </div>
+            <div class="udyam-step-card">
+              <span class="step-badge">Step 5</span>
+              <div class="step-text">
+                <h5>Instant Udyam Registration Number</h5>
+                <p>A lifetime valid 19-digit URN (e.g., UDYAM-MH-12-0012345) and QR-code enabled certificate is issued within 24–48 hours.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer" style="border-top: 1px solid var(--border-color); padding-top: 12px; display: flex; justify-content: space-between; align-items: center;">
+        <a href="https://udyamregistration.gov.in" target="_blank" rel="noopener noreferrer" class="small-btn" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
+          <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Visit Official Portal
+        </a>
+        <div style="display: flex; gap: 8px;">
+          <button type="button" class="small-btn" onclick="closeUdyamGuideModal()">Close</button>
+          <button type="button" class="primary-btn" onclick="closeUdyamGuideModal(); openMsmeRegistrationModal();">
+            Fill CODEX MSME Form &rarr;
+          </button>
+        </div>
       </div>
     </div>
   </div>
