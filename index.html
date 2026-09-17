@@ -706,7 +706,7 @@
               <h2>Loan Services & Financial Facilities</h2>
               <p>Explore available loan schemes, verify eligibility instantly, apply for financing, and calculate EMI.</p>
             </div>
-            <button class="primary-btn" onclick="openModal('loan')">
+            <button class="primary-btn" onclick="navigateToSection('new-loan-wizard')">
               <i data-lucide="file-plus" class="w-4 h-4"></i> New Application
             </button>
           </div>
@@ -716,14 +716,14 @@
           <div class="card stat-card interactive-card">
             <div class="stat-icon"><i data-lucide="landmark"></i></div>
             <p class="stat-title">Available Schemes</p>
-            <h3 class="stat-val">12 Active</h3>
+            <h3 class="stat-val" id="loan-schemes-count-label">12 Active</h3>
           </div>
           <div class="card stat-card interactive-card" onclick="openEligibilityChecker()">
             <div class="stat-icon"><i data-lucide="check-square"></i></div>
             <p class="stat-title">Check Eligibility</p>
             <h3 class="stat-val" style="font-size: 16px; color: var(--accent-color);">Instant Check &rarr;</h3>
           </div>
-          <div class="card stat-card interactive-card" onclick="openModal('loan')">
+          <div class="card stat-card interactive-card" onclick="navigateToSection('new-loan-wizard')">
             <div class="stat-icon"><i data-lucide="file-plus"></i></div>
             <p class="stat-title">Apply for Loan</p>
             <h3 class="stat-val" style="font-size: 16px; color: #10B981;">New Application &rarr;</h3>
@@ -735,93 +735,95 @@
           </div>
         </div>
 
-        <!-- Available Loan Schemes Table -->
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <h4 class="card-title">Available Loan Schemes & Business Financing</h4>
-              <p class="card-subtitle">Collateral-free MSME loans, equipment leasing, and working capital lines.</p>
-            </div>
-          </div>
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>Scheme Name</th>
-                <th>Loan Type</th>
-                <th>Max Amount</th>
-                <th>Interest Rate</th>
-                <th>Tenure</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>MSME Growth Advance</strong></td>
-                <td>Working Capital</td>
-                <td>₹50,00,000</td>
-                <td>8.5% p.a.</td>
-                <td>5 Years</td>
-                <td><button class="small-btn" onclick="openModal('loan')">Apply Now</button></td>
-              </tr>
-              <tr>
-                <td><strong>Industrial Equipment Leasing</strong></td>
-                <td>Asset Financing</td>
-                <td>₹1,20,00,000</td>
-                <td>7.9% p.a.</td>
-                <td>7 Years</td>
-                <td><button class="small-btn" onclick="openModal('loan')">Apply Now</button></td>
-              </tr>
-              <tr>
-                <td><strong>Green Energy Tech Loan</strong></td>
-                <td>Sustainability</td>
-                <td>₹75,00,000</td>
-                <td>6.5% p.a.</td>
-                <td>10 Years</td>
-                <td><button class="small-btn" onclick="openModal('loan')">Apply Now</button></td>
-              </tr>
-            </tbody>
-          </table>
+        <!-- Scheme Cards Grid -->
+        <div class="section-title-wrap" style="margin-top: 12px;">
+          <h3 style="font-size: 18px; font-weight: 700; color: var(--text-primary);">Featured Scheme Cards</h3>
         </div>
 
-        <!-- Loan Applications Table (15 Applications) -->
-        <div class="card">
+        <div class="schemes-grid-container" id="loan-schemes-cards-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;"></div>
+
+        <!-- Loan Applications Table -->
+        <div class="card" style="margin-top: 20px;">
           <div class="card-header">
             <div>
-              <h4 class="card-title">My Loan Applications List</h4>
-              <p class="card-subtitle">Comprehensive tracking log of 15 submitted financing requests.</p>
+              <h4 class="card-title">My Loan Applications</h4>
+              <p class="card-subtitle">Track status of submitted financing requests.</p>
             </div>
-            <button class="primary-btn" onclick="openModal('loan')">
-              <i data-lucide="plus" class="w-4 h-4"></i> New Application
-            </button>
           </div>
           <table class="data-table">
             <thead>
               <tr>
-                <th>App ID</th>
+                <th>Application ID</th>
                 <th>Scheme Name</th>
                 <th>Requested Amount</th>
                 <th>Submission Date</th>
                 <th>Status</th>
               </tr>
             </thead>
-            <tbody id="loan-applications-tbody">
-              <tr><td><strong>LN-8810</strong></td><td>MSME Growth Advance</td><td><strong>₹15,00,000</strong></td><td>Sep 02, 2026</td><td><span class="table-badge delivered">Approved & Disbursed</span></td></tr>
-              <tr><td><strong>LN-8942</strong></td><td>Industrial Equipment Leasing</td><td><strong>₹45,00,000</strong></td><td>Sep 12, 2026</td><td><span class="table-badge pending">Under Verification</span></td></tr>
-              <tr><td><strong>LN-8805</strong></td><td>Green Energy Tech Loan</td><td><strong>₹25,00,000</strong></td><td>Aug 28, 2026</td><td><span class="table-badge delivered">Disbursed</span></td></tr>
-              <tr><td><strong>LN-8750</strong></td><td>Working Capital Line #2</td><td><strong>₹10,00,000</strong></td><td>Aug 20, 2026</td><td><span class="table-badge delivered">Approved</span></td></tr>
-              <tr><td><strong>LN-8620</strong></td><td>Tech Infrastructure Upgrade</td><td><strong>₹30,00,000</strong></td><td>Aug 14, 2026</td><td><span class="table-badge cancelled">Rejected</span></td></tr>
-              <tr><td><strong>LN-8591</strong></td><td>MSME Growth Advance</td><td><strong>₹20,00,000</strong></td><td>Aug 05, 2026</td><td><span class="table-badge delivered">Disbursed</span></td></tr>
-              <tr><td><strong>LN-8433</strong></td><td>Warehouse Expansion Loan</td><td><strong>₹80,00,000</strong></td><td>Jul 29, 2026</td><td><span class="table-badge pending">Under Review</span></td></tr>
-              <tr><td><strong>LN-8312</strong></td><td>Solar Panel Install Grant-Loan</td><td><strong>₹12,00,000</strong></td><td>Jul 18, 2026</td><td><span class="table-badge delivered">Approved</span></td></tr>
-              <tr><td><strong>LN-8204</strong></td><td>Logistics Fleet Financing</td><td><strong>₹60,00,000</strong></td><td>Jul 10, 2026</td><td><span class="table-badge delivered">Disbursed</span></td></tr>
-              <tr><td><strong>LN-8155</strong></td><td>Emergency Cashflow Buffer</td><td><strong>₹5,00,000</strong></td><td>Jun 30, 2026</td><td><span class="table-badge delivered">Closed</span></td></tr>
-              <tr><td><strong>LN-8099</strong></td><td>R&D Lab Equipment Line</td><td><strong>₹35,00,000</strong></td><td>Jun 22, 2026</td><td><span class="table-badge delivered">Disbursed</span></td></tr>
-              <tr><td><strong>LN-7980</strong></td><td>Export Working Capital</td><td><strong>₹50,00,000</strong></td><td>Jun 12, 2026</td><td><span class="table-badge delivered">Approved</span></td></tr>
-              <tr><td><strong>LN-7845</strong></td><td>Office Automation Loan</td><td><strong>₹8,00,000</strong></td><td>May 28, 2026</td><td><span class="table-badge delivered">Closed</span></td></tr>
-              <tr><td><strong>LN-7712</strong></td><td>Raw Material Advance</td><td><strong>₹18,00,000</strong></td><td>May 15, 2026</td><td><span class="table-badge delivered">Closed</span></td></tr>
-              <tr><td><strong>LN-7601</strong></td><td>Industrial Equipment Leasing</td><td><strong>₹90,00,000</strong></td><td>May 02, 2026</td><td><span class="table-badge delivered">Disbursed</span></td></tr>
-            </tbody>
+            <tbody id="loan-applications-tbody"></tbody>
           </table>
+        </div>
+      </section>
+
+      <!-- ================= SECTION: NEW LOAN WIZARD (HIDDEN PAGE VIEW) ================= -->
+      <section id="section-new-loan-wizard" class="page-section">
+        <div class="section-title-wrap">
+          <div class="title-with-btn">
+            <div>
+              <h2>New Loan Application Wizard</h2>
+              <p>Submit your financing requirements and upload verification documents.</p>
+            </div>
+            <button class="small-btn" onclick="navigateToSection('loans')">&larr; Back to Loan Services</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <form id="new-loan-wizard-form" class="modal-body" style="gap: 20px;">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Scheme Name</label>
+                <input type="text" id="wiz-scheme-name" placeholder="e.g. MSME Modernization Loan" required />
+              </div>
+              <div class="form-group">
+                <label>Government / Ministry Department</label>
+                <input type="text" id="wiz-ministry" placeholder="e.g. Ministry of MSME" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Requested Loan Amount (₹)</label>
+                <input type="number" id="wiz-amount" placeholder="2500000" required />
+              </div>
+              <div class="form-group">
+                <label>Interest Rate / Benefit</label>
+                <input type="text" id="wiz-interest" placeholder="7.5% p.a. Interest" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Tenure / Duration</label>
+                <input type="text" id="wiz-tenure" placeholder="5 Years" required />
+              </div>
+              <div class="form-group">
+                <label>Upload Supporting Documents (PDF/Doc)</label>
+                <input type="file" id="wiz-docs" accept=".pdf,.doc,.docx,.png,.jpg" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Scheme Description & Business Purpose</label>
+              <textarea id="wiz-desc" rows="3" placeholder="Explain how funds will be deployed..." required style="padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-primary); outline: none; font-family: inherit;"></textarea>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 10px;">
+              <button type="button" class="small-btn" onclick="navigateToSection('loans')">Cancel</button>
+              <button type="submit" class="primary-btn">
+                <i data-lucide="upload-cloud" class="w-4 h-4"></i> Upload & Submit Application
+              </button>
+            </div>
+          </form>
         </div>
       </section>
 
@@ -891,22 +893,22 @@
         </div>
 
         <div class="stat-cards-grid-4">
-          <div class="card stat-card interactive-card" onclick="showToast('Opening Udyam MSME Registration guide...')">
+          <div class="card stat-card interactive-card" onclick="openMsmeRegistrationModal()">
             <div class="stat-icon"><i data-lucide="award"></i></div>
             <p class="stat-title">MSME Registration</p>
             <h3 class="stat-val" style="font-size: 16px; color: var(--accent-color);">Udyam Guide &rarr;</h3>
           </div>
-          <div class="card stat-card interactive-card" onclick="showToast('Loading active central & state schemes...')">
+          <div class="card stat-card interactive-card" onclick="navigateToSection('loans')">
             <div class="stat-icon"><i data-lucide="shield-check"></i></div>
             <p class="stat-title">Government Schemes</p>
             <h3 class="stat-val">24 Available</h3>
           </div>
-          <div class="card stat-card interactive-card" onclick="showToast('Listing tax rebates & capital subsidies...')">
+          <div class="card stat-card interactive-card" onclick="openMsmeSubsidyModal()">
             <div class="stat-icon"><i data-lucide="percent"></i></div>
             <p class="stat-title">Subsidies & Benefits</p>
             <h3 class="stat-val" style="font-size: 16px; color: #10B981;">View Benefits &rarr;</h3>
           </div>
-          <div class="card stat-card interactive-card" onclick="showToast('Connecting to MSME business support desk...')">
+          <div class="card stat-card interactive-card" onclick="openMsmeSupportModal()">
             <div class="stat-icon"><i data-lucide="headphones"></i></div>
             <p class="stat-title">Business Support</p>
             <h3 class="stat-val" style="font-size: 16px; color: #F59E0B;">24/7 Desk &rarr;</h3>
@@ -941,6 +943,43 @@
                 <td>Quality Council of India</td>
                 <td>Up to 80% Subsidy on Assessment Cost</td>
                 <td>All Manufacturing MSMEs</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- MSME Service Requests Tracking Ledger -->
+        <div class="card" style="margin-top: 20px;">
+          <div class="card-header">
+            <div>
+              <h4 class="card-title">My MSME Service Requests & Applications</h4>
+              <p class="card-subtitle">Live tracking of your submitted Udyam registrations, subsidies, and support tickets.</p>
+            </div>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Request ID</th>
+                <th>Service Type</th>
+                <th>Business Name</th>
+                <th>Date Submitted</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="msme-requests-tbody">
+              <tr>
+                <td><strong>MSME-9021</strong></td>
+                <td>Udyam Registration</td>
+                <td>Pratik Enterprises</td>
+                <td>Sep 01, 2026</td>
+                <td><span class="table-badge delivered">Certificate Issued</span></td>
+              </tr>
+              <tr>
+                <td><strong>MSME-9104</strong></td>
+                <td>ZED Subsidy Application</td>
+                <td>CODEX Technologies</td>
+                <td>Sep 10, 2026</td>
+                <td><span class="table-badge pending">Under Review</span></td>
               </tr>
             </tbody>
           </table>
@@ -1265,6 +1304,94 @@
     </div>
   </div>
 
+  <!-- MSME Interactive Service Modals -->
+  <!-- 1. MSME Registration Modal -->
+  <div class="modal-overlay hidden" id="msme-reg-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Udyam MSME Registration Form</h3>
+        <button class="modal-close-btn" onclick="document.getElementById('msme-reg-modal').classList.add('hidden')"><i data-lucide="x"></i></button>
+      </div>
+      <form id="msme-reg-form" class="modal-body" onsubmit="submitMsmeService(event, 'Udyam Registration')">
+        <div class="form-group">
+          <label>Business Name</label>
+          <input type="text" id="msme-reg-bus" required placeholder="e.g. Acme Industries" />
+        </div>
+        <div class="form-group">
+          <label>Proprietor / Director PAN</label>
+          <input type="text" id="msme-reg-pan" required placeholder="ABCDE1234F" />
+        </div>
+        <div class="form-group">
+          <label>Investment in Plant & Machinery (₹)</label>
+          <input type="number" id="msme-reg-inv" required placeholder="1500000" />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="small-btn" onclick="document.getElementById('msme-reg-modal').classList.add('hidden')">Cancel</button>
+          <button type="submit" class="primary-btn">Submit Registration</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. MSME Subsidy Application Modal -->
+  <div class="modal-overlay hidden" id="msme-sub-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Apply for Subsidy / Benefit Scheme</h3>
+        <button class="modal-close-btn" onclick="document.getElementById('msme-sub-modal').classList.add('hidden')"><i data-lucide="x"></i></button>
+      </div>
+      <form id="msme-sub-form" class="modal-body" onsubmit="submitMsmeService(event, 'ZED Subsidy Application')">
+        <div class="form-group">
+          <label>Select Subsidy Program</label>
+          <select id="msme-sub-type">
+            <option value="Credit Linked Capital Subsidy (CLCSS)">Credit Linked Capital Subsidy (CLCSS)</option>
+            <option value="Zero Defect Zero Effect (ZED) Certification">Zero Defect Zero Effect (ZED) Certification</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Business Name</label>
+          <input type="text" id="msme-sub-bus" required placeholder="e.g. Acme Industries" />
+        </div>
+        <div class="form-group">
+          <label>Upload Supporting Invoice / Audit Report</label>
+          <input type="file" id="msme-sub-file" accept=".pdf,.png,.jpg" required />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="small-btn" onclick="document.getElementById('msme-sub-modal').classList.add('hidden')">Cancel</button>
+          <button type="submit" class="primary-btn">Apply Subsidy</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. MSME 24/7 Support Desk Ticket Modal -->
+  <div class="modal-overlay hidden" id="msme-sup-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Open 24/7 Business Support Ticket</h3>
+        <button class="modal-close-btn" onclick="document.getElementById('msme-sup-modal').classList.add('hidden')"><i data-lucide="x"></i></button>
+      </div>
+      <form id="msme-sup-form" class="modal-body" onsubmit="submitMsmeService(event, 'Business Support Ticket')">
+        <div class="form-group">
+          <label>Issue Category</label>
+          <select id="msme-sup-cat">
+            <option value="Tax & GST Filing Assistance">Tax & GST Filing Assistance</option>
+            <option value="Government Grant Inquiry">Government Grant Inquiry</option>
+            <option value="Technical Dispute Resolution">Technical Dispute Resolution</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Describe Your Request</label>
+          <textarea id="msme-sup-desc" rows="3" required placeholder="Provide query details..." style="padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-primary); outline: none; font-family: inherit;"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="small-btn" onclick="document.getElementById('msme-sup-modal').classList.add('hidden')">Cancel</button>
+          <button type="submit" class="primary-btn">Open Support Ticket</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Crop Modal -->
   <div class="modal-overlay hidden" id="crop-photo-modal">
     <div class="crop-modal-card">
@@ -1358,7 +1485,7 @@
 
       <div class="codex-messages" id="codex-messages">
         <div class="ai-bubble">
-          Hello! I am <strong>Codex AI</strong>. Ask me anything about loan schemes, MSME services, or your database!
+          Hello! I am <strong>Codex AI</strong>. Ask me anything about MSME services, government schemes, or your database!
         </div>
       </div>
 

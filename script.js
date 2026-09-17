@@ -3,7 +3,7 @@
  */
 
 // ================= 1. DATABASE SCHEMA & INITIALIZATION =================
-const DB_STORAGE_KEY = "CODEX_LOCAL_DATABASE_V37";
+const DB_STORAGE_KEY = "CODEX_LOCAL_DATABASE_V42";
 const OPENAI_API_KEY_STORAGE = "CODEX_OPENAI_API_KEY";
 
 const CURRENCY_CONFIG = {
@@ -157,6 +157,40 @@ const INITIAL_DATABASE = {
         { name: "Sarah Connor", date: "Sep 01, 2026", delivered: true }
       ]
     }
+  ],
+  loanSchemes: [
+    {
+      id: "SCH-01",
+      name: "MSME Growth Advance",
+      ministry: "Ministry of MSME",
+      amount: "₹50,00,000",
+      benefit: "8.5% p.a. Interest",
+      desc: "Working capital financing for expanding inventory and raw material procurement."
+    },
+    {
+      id: "SCH-02",
+      name: "Industrial Equipment Leasing",
+      ministry: "SIDBI Industrial Dept",
+      amount: "₹1,20,00,000",
+      benefit: "7.9% p.a. Interest",
+      desc: "Asset financing for heavy machinery, automated production lines, and tooling."
+    },
+    {
+      id: "SCH-03",
+      name: "Green Energy Tech Loan",
+      ministry: "Green Energy Board",
+      amount: "₹75,00,000",
+      benefit: "6.5% p.a. Interest",
+      desc: "Subsidized loans for solar panel installations and eco-friendly factory upgrades."
+    }
+  ],
+  loanApplications: [
+    { id: "LN-8810", name: "MSME Growth Advance", amount: "₹15,00,000", date: "Sep 02, 2026", status: "Approved & Disbursed" },
+    { id: "LN-8942", name: "Industrial Equipment Leasing", amount: "₹45,00,000", date: "Sep 12, 2026", status: "Under Verification" }
+  ],
+  msmeRequests: [
+    { id: "MSME-9021", type: "Udyam Registration", business: "Pratik Enterprises", date: "Sep 01, 2026", status: "Certificate Issued" },
+    { id: "MSME-9104", type: "ZED Subsidy Application", business: "CODEX Technologies", date: "Sep 10, 2026", status: "Under Review" }
   ],
   paymentsFilter: "all",
   payments: [
@@ -522,6 +556,53 @@ function renderAllFromDB() {
 
   updateRevenueBarChart(activePeriod);
 
+  // Render Loan Scheme Cards & Applications Table
+  const schemesGrid = document.getElementById("loan-schemes-cards-grid");
+  const schemesCountLabel = document.getElementById("loan-schemes-count-label");
+  if (schemesGrid && data.loanSchemes) {
+    if (schemesCountLabel) schemesCountLabel.textContent = `${data.loanSchemes.length} Active`;
+    schemesGrid.innerHTML = data.loanSchemes.map(s => `
+      <div class="card interactive-card" style="display: flex; flex-direction: column; gap: 12px;">
+        <span class="badge" style="align-self: flex-start; background: rgba(59, 130, 246, 0.1); color: var(--accent-color);">${s.ministry}</span>
+        <h4 style="font-size: 16px; font-weight: 700; color: var(--text-primary);">${s.name}</h4>
+        <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">${s.desc}</p>
+        <div style="font-size: 13px; font-weight: 700; color: var(--text-primary);">Max: ${s.amount} &bull; ${s.benefit}</div>
+        <div style="display: flex; gap: 8px; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border-color);">
+          <button class="small-btn" onclick="showToast('Viewing details for ${s.name}...')">View Details</button>
+          <button class="small-btn" onclick="openEligibilityChecker()">Check Eligibility</button>
+          <button class="primary-btn" style="padding: 6px 12px; font-size: 11.5px;" onclick="navigateToSection('new-loan-wizard')">Apply Now</button>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  const loanAppTbody = document.getElementById("loan-applications-tbody");
+  if (loanAppTbody && data.loanApplications) {
+    loanAppTbody.innerHTML = data.loanApplications.map(app => `
+      <tr>
+        <td><strong>${app.id}</strong></td>
+        <td>${app.name}</td>
+        <td><strong>${app.amount}</strong></td>
+        <td style="color: #64748B;">${app.date}</td>
+        <td><span class="table-badge ${app.status.includes('Approved') ? 'delivered' : 'pending'}">${app.status}</span></td>
+      </tr>
+    `).join("");
+  }
+
+  // Render MSME Requests Table
+  const msmeTbody = document.getElementById("msme-requests-tbody");
+  if (msmeTbody && data.msmeRequests) {
+    msmeTbody.innerHTML = data.msmeRequests.map(req => `
+      <tr>
+        <td><strong>${req.id}</strong></td>
+        <td>${req.type}</td>
+        <td>${req.business}</td>
+        <td style="color: #64748B;">${req.date}</td>
+        <td><span class="table-badge ${req.status.includes('Issued') ? 'delivered' : 'pending'}">${req.status}</span></td>
+      </tr>
+    `).join("");
+  }
+
   const perfDateLabel = document.getElementById("date-label");
   if (perfDateLabel) perfDateLabel.textContent = data.performanceView.selectedDate;
 
@@ -869,6 +950,52 @@ window.openEligibilityChecker = function() {
   }
 };
 
+// ================= INTERACTIVE MSME TOOLS =================
+window.openMsmeRegistrationModal = function() {
+  document.getElementById("msme-reg-modal").classList.remove("hidden");
+};
+
+window.openMsmeSubsidyModal = function() {
+  document.getElementById("msme-sub-modal").classList.remove("hidden");
+};
+
+window.openMsmeSupportModal = function() {
+  document.getElementById("msme-sup-modal").classList.remove("hidden");
+};
+
+window.submitMsmeService = function(e, serviceType) {
+  e.preventDefault();
+  let busName = "Pratik Enterprises";
+  if (serviceType === 'Udyam Registration') {
+    busName = document.getElementById("msme-reg-bus").value.trim();
+    document.getElementById("msme-reg-modal").classList.add("hidden");
+  } else if (serviceType === 'ZED Subsidy Application') {
+    busName = document.getElementById("msme-sub-bus").value.trim();
+    serviceType = document.getElementById("msme-sub-type").value;
+    document.getElementById("msme-sub-modal").classList.add("hidden");
+  } else if (serviceType === 'Business Support Ticket') {
+    serviceType = "Support: " + document.getElementById("msme-sup-cat").value;
+    document.getElementById("msme-sup-modal").classList.add("hidden");
+  }
+
+  const db = DB.get();
+  if (!db.msmeRequests) db.msmeRequests = [];
+
+  const newReq = {
+    id: `MSME-${Math.floor(1000 + Math.random() * 9000)}`,
+    type: serviceType,
+    business: busName,
+    date: new Date().toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" }),
+    status: "Under Review"
+  };
+
+  db.msmeRequests.unshift(newReq);
+  DB.save(db);
+  renderAllFromDB();
+  showToast(`Successfully submitted ${serviceType}!`);
+  logDatabaseNotification("system", `New MSME request submitted: ${serviceType} for ${busName}`);
+};
+
 // Export Utilities
 function exportSupplyToExcelCSV() {
   const db = DB.get();
@@ -929,9 +1056,10 @@ const SEARCHABLE_PAGES = [
   { title: "Customers Directory", target: "customers", category: "Page", icon: "users", keywords: "users clients emails subscribers leads customers" },
   { title: "Products Inventory", target: "products", category: "Page", icon: "package-open", keywords: "products inventory stock available unavailable buyer delivery upload" },
   { title: "Payment Management", target: "payments", category: "Page", icon: "credit-card", keywords: "payment pending completed transaction settlement" },
-  { title: "Loan Services", target: "loans", category: "Page", icon: "landmark", keywords: "loan schemes eligibility apply emi calculator financing applications" },
+  { title: "Loan Services", target: "loans", category: "Page", icon: "landmark", keywords: "loan schemes eligibility apply emi calculator financing applications new scheme wizard" },
+  { title: "New Loan Application", target: "new-loan-wizard", category: "Page", icon: "file-plus", keywords: "apply loan upload scheme application" },
   { title: "Document Vault", target: "documents", category: "Page", icon: "file-text", keywords: "document upload required verification files" },
-  { title: "MSME Services", target: "msme", category: "Page", icon: "briefcase", keywords: "msme registration udyam government schemes subsidies benefits support" },
+  { title: "MSME Services", target: "msme", category: "Page", icon: "briefcase", keywords: "msme registration udyam government schemes subsidies benefits support requests status" },
   { title: "Cloud Data", target: "cloud", category: "Page", icon: "cloud", keywords: "cloud backup vault storage sync" },
   { title: "Industrial Blog's & News", target: "blogs", category: "Page", icon: "newspaper", keywords: "blog news startup industrial articles reports" },
   { title: "System Settings", target: "settings", category: "Settings", icon: "settings", keywords: "preferences 2fa notifications alerts configuration database reset settings" }
@@ -1187,6 +1315,50 @@ document.addEventListener("DOMContentLoaded", () => {
     showToast("Preparing A4 Print for Product Report...");
     setTimeout(() => window.print(), 200);
   });
+
+  // New Loan Wizard Form Submit Handler
+  const newLoanForm = document.getElementById("new-loan-wizard-form");
+  if (newLoanForm) {
+    newLoanForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const sName = document.getElementById("wiz-scheme-name").value.trim();
+      const ministry = document.getElementById("wiz-ministry").value.trim();
+      const amount = "₹" + parseInt(document.getElementById("wiz-amount").value, 10).toLocaleString();
+      const interest = document.getElementById("wiz-interest").value.trim();
+      const desc = document.getElementById("wiz-desc").value.trim();
+
+      const db = DB.get();
+      if (!db.loanSchemes) db.loanSchemes = [];
+      if (!db.loanApplications) db.loanApplications = [];
+
+      const newScheme = {
+        id: `SCH-0${db.loanSchemes.length + 1}`,
+        name: sName,
+        ministry: ministry,
+        amount: amount,
+        benefit: interest,
+        desc: desc
+      };
+
+      const newApp = {
+        id: `LN-${Math.floor(1000 + Math.random() * 9000)}`,
+        name: sName,
+        amount: amount,
+        date: new Date().toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" }),
+        status: "Under Verification"
+      };
+
+      db.loanSchemes.unshift(newScheme);
+      db.loanApplications.unshift(newApp);
+      DB.save(db);
+
+      renderAllFromDB();
+      navigateToSection("loans");
+      showToast(`New scheme "${sName}" uploaded & application submitted successfully!`);
+      logDatabaseNotification("system", `New loan scheme published & application submitted: ${sName}`);
+      newLoanForm.reset();
+    });
+  }
 
   // Upload New Product Button handler
   document.getElementById("upload-new-product-btn")?.addEventListener("click", () => {
@@ -1939,13 +2111,6 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
         <div class="form-group"><label>Status</label><select id="m-sup-status"><option value="Delivered">Delivered (Glowing Green)</option><option value="In Transit">In Transit (Alert Red)</option><option value="Pending">Pending (Alert Red)</option><option value="Out of Stock">Out of Stock (Alert Red)</option></select></div>
       `;
-    } else if (action === "loan") {
-      modalTitle.textContent = "Apply for New Loan Scheme";
-      modalFields.innerHTML = `
-        <div class="form-group"><label>Select Scheme</label><select id="m-loan-scheme"><option value="MSME Growth Advance">MSME Growth Advance (Working Capital)</option><option value="Industrial Equipment Leasing">Industrial Equipment Leasing</option><option value="Green Energy Tech Loan">Green Energy Tech Loan</option></select></div>
-        <div class="form-group"><label>Requested Loan Amount in ${db.currency} (${curSym})</label><input type="number" id="m-loan-amount" required placeholder="500000" /></div>
-        <div class="form-group"><label>Business Registration / PAN</label><input type="text" id="m-loan-pan" required placeholder="ABCDE1234F" /></div>
-      `;
     }
   };
 
@@ -2016,9 +2181,6 @@ document.addEventListener("DOMContentLoaded", () => {
       renderAllFromDB();
       showToast("Company supply record registered!");
       logDatabaseNotification("supply", `Supply contract registered for ${companyName} (${qty} units).`);
-    } else if (currentModalAction === "loan") {
-      showToast("Loan application submitted successfully for review!");
-      logDatabaseNotification("system", "New loan application submitted.");
     }
     closeModal();
   });
