@@ -278,9 +278,14 @@ const INITIAL_DATABASE = {
     { name: "Rohan Kulkarni", email: "rohan.k@example.com", tier: "Enterprise Lead", joined: "Mar 01, 2026" },
     { name: "Alex Rivera", email: "alex.r@example.com", tier: "Premium Subscriber", joined: "Apr 15, 2026" }
   ],
-  calendarEvents: [
-    { day: 5, title: "Team Sync", accent: false },
-    { day: 11, title: "Sprint Demo", accent: true }
+  kalnirnayEvents: [
+    { id: 1, date: "2026-09-02", title: "Anant Chaturdashi / Ganesh Visarjan", category: "Festival", desc: "Traditional Maharashtrian & pan-Indian festival celebration (Public holiday)." },
+    { id: 2, date: "2026-09-07", title: "GSTR-3B Monthly GST Filing Deadline", category: "Compliance", desc: "Mandatory GST return filing for outward supplies and input tax credit claims." },
+    { id: 3, date: "2026-09-10", title: "SIDBI Equipment Leasing EMI Due", category: "EMI", desc: "Monthly installment of ₹1,42,000 for manufacturing automated plant machinery." },
+    { id: 4, date: "2026-09-14", title: "Quarterly Board Strategy Review", category: "Meeting", desc: "Reviewing Q2 business analytics reports and MSME supply chain expansion." },
+    { id: 5, date: "2026-09-20", title: "TDS / TCS Deposit Due Date", category: "Compliance", desc: "Deposit of tax deducted at source for August corporate vendor settlements." },
+    { id: 6, date: "2026-09-25", title: "Mahalaya / Pitru Paksha Begins", category: "Festival", desc: "Sacred lunar period commencing ancestral remembrance traditions." },
+    { id: 7, date: "2026-09-28", title: "MSME Scheme Subsidy Follow-up", category: "Reminder", desc: "Check approval status for ZED certification reimbursement application." }
   ],
   performanceView: {
     selectedDate: "Sep 11, 2026",
@@ -298,7 +303,7 @@ const INITIAL_DATABASE = {
   aiChatHistory: []
 };
 
-// ================= DEMO GOVERNMENT SCHEMES DATASET (40 ENTRIES) =================
+// ================= DEMO GOVERNMENT SCHEMES DATASET =================
 const DEMO_GOVERNMENT_SCHEMES = [
   { id: "DEMO-01", name: "Credit Guarantee Scheme (CGTMSE)", category: "Credit", ministry: "Ministry of MSME", amount: "Up to ₹5.0 Cr", interest: "Collateral-Free", eligibility: "Micro & Small Units", desc: "Provides collateral-free loans to new and existing micro and small enterprises with 85% credit coverage." },
   { id: "DEMO-02", name: "Prime Minister Employment Generation (PMEGP)", category: "Subsidy", ministry: "KVIC / MSME", amount: "Up to ₹50 Lakhs", interest: "15% - 35% Margin Subsidy", eligibility: "Individuals / SHGs (Age 18+)", desc: "Credit-linked subsidy program targeting employment generation across manufacturing and services." },
@@ -309,40 +314,84 @@ const DEMO_GOVERNMENT_SCHEMES = [
   { id: "DEMO-07", name: "Zero Defect Zero Effect (ZED) Subsidy", category: "Subsidy", ministry: "Quality Council of India", amount: "Up to ₹5 Lakhs", interest: "80% Testing Grant", eligibility: "Udyam Registered MSMEs", desc: "Financial grant reimbursement covering assessment, clean production certifications, and audit consultancies." },
   { id: "DEMO-08", name: "Rooftop Solar MSME Finance Scheme", category: "Green", ministry: "Ministry of New & Renewable Energy", amount: "Up to ₹1.5 Cr", interest: "6.75% Concessional Rate", eligibility: "Operating Factories / MSMEs", desc: "Subsidized term loan facility for industrial rooftop solar system installations to lower manufacturing carbon overhead." },
   { id: "DEMO-09", name: "SIDBI Make in India Soft Loan (SMILE)", category: "Credit", ministry: "SIDBI", amount: "Up to ₹2.0 Cr", interest: "7.85% p.a.", eligibility: "New Enterprises & 25 Identified Sectors", desc: "Quasi-equity soft loans and term financing focused on modernizing high-growth manufacturing segments." },
-  { id: "DEMO-10", name: "Credit Linked Capital Subsidy (CLCSS)", category: "Subsidy", ministry: "Ministry of MSME", amount: "Up to ₹15 Lakhs", interest: "15% Upfront Capital Subsidy", eligibility: "Micro & Small Manufacturing", desc: "Capital subsidy for replacing obsolete machinery with modern state-of-the-art technology." },
-  { id: "DEMO-11", name: "Mahila Udyam Nidhi Scheme", category: "Women", ministry: "Punjab National Bank / SIDBI", amount: "Up to ₹10 Lakhs", interest: "7.2% Concessional Rate", eligibility: "Women-owned MSMEs (51%+ stake)", desc: "Soft loan program aiding women entrepreneurs in establishing new tiny manufacturing and service enterprises." },
-  { id: "DEMO-12", name: "PM Vishwakarma Scheme", category: "Credit", ministry: "Ministry of MSME", amount: "Up to ₹3.0 Lakhs", interest: "5.0% Subsidized Interest", eligibility: "Traditional Artisans & Craftsmen", desc: "Holistic collateral-free credit and toolkit grants across 18 specialized artisan and handicraft trades." },
-  { id: "DEMO-13", name: "Technology Upgradation Fund (ATUFS)", category: "Subsidy", ministry: "Ministry of Textiles", amount: "Up to ₹30 Lakhs", interest: "10% - 15% Capital Subsidy", eligibility: "Textile & Garment MSMEs", desc: "Promotes capital investment in high-efficiency spinning, weaving, and processing machinery." },
-  { id: "DEMO-14", name: "Agriculture Infrastructure Fund (AIF)", category: "Green", ministry: "Ministry of Agriculture", amount: "Up to ₹2.0 Cr", interest: "3.0% Interest Subvention", eligibility: "Agri-Entrepreneurs / FPOs", desc: "Credit facility supporting farm-gate post-harvest storage, cold chains, and bio-waste processing units." },
-  { id: "DEMO-15", name: "Emergency Credit Line Guarantee (ECLGS)", category: "Credit", ministry: "National Credit Guarantee Trustee", amount: "Up to 20% of Outstanding", interest: "Capped at 9.25% p.a.", eligibility: "Existing GST Borrowers", desc: "Guaranteed emergency working capital lines assisting manufacturing MSMEs during liquidity swings." },
-  { id: "DEMO-16", name: "National Small Industries Assistance (NSIC)", category: "Credit", ministry: "NSIC", amount: "Up to ₹5.0 Cr", interest: "9.5% p.a.", eligibility: "Manufacturing Units", desc: "Raw material procurement assistance with deferred bank guarantee payments for up to 90 days." },
-  { id: "DEMO-17", name: "SFURTI Scheme for Traditional Industries", category: "Subsidy", ministry: "Ministry of MSME", amount: "Up to ₹2.5 Cr per cluster", interest: "100% Grant-in-aid", eligibility: "Artisan Clusters / NGOs", desc: "Cluster-based funding providing common facility centers, modern machinery, and specialized packaging tools." },
-  { id: "DEMO-18", name: "SIDBI 4E (End-to-End Energy Efficiency)", category: "Green", ministry: "SIDBI & World Bank", amount: "Up to ₹1.5 Cr", interest: "7.75% Concessional Rate", eligibility: "Energy-intensive MSMEs", desc: "Finance for implementing energy audits and adopting power-saving equipment in foundries and workshops." },
-  { id: "DEMO-19", name: "Dena Shakti Scheme for Women", category: "Women", ministry: "Public Sector Banks", amount: "Up to ₹20 Lakhs", interest: "0.25% Rebate on Base Rate", eligibility: "Women Proprietors", desc: "Supports women entrepreneurs in retail trade, allied agriculture, and micro manufacturing activities." },
-  { id: "DEMO-20", name: "ASPIRE Innovation & Incubation Fund", category: "Subsidy", ministry: "Ministry of MSME", amount: "Up to ₹1.0 Cr per center", interest: "Capital Grant", eligibility: "Incubators / Agro Tech Startups", desc: "Setting up Livelihood Business Incubators (LBI) across rural districts for accelerated agro-processing." },
-  { id: "DEMO-21", name: "Export-Import Working Capital (EXIM Bank)", category: "Credit", ministry: "EXIM Bank of India", amount: "Up to ₹10.0 Cr", interest: "LIBOR/SOFR + 2.5%", eligibility: "Verified MSME Exporters", desc: "Pre-shipment and post-shipment export credit financing for international wholesale cargo fulfillment." },
-  { id: "DEMO-22", name: "TReDS Invoice Discounting Facility", category: "Credit", ministry: "RBI / MSME Gateway", amount: "Factoring against Invoices", interest: "Competitive Market Rates", eligibility: "Suppliers to Corporates / PSUs", desc: "Digital platform for unlocking liquidity by factoring trade receivables against approved enterprise buyer bills." },
-  { id: "DEMO-23", name: "Design Clinic Scheme for MSMEs", category: "Subsidy", ministry: "Ministry of MSME", amount: "Up to ₹40 Lakhs", interest: "60% Government Contribution", eligibility: "MSME Clusters & Design Firms", desc: "Subsidizes industrial design consultations to improve commercial appeal and ergonomic specifications." },
-  { id: "DEMO-24", name: "Waste-to-Wealth Green Accelerator Loan", category: "Green", ministry: "Ministry of Environment", amount: "Up to ₹80 Lakhs", interest: "6.9% p.a.", eligibility: "Circular Economy MSMEs", desc: "Financing for industrial effluent treatment plants, recycling equipment, and composting machinery." },
-  { id: "DEMO-25", name: "Cent Kalyani Scheme for Women Entrepreneurs", category: "Women", ministry: "Central Bank of India", amount: "Up to ₹1.0 Cr", interest: "No Processing Fees + Rebate", eligibility: "Women Professionals & Traders", desc: "Loans for business expansion, software procurement, and inventory buildup with zero collateral requirement." },
-  { id: "DEMO-26", name: "Coir Udyami Yojana", category: "Subsidy", ministry: "Coir Board / MSME", amount: "Up to ₹10 Lakhs", interest: "25% Government Subsidy", eligibility: "Coir Manufacturing Units", desc: "Credit-linked subsidy for setting up coir fiber and coir pith processing units across coastal regions." },
-  { id: "DEMO-27", name: "Pradhan Mantri Matsya Sampada Yojana", category: "Subsidy", ministry: "Ministry of Fisheries", amount: "Up to ₹50 Lakhs", interest: "40% - 60% Project Subsidy", eligibility: "Fish Farmers / Processing MSMEs", desc: "Modernizes cold storage, insulated transport vehicles, and biofloc aquaculture infrastructure." },
-  { id: "DEMO-28", name: "Market Development Assistance (MDA)", category: "Subsidy", ministry: "Ministry of Commerce", amount: "Up to ₹3 Lakhs per event", interest: "100% Airfare & Stall Grant", eligibility: "MSME Export Council Members", desc: "Reimburses stall rentals and travel expenses for MSMEs participating in international trade exhibitions." },
-  { id: "DEMO-29", name: "Biomass Pellet Plant Setting-Up Loan", category: "Green", ministry: "Ministry of Power & IREDA", amount: "Up to ₹3.0 Cr", interest: "7.10% p.a.", eligibility: "Bio-pellet Manufacturers", desc: "Encourages conversion of agricultural stubble and bio-residues into industrial thermal heating pellets." },
-  { id: "DEMO-30", name: "Udyogini Scheme for Rural Women", category: "Women", ministry: "State Women Dev Corporations", amount: "Up to ₹3 Lakhs", interest: "Zero Interest / Subsidized", eligibility: "Women in Micro Enterprises", desc: "Financial support for women entrepreneurs in rural cottages, handlooms, food processing, and retail." },
-  { id: "DEMO-31", name: "Lean Manufacturing Competitive Scheme", category: "Subsidy", ministry: "Quality Council of India", amount: "Up to ₹36 Lakhs per cluster", interest: "80% Consultant Subsidy", eligibility: "Manufacturing Clusters (6-10 units)", desc: "Funds 5S, Kaizen, and Lean consultants to eliminate material waste and step up floor productivity." },
-  { id: "DEMO-32", name: "Intellectual Property Protection (S組み)", category: "Subsidy", ministry: "Ministry of MSME", amount: "Up to ₹5 Lakhs per Patent", interest: "Reimbursement Grant", eligibility: "Innovators with Udyam Certificate", desc: "Reimburses government and attorney fees incurred during domestic and foreign patent/trademark registrations." },
-  { id: "DEMO-33", name: "Electric Delivery Fleet Advance", category: "Green", ministry: "Ministry of Heavy Industries", amount: "Up to ₹1.2 Cr", interest: "7.25% p.a.", eligibility: "Supply Chain & Logistics MSMEs", desc: "Asset financing to transition delivery networks from petrol/diesel to commercial electric two/three-wheelers." },
-  { id: "DEMO-34", name: "Stree Shakti Package for Women", category: "Women", ministry: "State Bank of India", amount: "Up to ₹50 Lakhs", interest: "0.5% Concession over Base", eligibility: "Women-managed Enterprises (50%+)", desc: "Provides working capital and capital expenditure credit lines with reduced margin requirements." },
-  { id: "DEMO-35", name: "Food Processing Micro-Enterprises (PMFME)", category: "Subsidy", ministry: "Ministry of Food Processing", amount: "Up to ₹10 Lakhs", interest: "35% Credit-linked Subsidy", eligibility: "Micro Food Units / ODOP", desc: "Supports individual food processors under One District One Product (ODOP) with branding and machinery aid." },
-  { id: "DEMO-36", name: "High-Precision Tooling Equipment Loan", category: "Credit", ministry: "SIDBI Industrial Dept", amount: "Up to ₹4.0 Cr", interest: "8.15% p.a.", eligibility: "CNC / Precision Toolmakers", desc: "Provides financing for purchasing computer numeric control (CNC) systems, wire EDM, and laser cutters." },
-  { id: "DEMO-37", name: "Solar Cold Storage Infrastructure Loan", category: "Green", ministry: "NABARD & Ministry of MSME", amount: "Up to ₹75 Lakhs", interest: "3.5% Subvention Rate", eligibility: "Farmers / Rural Agro MSMEs", desc: "Finances solar-powered decentralized micro-cold rooms for perishables, fruits, and agricultural crops." },
-  { id: "DEMO-38", name: "Incubation Grant for Tech Startups", category: "Subsidy", ministry: "MeitY / MSME Innovation", amount: "Up to ₹25 Lakhs", interest: "Seed Fund Grant", eligibility: "Registered Tech Startups", desc: "Prototype development grants for hardware, IoT sensors, and cloud software platforms with commercial validation." },
-  { id: "DEMO-39", name: "Shringaar Scheme for Beauty & Wellness", category: "Women", ministry: "Public Sector Banks", amount: "Up to ₹15 Lakhs", interest: "8.25% p.a.", eligibility: "Trained Women Cosmetologists", desc: "Equipment and lease advance loans for establishing modern wellness centers, beauty clinics, and salons." },
-  { id: "DEMO-40", name: "National Apprenticeship Promotion (NAPS)", category: "Subsidy", ministry: "Ministry of Skill Development", amount: "₹1,500/month per apprentice", interest: "Stipend Grant Subsidy", eligibility: "MSMEs Hiring Trainees", desc: "Reimburses 25% of prescribed monthly stipends to encourage industrial on-the-job apprenticeship training." }
+  { id: "DEMO-10", name: "Credit Linked Capital Subsidy (CLCSS)", category: "Subsidy", ministry: "Ministry of MSME", amount: "Up to ₹15 Lakhs", interest: "15% Upfront Capital Subsidy", eligibility: "Micro & Small Manufacturing", desc: "Capital subsidy for replacing obsolete machinery with modern state-of-the-art technology." }
+];
+
+// ================= MSME SUBSIDIES & BENEFITS DATASET =================
+const MSME_CURATED_SUBSIDIES = [
+  { 
+    id: "SUB-01", 
+    title: "Credit Linked Capital Subsidy (CLCSS)", 
+    benefit: "15% Capital Subsidy (Up to ₹15 Lakhs)", 
+    ministry: "Ministry of MSME", 
+    eligibility: "Micro and Small Manufacturing Enterprises holding active Udyam Registration.", 
+    process: "Procure approved plant and machinery through institutional term loans and apply via the DC-MSME online portal with verified invoices." 
+  },
+  { 
+    id: "SUB-02", 
+    title: "Zero Defect Zero Effect (ZED) Certification Subsidy", 
+    benefit: "Up to 80% Subsidy on Assessment Cost", 
+    ministry: "Quality Council of India (QCI)", 
+    eligibility: "All manufacturing MSMEs rated under Bronze, Silver, or Gold ZED certification tiers.", 
+    process: "Register on the MSME ZED portal, complete the online pledge, and submit financial audit reports to receive direct fee reimbursements." 
+  },
+  { 
+    id: "SUB-03", 
+    title: "Patent & Trademark Registration Reimbursement", 
+    benefit: "Up to ₹5 Lakhs per Patent & ₹1 Lakh for Trademarks", 
+    ministry: "Office of Controller General of Patents", 
+    eligibility: "Udyam registered innovators filing domestic or international patent/trademark applications.", 
+    process: "File patent through registered IP attorneys, pay statutory fees, and submit the reimbursement claim form to the National MSME Board." 
+  },
+  { 
+    id: "SUB-04", 
+    title: "ISO 9000 / 14001 Certification Reimbursement", 
+    benefit: "100% Fee Reimbursed (Up to ₹1 Lakh)", 
+    ministry: "Ministry of MSME", 
+    eligibility: "Micro and Small Enterprises obtaining quality management or environmental certifications.", 
+    process: "Acquire ISO certification from accredited agencies and submit bills along with Udyam certificate within 6 months." 
+  },
+  { 
+    id: "SUB-05", 
+    title: "Market Development Assistance (MDA) for Export", 
+    benefit: "Up to ₹3 Lakhs per International Trade Fair", 
+    ministry: "Ministry of Commerce & Industry", 
+    eligibility: "MSME export units registered with Export Promotion Councils (EPC).", 
+    process: "Apply 30 days prior to global trade delegation or exhibition via the DGFT portal for airfare and stall rental grants." 
+  },
+  { 
+    id: "SUB-06", 
+    title: "National Apprenticeship Promotion Scheme (NAPS)", 
+    benefit: "₹1,500 / month per apprentice (25% Stipend Match)", 
+    ministry: "Ministry of Skill Development", 
+    eligibility: "All commercial and manufacturing MSMEs engaging trainees and apprentices.", 
+    process: "Register on the National Apprenticeship Portal, upload apprenticeship contracts, and claim monthly DBT transfers." 
+  },
+  { 
+    id: "SUB-07", 
+    title: "Bar Code Registration Subsidy", 
+    benefit: "75% Reimbursement on One-time & Annual Fees", 
+    ministry: "GS1 India & Ministry of MSME", 
+    eligibility: "Micro and Small Enterprises adopting barcoding for product retail packaging.", 
+    process: "Obtain barcode registration from GS1 India and file reimbursement through the office of DC-MSME." 
+  },
+  { 
+    id: "SUB-08", 
+    title: "Lean Manufacturing Competitive Subsidy", 
+    benefit: "80% Consultant Fee Grant (Up to ₹36 Lakhs/Cluster)", 
+    ministry: "National Productivity Council", 
+    eligibility: "Manufacturing clusters comprising 6 to 10 micro/small units.", 
+    process: "Form a cluster SPV, submit diagnostic study reports, and onboard approved lean manufacturing consultants." 
+  }
 ];
 
 let activeModalSchemeCategory = "all";
+let kalnirnayState = {
+  year: 2026,
+  month: 8, // September (0-indexed)
+  selectedDateStr: "2026-09-18",
+  categoryFilter: "all"
+};
 
 // Database DAO
 const DB = {
@@ -421,6 +470,11 @@ function navigateToSection(targetId) {
   document.querySelectorAll(".page-section").forEach(sec => sec.classList.remove("active"));
   const sec = document.getElementById(`section-${targetId}`);
   if (sec) sec.classList.add("active");
+
+  if (targetId === "calendar") {
+    renderKalnirnayCalendar();
+  }
+
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -877,6 +931,7 @@ function renderAllFromDB() {
   renderNotificationsUI();
   updateSalesChart();
   updatePerformanceChart();
+  renderKalnirnayCalendar();
   lucide.createIcons();
 }
 
@@ -987,6 +1042,334 @@ window.openProductDetailModal = function(productId) {
 
   document.getElementById("product-detail-modal").classList.remove("hidden");
   lucide.createIcons();
+};
+
+// ================= MSME SUBSIDIES & BENEFITS MODAL ENGINE =================
+window.openMsmeSubsidiesModal = function() {
+  const modal = document.getElementById("msme-subsidies-modal");
+  if (!modal) return;
+  modal.classList.remove("hidden");
+  renderMsmeSubsidiesList();
+  lucide.createIcons();
+};
+
+window.closeMsmeSubsidiesModal = function() {
+  const modal = document.getElementById("msme-subsidies-modal");
+  if (modal) modal.classList.add("hidden");
+};
+
+function renderMsmeSubsidiesList() {
+  const container = document.getElementById("msme-subsidies-cards-container");
+  if (!container) return;
+
+  container.innerHTML = MSME_CURATED_SUBSIDIES.map(sub => `
+    <div class="scheme-vault-card">
+      <div class="scheme-vault-top">
+        <span class="scheme-vault-cat cat-subsidy">${sub.ministry}</span>
+        <span class="scheme-vault-tag">${sub.id}</span>
+      </div>
+
+      <div>
+        <h4 class="scheme-vault-title">${sub.title}</h4>
+        <span class="scheme-vault-ministry" style="color: #10B981; font-weight: 700;">Benefit: ${sub.benefit}</span>
+      </div>
+
+      <div class="scheme-vault-body" style="gap: 6px;">
+        <p style="font-size: 12px; color: var(--text-primary);"><strong>Eligibility:</strong> ${sub.eligibility}</p>
+        <p style="font-size: 11.5px; color: var(--text-secondary);"><strong>How to Apply:</strong> ${sub.process}</p>
+      </div>
+
+      <div class="scheme-vault-actions" style="margin-top: auto;">
+        <button type="button" class="primary-btn" style="width: 100%; justify-content: center; background-color: #10B981;" onclick="applyMsmeSubsidyDirect('${sub.title.replace(/'/g, "\\'")}')">
+          <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Apply Benefit
+        </button>
+      </div>
+    </div>
+  `).join("");
+
+  lucide.createIcons();
+}
+
+window.applyMsmeSubsidyDirect = function(subTitle) {
+  closeMsmeSubsidiesModal();
+  showToast(`Initiating application for: ${subTitle}`);
+  openMsmeSubsidyModal();
+};
+
+// ================= HELP & SUPPORT DESK TICKETS =================
+window.openNewSupportTicketModal = function() {
+  const modal = document.getElementById("new-support-ticket-modal");
+  if (modal) modal.classList.remove("hidden");
+  lucide.createIcons();
+};
+
+window.closeNewSupportTicketModal = function() {
+  const modal = document.getElementById("new-support-ticket-modal");
+  if (modal) modal.classList.add("hidden");
+};
+
+window.submitSupportTicket = function(e) {
+  e.preventDefault();
+  const category = document.getElementById("ticket-cat").value;
+  const desc = document.getElementById("ticket-desc").value.trim();
+  if (!desc) return;
+
+  const tbody = document.getElementById("help-desk-tickets-tbody");
+  if (tbody) {
+    const newRow = document.createElement("tr");
+    const ticketId = `TICK-${Math.floor(4000 + Math.random() * 9000)}`;
+    const dateStr = new Date().toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" });
+
+    newRow.innerHTML = `
+      <td><strong>${ticketId}</strong></td>
+      <td>${category}</td>
+      <td>${desc}</td>
+      <td>${dateStr}</td>
+      <td><span class="table-badge pending">In Progress</span></td>
+    `;
+    tbody.prepend(newRow);
+  }
+
+  closeNewSupportTicketModal();
+  document.getElementById("support-ticket-form").reset();
+  showToast("Support ticket raised successfully! Our team will respond shortly.");
+  logDatabaseNotification("system", `New support ticket raised: ${category}`);
+};
+
+// ================= INDIAN KALNIRNAY CALENDAR & MILESTONES ENGINE =================
+window.renderKalnirnayCalendar = function() {
+  const db = DB.get();
+  const events = db.kalnirnayEvents || [];
+
+  const { year, month, selectedDateStr, categoryFilter } = kalnirnayState;
+
+  const titleEl = document.getElementById("kalnirnay-month-year-title");
+  if (titleEl) titleEl.textContent = `${MONTH_NAMES[month]} ${year}`;
+
+  const searchVal = (document.getElementById("kalnirnay-event-search")?.value || "").toLowerCase().trim();
+
+  const gridContainer = document.getElementById("kalnirnay-days-grid-container");
+  if (!gridContainer) return;
+  gridContainer.innerHTML = "";
+
+  const firstDayIndex = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  for (let i = 0; i < firstDayIndex; i++) {
+    const blank = document.createElement("div");
+    blank.className = "kalnirnay-day-cell empty-cell";
+    gridContainer.appendChild(blank);
+  }
+
+  const todayIso = new Date().toISOString().slice(0, 10);
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dayStr = String(d).padStart(2, '0');
+    const mStr = String(month + 1).padStart(2, '0');
+    const dateIso = `${year}-${mStr}-${dayStr}`;
+
+    const cell = document.createElement("div");
+    const isToday = (dateIso === todayIso);
+    const isSelected = (dateIso === selectedDateStr);
+
+    cell.className = "kalnirnay-day-cell" + (isToday ? " today-cell" : "") + (isSelected ? " selected-cell" : "");
+
+    const dayEvents = events.filter(ev => {
+      const matchDate = ev.date === dateIso;
+      const matchCat = categoryFilter === "all" || ev.category === categoryFilter;
+      const matchSearch = !searchVal || ev.title.toLowerCase().includes(searchVal) || ev.desc.toLowerCase().includes(searchVal);
+      return matchDate && matchCat && matchSearch;
+    });
+
+    cell.innerHTML = `
+      <div class="cell-date-num">
+        <span>${d}</span>
+        <span class="cell-tithi-lbl">${getTraditionalTithiSnippet(month, d)}</span>
+      </div>
+      <div class="cell-events-wrapper">
+        ${dayEvents.map(ev => `<span class="kalnirnay-event-pill pill-${ev.category}" title="${ev.title}">${ev.title}</span>`).join("")}
+      </div>
+    `;
+
+    cell.addEventListener("click", () => {
+      kalnirnayState.selectedDateStr = dateIso;
+      renderKalnirnayCalendar();
+    });
+
+    gridContainer.appendChild(cell);
+  }
+
+  renderKalnirnaySidePanel();
+  lucide.createIcons();
+};
+
+function getTraditionalTithiSnippet(m, d) {
+  if (m === 8) {
+    if (d === 2) return "Anant Chaturdashi";
+    if (d === 7) return "GSTR-3B Due";
+    if (d === 10) return "EMI Due";
+    if (d === 14) return "Board Review";
+    if (d === 20) return "TDS Due";
+    if (d === 25) return "Pitru Paksha";
+  }
+  return "";
+}
+
+window.renderKalnirnaySidePanel = function() {
+  const db = DB.get();
+  const events = db.kalnirnayEvents || [];
+  const { selectedDateStr } = kalnirnayState;
+
+  const headerEl = document.getElementById("side-panel-date-header");
+  const subEl = document.getElementById("side-panel-panchang-sub");
+  const listContainer = document.getElementById("side-panel-events-list");
+
+  if (!headerEl || !listContainer) return;
+
+  const dateObj = new Date(selectedDateStr + "T00:00:00");
+  headerEl.textContent = dateObj.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  subEl.textContent = `Selected Calendar Node &bull; ${dateObj.toLocaleDateString("en-US", { weekday: "long" })}`;
+
+  const dayEvents = events.filter(ev => ev.date === selectedDateStr);
+
+  if (dayEvents.length === 0) {
+    listContainer.innerHTML = `
+      <div style="padding: 24px; text-align: center; color: #94A3B8; font-size: 12px;">
+        No events or deadlines registered for this date.<br>
+        <button class="small-btn" style="margin-top: 10px;" onclick="openAddEventForSelectedDate()">+ Add Event Here</button>
+      </div>
+    `;
+  } else {
+    listContainer.innerHTML = dayEvents.map(ev => `
+      <div class="side-event-card">
+        <div class="side-event-top">
+          <span class="kalnirnay-event-pill pill-${ev.category}">${ev.category}</span>
+          <span style="font-size: 10px; color: #94A3B8; font-weight: 600;">#${ev.id}</span>
+        </div>
+        <h5 class="side-event-title">${ev.title}</h5>
+        <p class="side-event-desc">${ev.desc || 'No description provided.'}</p>
+        <div class="side-event-actions">
+          <button class="small-btn" style="padding: 3px 8px; font-size: 11px;" onclick="openEditEventModal(${ev.id})">Edit</button>
+          <button class="small-btn delete-row-btn" style="padding: 3px 8px; font-size: 11px;" onclick="deleteKalnirnayEvent(${ev.id})">Delete</button>
+        </div>
+      </div>
+    `).join("");
+  }
+};
+
+window.changeKalnirnayMonth = function(direction) {
+  kalnirnayState.month += direction;
+  if (kalnirnayState.month > 11) {
+    kalnirnayState.month = 0;
+    kalnirnayState.year += 1;
+  } else if (kalnirnayState.month < 0) {
+    kalnirnayState.month = 11;
+    kalnirnayState.year -= 1;
+  }
+  renderKalnirnayCalendar();
+};
+
+window.jumpToCurrentMonth = function() {
+  const now = new Date();
+  kalnirnayState.year = now.getFullYear();
+  kalnirnayState.month = now.getMonth();
+  kalnirnayState.selectedDateStr = now.toISOString().slice(0, 10);
+  renderKalnirnayCalendar();
+  showToast("Jumped to today's date.");
+};
+
+window.setKalnirnayCategory = function(cat, btn) {
+  kalnirnayState.categoryFilter = cat;
+  document.querySelectorAll("#kalnirnay-cat-pills .pill").forEach(p => p.classList.remove("active"));
+  if (btn) btn.classList.add("active");
+  renderKalnirnayCalendar();
+};
+
+window.openAddEventModal = function() {
+  const modal = document.getElementById("kalnirnay-event-modal");
+  const form = document.getElementById("kalnirnay-event-form");
+  if (form) form.reset();
+  document.getElementById("kalnirnay-modal-title").textContent = "Add Calendar Event / Deadline";
+  document.getElementById("edit-event-index").value = "";
+  document.getElementById("event-input-date").value = kalnirnayState.selectedDateStr;
+  if (modal) modal.classList.remove("hidden");
+  lucide.createIcons();
+};
+
+window.openAddEventForSelectedDate = function() {
+  openAddEventModal();
+};
+
+window.closeKalnirnayEventModal = function() {
+  const modal = document.getElementById("kalnirnay-event-modal");
+  if (modal) modal.classList.add("hidden");
+};
+
+window.openEditEventModal = function(eventId) {
+  const db = DB.get();
+  const event = (db.kalnirnayEvents || []).find(ev => ev.id === eventId);
+  if (!event) return;
+
+  document.getElementById("kalnirnay-modal-title").textContent = "Edit Calendar Event";
+  document.getElementById("edit-event-index").value = event.id;
+  document.getElementById("event-input-title").value = event.title;
+  document.getElementById("event-input-date").value = event.date;
+  document.getElementById("event-input-category").value = event.category;
+  document.getElementById("event-input-desc").value = event.desc || "";
+
+  document.getElementById("kalnirnay-event-modal").classList.remove("hidden");
+  lucide.createIcons();
+};
+
+window.handleKalnirnayEventSubmit = function(e) {
+  e.preventDefault();
+  const editIdStr = document.getElementById("edit-event-index").value;
+  const title = document.getElementById("event-input-title").value.trim();
+  const date = document.getElementById("event-input-date").value;
+  const category = document.getElementById("event-input-category").value;
+  const desc = document.getElementById("event-input-desc").value.trim();
+
+  if (!title || !date) return;
+
+  const db = DB.get();
+  if (!db.kalnirnayEvents) db.kalnirnayEvents = [];
+
+  if (editIdStr) {
+    const editId = parseInt(editIdStr, 10);
+    const idx = db.kalnirnayEvents.findIndex(ev => ev.id === editId);
+    if (idx !== -1) {
+      db.kalnirnayEvents[idx] = { id: editId, title, date, category, desc };
+      showToast("Calendar event updated successfully!");
+      logDatabaseNotification("system", `Calendar event updated: ${title}`);
+    }
+  } else {
+    const newEvent = {
+      id: Date.now(),
+      title,
+      date,
+      category,
+      desc
+    };
+    db.kalnirnayEvents.unshift(newEvent);
+    showToast("New event added to calendar!");
+    logDatabaseNotification("system", `New calendar milestone added: ${title}`);
+  }
+
+  DB.save(db);
+  closeKalnirnayEventModal();
+  kalnirnayState.selectedDateStr = date;
+  kalnirnayState.year = parseInt(date.split("-")[0], 10);
+  kalnirnayState.month = parseInt(date.split("-")[1], 10) - 1;
+  renderKalnirnayCalendar();
+};
+
+window.deleteKalnirnayEvent = function(eventId) {
+  if (!confirm("Are you sure you want to delete this event from the calendar?")) return;
+  const db = DB.get();
+  db.kalnirnayEvents = (db.kalnirnayEvents || []).filter(ev => ev.id !== eventId);
+  DB.save(db);
+  renderKalnirnayCalendar();
+  showToast("Event removed from calendar.");
 };
 
 // ================= ALL SCHEMES DIRECTORY MODAL ENGINE =================
@@ -1437,6 +1820,8 @@ const SEARCHABLE_PAGES = [
   { title: "New Loan Application", target: "new-loan-wizard", category: "Page", icon: "file-plus", keywords: "apply loan upload scheme application" },
   { title: "Document Vault", target: "documents", category: "Page", icon: "file-text", keywords: "document upload required verification files" },
   { title: "MSME Services", target: "msme", category: "Page", icon: "briefcase", keywords: "msme registration udyam government schemes subsidies benefits support requests status" },
+  { title: "24/7 Help & Support Desk", target: "msme-support", category: "Page", icon: "headphones", keywords: "help support desk faqs ticket complaint document guidance ai" },
+  { title: "Kalnirnay Calendar & Milestones", target: "calendar", category: "Page", icon: "calendar", keywords: "calendar events deadlines gst emi festivals meetings milestones panchang" },
   { title: "Cloud Data", target: "cloud", category: "Page", icon: "cloud", keywords: "cloud backup vault storage sync" },
   { title: "Industrial Blog's & News", target: "blogs", category: "Page", icon: "newspaper", keywords: "blog news startup industrial articles reports" },
   { title: "System Settings", target: "settings", category: "Settings", icon: "settings", keywords: "preferences 2fa notifications alerts configuration database reset settings" }

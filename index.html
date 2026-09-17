@@ -100,6 +100,13 @@
             </div>
           </a>
 
+          <a href="#" class="nav-item" data-target="msme-support">
+            <div class="nav-label">
+              <i data-lucide="headphones"></i>
+              <span>Help Desk</span>
+            </div>
+          </a>
+
           <a href="#" class="nav-item" data-target="cloud">
             <div class="nav-label">
               <i data-lucide="cloud"></i>
@@ -972,12 +979,12 @@
               <div class="stat-icon" style="color: #F59E0B;"><i data-lucide="headphones"></i></div>
               <p class="stat-title">Business Support</p>
               <div class="stat-val-group" style="margin-top: 4px;">
-                <h3 class="stat-val" style="font-size: 18px; color: #F59E0B;">AI Desk 24/7</h3>
-                <span class="trend-badge positive">Instant Help</span>
+                <h3 class="stat-val" style="font-size: 18px; color: #F59E0B;">Help Desk</h3>
+                <span class="trend-badge positive">24/7 Active</span>
               </div>
               <p style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Live expert FAQs, grievance redressal & CODEX AI assistance</p>
             </div>
-            <button type="button" class="primary-btn" style="margin-top: 14px; width: 100%; justify-content: center; background-color: #F59E0B;" onclick="openMsmeSupportDeskModal()">
+            <button type="button" class="primary-btn" style="margin-top: 14px; width: 100%; justify-content: center; background-color: #F59E0B;" onclick="navigateToSection('msme-support')">
               <i data-lucide="message-square-code" class="w-4 h-4"></i> 24/7 Desk
             </button>
           </div>
@@ -1054,6 +1061,255 @@
         </div>
       </section>
 
+      <!-- ================= SECTION: HELP & SUPPORT DESK ================= -->
+      <section id="section-msme-support" class="page-section">
+        <div class="section-title-wrap">
+          <div class="title-with-btn">
+            <div>
+              <h2>MSME & CODEX 24/7 Help Desk</h2>
+              <p>Comprehensive user support center for complaints, scheme guidance, and document assistance.</p>
+            </div>
+            <button class="primary-btn" onclick="openNewSupportTicketModal()">
+              <i data-lucide="plus-circle" class="w-4 h-4"></i> Raise Support Ticket
+            </button>
+          </div>
+        </div>
+
+        <div class="stat-cards-grid-4">
+          <div class="card stat-card interactive-card" onclick="document.getElementById('support-faqs-anchor').scrollIntoView({behavior: 'smooth'})">
+            <div class="stat-icon"><i data-lucide="help-circle"></i></div>
+            <p class="stat-title">Knowledge Base & FAQs</p>
+            <h3 class="stat-val" style="font-size: 15px; color: var(--accent-color);">Browse Topics &darr;</h3>
+          </div>
+          <div class="card stat-card interactive-card" onclick="navigateToSection('loans')">
+            <div class="stat-icon"><i data-lucide="landmark"></i></div>
+            <p class="stat-title">Scheme & Loan Guidance</p>
+            <h3 class="stat-val" style="font-size: 15px; color: #10B981;">Explore Vault &rarr;</h3>
+          </div>
+          <div class="card stat-card interactive-card" onclick="navigateToSection('documents')">
+            <div class="stat-icon"><i data-lucide="file-text"></i></div>
+            <p class="stat-title">Document Assistance</p>
+            <h3 class="stat-val" style="font-size: 15px; color: #F59E0B;">Compliance Vault &rarr;</h3>
+          </div>
+          <div class="card stat-card interactive-card" onclick="document.getElementById('codex-toggle-btn').click()">
+            <div class="stat-icon" style="color: #7C3AED;"><i data-lucide="bot"></i></div>
+            <p class="stat-title">CODEX AI Assistant</p>
+            <h3 class="stat-val" style="font-size: 15px; color: #7C3AED;">Chat Now &uarr;</h3>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-top: 4px;">
+          <div class="card" style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="card-header" style="margin-bottom: 0;">
+              <div>
+                <h4 class="card-title" id="support-faqs-anchor">Frequently Asked Questions (FAQs)</h4>
+                <p class="card-subtitle">Quick answers regarding Udyam registrations, credit subsidies, and application status.</p>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <div class="faq-accordion-item">
+                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+                  <span>How can I check the live status of my loan or MSME application?</span>
+                  <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                </div>
+                <div class="faq-a">
+                  You can track your submitted requests in real-time under the <strong>Loan Services</strong> or <strong>MSME Services</strong> sections where live ledger statuses (e.g., "Under Review", "Certificate Issued") are updated automatically.
+                </div>
+              </div>
+
+              <div class="faq-accordion-item">
+                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+                  <span>What documents are mandatory for Udyam MSME registration?</span>
+                  <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                </div>
+                <div class="faq-a">
+                  You only need an Aadhaar card linked with your active mobile number, your enterprise/proprietor PAN card, bank account details, and plant address pincode. No paper uploads are required.
+                </div>
+              </div>
+
+              <div class="faq-accordion-item">
+                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+                  <span>How do I claim the Credit Linked Capital Subsidy (CLCSS)?</span>
+                  <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                </div>
+                <div class="faq-a">
+                  Micro and small enterprises acquiring approved machinery through term loans can apply through the DC-MSME portal or our MSME Subsidies application drawer.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="display: flex; flex-direction: column; gap: 16px;">
+            <h4 class="card-title">Direct Support Contacts</h4>
+            <p style="font-size: 12px; color: var(--text-secondary);">Reach out to our specialist help desk teams during business hours.</p>
+            
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 4px;">
+              <div style="display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: 10px; background: var(--bg-main); border: 1px solid var(--border-color);">
+                <i data-lucide="phone-call" class="w-4 h-4 text-accent"></i>
+                <div>
+                  <span style="font-size: 11px; color: #94A3B8; display: block;">Toll-Free Helpline</span>
+                  <strong style="font-size: 12.5px; color: var(--text-primary);">1800-CODEX-MSME</strong>
+                </div>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: 10px; background: var(--bg-main); border: 1px solid var(--border-color);">
+                <i data-lucide="mail" class="w-4 h-4 text-accent"></i>
+                <div>
+                  <span style="font-size: 11px; color: #94A3B8; display: block;">Support Email Desk</span>
+                  <strong style="font-size: 12.5px; color: var(--text-primary);">support@codex-msme.gov</strong>
+                </div>
+              </div>
+
+              <button class="primary-btn" style="width: 100%; justify-content: center; margin-top: 8px;" onclick="openNewSupportTicketModal()">
+                <i data-lucide="ticket" class="w-4 h-4"></i> Submit Complaint / Ticket
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: 4px;">
+          <div class="card-header">
+            <div>
+              <h4 class="card-title">Submitted Support Tickets & Complaints</h4>
+              <p class="card-subtitle">Track responses from our grievance redressal officers.</p>
+            </div>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Ticket ID</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="help-desk-tickets-tbody">
+              <tr>
+                <td><strong>TICK-4021</strong></td>
+                <td>Tax & GST Filing Assistance</td>
+                <td>Assistance required for Q1 GST reconciliation export.</td>
+                <td>Sep 15, 2026</td>
+                <td><span class="table-badge delivered">Resolved</span></td>
+              </tr>
+              <tr>
+                <td><strong>TICK-4190</strong></td>
+                <td>Government Grant Inquiry</td>
+                <td>Inquiry regarding ZED certification subsidy disbursement.</td>
+                <td>Sep 17, 2026</td>
+                <td><span class="table-badge pending">In Progress</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= SECTION 6: INDIAN KALNIRNAY CALENDAR & MILESTONES ================= -->
+      <section id="section-calendar" class="page-section">
+        <div class="section-title-wrap">
+          <div class="title-with-btn">
+            <div>
+              <h2>Kalnirnay & Business Compliance Calendar</h2>
+              <p>Traditional Indian monthly calendar layout integrated with GST deadlines, EMI dates, and corporate milestones.</p>
+            </div>
+            <button class="primary-btn" onclick="openAddEventModal()">
+              <i data-lucide="plus-circle" class="w-4 h-4"></i> + Add Event / Deadline
+            </button>
+          </div>
+        </div>
+
+        <!-- Main Kalnirnay Dashboard Layout (2 Columns: Grid & Side Panel) -->
+        <div class="kalnirnay-dashboard-grid">
+          
+          <!-- Column 1: Monthly Calendar Grid (Kalnirnay Style) -->
+          <div class="card kalnirnay-main-card">
+            
+            <!-- Calendar Navigation & Header -->
+            <div class="kalnirnay-header-bar">
+              <div class="kalnirnay-title-wrap">
+                <h3 id="kalnirnay-month-year-title">September 2026</h3>
+                <span class="kalnirnay-panchang-badge" id="kalnirnay-panchang-label">Bhadrapada - Ashwin 2048 Vikrami</span>
+              </div>
+
+              <div class="kalnirnay-nav-controls">
+                <button type="button" class="small-btn" onclick="changeKalnirnayMonth(-1)" title="Previous Month">
+                  <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                </button>
+                <button type="button" class="small-btn" onclick="jumpToCurrentMonth()" title="Jump to Today">Today</button>
+                <button type="button" class="small-btn" onclick="changeKalnirnayMonth(1)" title="Next Month">
+                  <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Search & Filter Toolbar -->
+            <div class="kalnirnay-filter-toolbar">
+              <div class="kalnirnay-search-box">
+                <i data-lucide="search" class="w-4 h-4 text-muted"></i>
+                <input type="text" id="kalnirnay-event-search" placeholder="Search festivals, GST deadlines, EMIs..." oninput="renderKalnirnayCalendar()" />
+              </div>
+
+              <div class="pill-group" id="kalnirnay-cat-pills">
+                <button class="pill active" data-calcat="all" onclick="setKalnirnayCategory('all', this)">All Events</button>
+                <button class="pill" data-calcat="Festival" onclick="setKalnirnayCategory('Festival', this)">Festivals</button>
+                <button class="pill" data-calcat="Compliance" onclick="setKalnirnayCategory('Compliance', this)">GST / Tax</button>
+                <button class="pill" data-calcat="EMI" onclick="setKalnirnayCategory('EMI', this)">Loan/EMI</button>
+                <button class="pill" data-calcat="Meeting" onclick="setKalnirnayCategory('Meeting', this)">Meetings</button>
+              </div>
+            </div>
+
+            <!-- Weekday Headers -->
+            <div class="kalnirnay-weekdays-grid">
+              <span class="wk-sun">Sun</span>
+              <span>Mon</span>
+              <span>Tue</span>
+              <span>Wed</span>
+              <span>Thu</span>
+              <span>Fri</span>
+              <span class="wk-sat">Sat</span>
+            </div>
+
+            <!-- Days Grid Matrix -->
+            <div class="kalnirnay-days-matrix" id="kalnirnay-days-grid-container"></div>
+
+            <!-- Color Indicator Legend Bar -->
+            <div class="kalnirnay-legend-bar">
+              <div class="legend-item"><span class="legend-dot ind-today"></span> Today</div>
+              <div class="legend-item"><span class="legend-dot ind-festival"></span> Indian Festival</div>
+              <div class="legend-item"><span class="legend-dot ind-compliance"></span> GST / Compliance</div>
+              <div class="legend-item"><span class="legend-dot ind-emi"></span> Loan / EMI Due</div>
+              <div class="legend-item"><span class="legend-dot ind-meeting"></span> Business Meeting</div>
+            </div>
+          </div>
+
+          <!-- Column 2: Selected Date Side Panel / Event Manager -->
+          <div class="card kalnirnay-side-panel">
+            <div class="card-header" style="margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 12px;">
+              <div>
+                <h4 class="card-title" id="side-panel-date-header">September 18, 2026</h4>
+                <p class="card-subtitle" id="side-panel-panchang-sub">Tithi: Shukla Ekadashi &bull; Nakshatra: Purva Ashada</p>
+              </div>
+              <button type="button" class="small-btn" onclick="openAddEventForSelectedDate()">+ Add</button>
+            </div>
+
+            <div class="side-panel-events-scroll" id="side-panel-events-list"></div>
+
+            <!-- Quick Reminders Banner -->
+            <div class="side-panel-reminder-box">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <i data-lucide="bell-ring" class="w-4 h-4 text-accent"></i>
+                <strong style="font-size: 12.5px; color: var(--text-primary);">Active Alerts & Reminders</strong>
+              </div>
+              <p style="font-size: 11.5px; color: var(--text-secondary); line-height: 1.4;" id="side-panel-reminder-text">
+                🔔 GST GSTR-3B filing due in 2 days. Ensure electronic ledger cash balance is verified.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
       <!-- ================= SECTION: CLOUD DATA ================= -->
       <section id="section-cloud" class="page-section">
         <div class="section-title-wrap">
@@ -1112,18 +1368,6 @@
             </div>
           </div>
 
-        </div>
-      </section>
-
-      <!-- ================= SECTION 6: CALENDAR ================= -->
-      <section id="section-calendar" class="page-section">
-        <div class="section-title-wrap">
-          <h2>Calendar & Milestone Schedule</h2>
-          <p>Click any date to register or review sprint events in the database.</p>
-        </div>
-
-        <div class="card">
-          <div class="calendar-grid" id="calendar-grid-container"></div>
         </div>
       </section>
 
@@ -1410,43 +1654,6 @@
     </div>
   </div>
 
-  <!-- 24/7 Business Support Desk AI Modal -->
-  <div class="modal-overlay hidden" id="msme-support-desk-modal">
-    <div class="modal-card" style="width: 620px; max-width: 95vw; height: 600px; max-height: 90vh; display: flex; flex-direction: column;">
-      <div class="modal-header" style="padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(245, 158, 11, 0.1); color: #F59E0B; display: flex; align-items: center; justify-content: center;">
-            <i data-lucide="headphones" class="w-5 h-5"></i>
-          </div>
-          <div>
-            <h3 style="font-size: 16px; font-weight: 800; color: var(--text-primary);">24/7 MSME Business Support Desk</h3>
-            <span style="font-size: 11px; color: #10B981; font-weight: 600;">● CODEX AI Assistant Online</span>
-          </div>
-        </div>
-        <button class="modal-close-btn" onclick="closeMsmeSupportDeskModal()"><i data-lucide="x"></i></button>
-      </div>
-
-      <div style="flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; font-size: 13px;" id="support-desk-messages">
-        <div class="ai-bubble">
-          👋 Hello <strong>Pratik Narkhede</strong>! I am your 24/7 MSME Support Desk assistant. Ask me anything about Udyam registration, tax filings, government subsidies, or loan eligibility!
-        </div>
-      </div>
-
-      <div style="padding: 8px 16px; background: var(--bg-main); border-top: 1px solid var(--border-color); display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none;">
-        <button class="suggestion-chip" onclick="askSupportDesk('How do I register my enterprise for Udyam?')">📝 Udyam Steps</button>
-        <button class="suggestion-chip" onclick="askSupportDesk('What are the benefits of ZED Certification?')">🛡️ ZED Benefits</button>
-        <button class="suggestion-chip" onclick="askSupportDesk('How can I claim CLCSS capital subsidy?')">💸 CLCSS Subsidy</button>
-      </div>
-
-      <form style="display: flex; border-top: 1px solid var(--border-color); background: var(--bg-card); padding: 6px;" onsubmit="handleSupportDeskSubmit(event)">
-        <input type="text" id="support-desk-input" placeholder="Type your business or compliance question..." autocomplete="off" style="flex: 1; border: none; padding: 12px 14px; font-size: 13px; background: transparent; color: var(--text-primary); outline: none;" required />
-        <button type="submit" class="primary-btn" style="padding: 0 18px; border-radius: 10px;">
-          <i data-lucide="send" class="w-4 h-4"></i>
-        </button>
-      </form>
-    </div>
-  </div>
-
   <!-- Loan Eligibility Assessment Modal -->
   <div class="modal-overlay hidden" id="loan-eligibility-modal">
     <div class="modal-card" style="width: 500px; max-width: 95vw;">
@@ -1489,7 +1696,6 @@
           </select>
         </div>
 
-        <!-- Result Banner -->
         <div id="eligibility-result-banner" class="hidden" style="padding: 14px; border-radius: 10px; font-size: 13px; line-height: 1.5; margin-top: 4px;"></div>
 
         <div class="modal-footer">
@@ -1710,89 +1916,76 @@
     </div>
   </div>
 
-  <!-- MSME Interactive Service Modals -->
-  <!-- 1. MSME Registration Modal -->
-  <div class="modal-overlay hidden" id="msme-reg-modal">
+  <!-- Raise Support Ticket Modal -->
+  <div class="modal-overlay hidden" id="new-support-ticket-modal">
     <div class="modal-card">
       <div class="modal-header">
-        <h3>Udyam MSME Registration Form</h3>
-        <button class="modal-close-btn" onclick="document.getElementById('msme-reg-modal').classList.add('hidden')"><i data-lucide="x"></i></button>
+        <h3>Raise New Support / Complaint Ticket</h3>
+        <button class="modal-close-btn" onclick="closeNewSupportTicketModal()"><i data-lucide="x"></i></button>
       </div>
-      <form id="msme-reg-form" class="modal-body" onsubmit="submitMsmeService(event, 'Udyam Registration')">
+      <form id="support-ticket-form" class="modal-body" onsubmit="submitSupportTicket(event)">
         <div class="form-group">
-          <label>Business Name</label>
-          <input type="text" id="msme-reg-bus" required placeholder="e.g. Acme Industries" />
-        </div>
-        <div class="form-group">
-          <label>Proprietor / Director PAN</label>
-          <input type="text" id="msme-reg-pan" required placeholder="ABCDE1234F" />
-        </div>
-        <div class="form-group">
-          <label>Investment in Plant & Machinery (₹)</label>
-          <input type="number" id="msme-reg-inv" required placeholder="1500000" />
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="small-btn" onclick="document.getElementById('msme-reg-modal').classList.add('hidden')">Cancel</button>
-          <button type="submit" class="primary-btn">Submit Registration</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- 2. MSME Subsidy Application Modal -->
-  <div class="modal-overlay hidden" id="msme-sub-modal">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3>Apply for Subsidy / Benefit Scheme</h3>
-        <button class="modal-close-btn" onclick="document.getElementById('msme-sub-modal').classList.add('hidden')"><i data-lucide="x"></i></button>
-      </div>
-      <form id="msme-sub-form" class="modal-body" onsubmit="submitMsmeService(event, 'ZED Subsidy Application')">
-        <div class="form-group">
-          <label>Select Subsidy Program</label>
-          <select id="msme-sub-type">
-            <option value="Credit Linked Capital Subsidy (CLCSS)">Credit Linked Capital Subsidy (CLCSS)</option>
-            <option value="Zero Defect Zero Effect (ZED) Certification">Zero Defect Zero Effect (ZED) Certification</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Business Name</label>
-          <input type="text" id="msme-sub-bus" required placeholder="e.g. Acme Industries" />
-        </div>
-        <div class="form-group">
-          <label>Upload Supporting Invoice / Audit Report</label>
-          <input type="file" id="msme-sub-file" accept=".pdf,.png,.jpg" required />
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="small-btn" onclick="document.getElementById('msme-sub-modal').classList.add('hidden')">Cancel</button>
-          <button type="submit" class="primary-btn">Apply Subsidy</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- 3. MSME 24/7 Support Desk Ticket Modal -->
-  <div class="modal-overlay hidden" id="msme-sup-modal">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3>Open 24/7 Business Support Ticket</h3>
-        <button class="modal-close-btn" onclick="document.getElementById('msme-sup-modal').classList.add('hidden')"><i data-lucide="x"></i></button>
-      </div>
-      <form id="msme-sup-form" class="modal-body" onsubmit="submitMsmeService(event, 'Business Support Ticket')">
-        <div class="form-group">
-          <label>Issue Category</label>
-          <select id="msme-sup-cat">
+          <label>Support Category</label>
+          <select id="ticket-cat">
             <option value="Tax & GST Filing Assistance">Tax & GST Filing Assistance</option>
             <option value="Government Grant Inquiry">Government Grant Inquiry</option>
+            <option value="Application Status Help">Application Status Help</option>
+            <option value="Document Assistance">Document Assistance</option>
             <option value="Technical Dispute Resolution">Technical Dispute Resolution</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Describe Your Request</label>
-          <textarea id="msme-sup-desc" rows="3" required placeholder="Provide query details..." style="padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-primary); outline: none; font-family: inherit;"></textarea>
+          <label>Describe Your Issue or Complaint</label>
+          <textarea id="ticket-desc" rows="3" required placeholder="Provide ticket details..." style="padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-primary); outline: none; font-family: inherit;"></textarea>
         </div>
         <div class="modal-footer">
-          <button type="button" class="small-btn" onclick="document.getElementById('msme-sup-modal').classList.add('hidden')">Cancel</button>
-          <button type="submit" class="primary-btn">Open Support Ticket</button>
+          <button type="button" class="small-btn" onclick="closeNewSupportTicketModal()">Cancel</button>
+          <button type="submit" class="primary-btn">Submit Ticket</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Kalnirnay Add / Edit Event Modal -->
+  <div class="modal-overlay hidden" id="kalnirnay-event-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="kalnirnay-modal-title">Add Calendar Event / Deadline</h3>
+        <button class="modal-close-btn" onclick="closeKalnirnayEventModal()"><i data-lucide="x"></i></button>
+      </div>
+      <form id="kalnirnay-event-form" class="modal-body" onsubmit="handleKalnirnayEventSubmit(event)">
+        <input type="hidden" id="edit-event-index" value="" />
+        
+        <div class="form-group">
+          <label>Event / Deadline Title</label>
+          <input type="text" id="event-input-title" required placeholder="e.g. Q2 GST Return Filing" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Event Date</label>
+            <input type="date" id="event-input-date" required />
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="event-input-category" required>
+              <option value="Compliance">GST / Compliance Deadline</option>
+              <option value="EMI">Loan / EMI Due Date</option>
+              <option value="Festival">Indian Festival / Holiday</option>
+              <option value="Meeting">Business Meeting</option>
+              <option value="Reminder">Personal Reminder</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Description & Notes</label>
+          <textarea id="event-input-desc" rows="2" placeholder="Add specific notes or reminders..." style="padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-primary); outline: none; font-family: inherit;"></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="small-btn" onclick="closeKalnirnayEventModal()">Cancel</button>
+          <button type="submit" class="primary-btn">Save Event to Calendar</button>
         </div>
       </form>
     </div>
