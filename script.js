@@ -436,6 +436,38 @@ function markNotificationsAsRead() {
   }
 }
 
+// Calendar Month Grid Helper
+function populateMonthYearDropdowns(monthEl, yearEl, activeMonth, activeYear) {
+  if (!monthEl || !yearEl) return;
+  monthEl.innerHTML = MONTH_NAMES.map((m, i) => `<option value="${i}" ${i === activeMonth ? 'selected' : ''}>${m}</option>`).join("");
+  const years = [2024, 2025, 2026, 2027, 2028];
+  yearEl.innerHTML = years.map(y => `<option value="${y}" ${y === activeYear ? 'selected' : ''}>${y}</option>`).join("");
+}
+
+function renderMonthGrid(containerEl, year, month, selectedDay, onSelect) {
+  if (!containerEl) return;
+  containerEl.innerHTML = "";
+  const firstDayIndex = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  for (let i = 0; i < firstDayIndex; i++) {
+    const emptySpan = document.createElement("span");
+    emptySpan.className = "cal-pop-day empty";
+    containerEl.appendChild(emptySpan);
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dayBtn = document.createElement("button");
+    dayBtn.type = "button";
+    dayBtn.className = "cal-pop-day" + (d === selectedDay ? " selected" : "");
+    dayBtn.textContent = d;
+    dayBtn.addEventListener("click", () => {
+      onSelect(year, month, d);
+    });
+    containerEl.appendChild(dayBtn);
+  }
+}
+
 // ================= 2. RENDER ALL FROM DATABASE =================
 function renderAllFromDB() {
   const data = DB.get();
@@ -1019,6 +1051,28 @@ function exportSupplyToExcelCSV() {
   downloadCSV([headers.join(","), ...rows.map(r => r.join(","))].join("\r\n"), `CODEX_Company_Supply_${activeFilter}`);
 }
 
+function exportOrdersToExcelCSV() {
+  const db = DB.get();
+  const activeFilter = db.ordersFilter || "all";
+  let orders = db.orders || [];
+
+  if (activeFilter !== "all") {
+    orders = orders.filter(o => o.status.toLowerCase() === activeFilter);
+  }
+
+  if (orders.length === 0) {
+    showToast("No orders data to export!");
+    return;
+  }
+
+  const headers = ["Order ID", "Purchase Date", "Customer", "Item", `Amount (${db.currency})`, "Status"];
+  const rows = orders.map(o => [
+    `"${o.id}"`, `"${o.date}"`, `"${o.customer}"`, `"${o.item}"`, `"${formatMoney(o.amountUSD)}"`, `"${o.status}"`
+  ]);
+
+  downloadCSV([headers.join(","), ...rows.map(r => r.join(","))].join("\r\n"), `CODEX_Orders_${activeFilter}`);
+}
+
 function downloadCSV(csvString, fileNamePrefix) {
   const blob = new Blob(["\uFEFF" + csvString], { type: "text/csv;charset=utf-8;" });
   const url = URL.createObjectURL(blob);
@@ -1102,16 +1156,126 @@ function getSearchDatabaseIndex() {
   return results;
 }
 
-// ================= OPENAI GPT API CHAT ENGINE =================
-async function processOpenAIChatAPI(rawPrompt) {
-  const apiKey = localStorage.getItem(OPENAI_API_KEY_STORAGE) || "YOUR_OPENAI_API_KEY_HERE";
-  
-  if (!apiKey || apiKey.includes("YOUR_OPENAI_API_KEY")) {
-    return `⚠️ <strong>OpenAI API Key Missing</strong><br><br>Please configure your OpenAI API key in browser storage or settings to chat with GPT-4o.`;
+// ================= DIRECT DATABASE INTELLIGENCE ENGINE & OPENAI GPT BRIDGE =================
+function generateLocalDatabaseQueryResponse(prompt) {
+  const q = prompt.toLowerCase();
+  const db = DB.get();
+
+  // Summary / Overview
+  if (q.includes("summary") || q.includes("overview") || q.includes("about") || q.includes("website") || q.includes("system")) {
+    const rev = db.revenueViews.data[db.revenueViews.active || "monthly"];
+    return `📊 <strong>CODEX Dashboard & Database Summary:</strong><br>
+    • <strong>Owner / Admin:</strong> ${db.profile.name} (${db.profile.role})<br>
+    • <strong>Customers:</strong> ${db.metrics.registeredCustomers.toLocaleString()} registered (${db.customers.length} in quick directory)<br>
+    • <strong>Orders:</strong> ${db.orders.length} transactions logged (${db.metrics.totalOrders.toLocaleString()} total processed)<br>
+    • <strong>Active Revenue:</strong> ${formatMoney(rev.revenueUSD)} (Target: ${formatMoney(rev.targetUSD)})<br>
+    • <strong>Inventory Stock:</strong> ${db.inventoryStock.available.toLocaleString()} available / ${db.inventoryStock.sold.toLocaleString()} sold<br>
+    • <strong>MSME Services:</strong> ${db.msmeRequests ? db.msmeRequests.length : 0} submitted requests<br>
+    • <strong>Active Loan Schemes:</strong> ${db.loanSchemes ? db.loanSchemes.length : 0} schemes listed`;
   }
 
+  // Customers Query
+  if (q.includes("customer") || q.includes("client") || q.includes("user")) {
+    const list = db.customers.map(c => `• <strong>${c.name}</strong> (${c.tier}) - ${c.email}`).join("<br>");
+    return `👥 <strong>Customer Directory (${db.customers.length} records):</strong><br>${list}<br><br>Total database registered metric: <strong>${db.metrics.registeredCustomers.toLocaleString()}</strong>`;
+  }
+
+  // Orders / Sales Queries
+  if (q.includes("order") || q.includes("purchase") || q.includes("transaction") || q.includes("sale")) {
+    const ordersList = db.orders.slice(0, 5).map(o => `• <strong>#${o.id}</strong>: ${o.item} by ${o.customer} - ${formatMoney(o.amountUSD)} [<em>${o.status}</em>]`).join("<br>");
+    return `📦 <strong>Recent Orders (${db.orders.length} total):</strong><br>${ordersList}<br><br>Pending orders: <strong>${db.orders.filter(o => o.status === 'Pending').length}</strong> | Completed: <strong>${db.orders.filter(o => o.status === 'Completed').length}</strong>`;
+  }
+
+  // Products / Inventory / Stock
+  if (q.includes("product") || q.includes("inventory") || q.includes("stock") || q.includes("item")) {
+    const prods = db.productsCatalog.map(p => `• <strong>${p.name}</strong>: ${p.quantity} units (${p.available ? '✅ Available' : '❌ Out of stock'})`).join("<br>");
+    return `🏭 <strong>Warehouse & Products Catalog:</strong><br>${prods}<br><br>Total Stock in Warehouse: <strong>${db.inventoryStock.details.toLocaleString()} units</strong> (Available: ${db.inventoryStock.available.toLocaleString()})`;
+  }
+
+  // Revenue / Profit / Target / Money
+  if (q.includes("revenue") || q.includes("target") || q.includes("profit") || q.includes("earn") || q.includes("currency")) {
+    const rev = db.revenueViews.data[db.revenueViews.active || "monthly"];
+    return `💰 <strong>Financial Telemetry (${db.currency}):</strong><br>
+    • <strong>Timeframe:</strong> ${rev.title}<br>
+    • <strong>Current Revenue:</strong> ${formatMoney(rev.revenueUSD)}<br>
+    • <strong>Target Goal:</strong> ${formatMoney(rev.targetUSD)} (${rev.pct} achieved)<br>
+    • <strong>Today's Velocity:</strong> ${formatMoney(rev.todayStatUSD)}<br>
+    • <strong>Refund Allocations:</strong> ${formatMoney(db.inventory.refundsAmountUSD)}`;
+  }
+
+  // Company Supplies / Vendors
+  if (q.includes("supply") || q.includes("supplier") || q.includes("company") || q.includes("vendor") || q.includes("wholesale")) {
+    const sups = db.companySupplies.map(s => `• <strong>${s.company}</strong>: ${s.product} (${s.quantity} units, ${s.status})`).join("<br>");
+    return `🚚 <strong>Company Supply Pipeline:</strong><br>${sups}`;
+  }
+
+  // Loans / Financing / EMI
+  if (q.includes("loan") || q.includes("emi") || q.includes("financ") || q.includes("scheme")) {
+    const schemes = db.loanSchemes.map(s => `• <strong>${s.name}</strong> (${s.ministry}): Max ${s.amount} @ ${s.benefit}`).join("<br>");
+    const apps = db.loanApplications.map(a => `• <strong>${a.id}</strong>: ${a.name} (${a.amount}) - ${a.status}`).join("<br>");
+    return `🏦 <strong>Loan Facilities:</strong><br>${schemes}<br><br><strong>Your Submitted Applications:</strong><br>${apps}`;
+  }
+
+  // MSME / Udyam / Subsidies
+  if (q.includes("msme") || q.includes("udyam") || q.includes("subsidy") || q.includes("grant")) {
+    const reqs = db.msmeRequests.map(r => `• <strong>${r.id}</strong>: ${r.type} for <em>${r.business}</em> [Status: ${r.status}]`).join("<br>");
+    return `🏛️ <strong>MSME Services Status:</strong><br>${reqs}<br><br>Available government programs include CLCSS (15% capital subsidy) and ZED Certification support.`;
+  }
+
+  // Profile / Admin
+  if (q.includes("profile") || q.includes("pratik") || q.includes("admin") || q.includes("owner")) {
+    return `👤 <strong>System Administrator Profile:</strong><br>
+    • <strong>Name:</strong> ${db.profile.name}<br>
+    • <strong>Role:</strong> ${db.profile.role}<br>
+    • <strong>Email:</strong> ${db.profile.email}<br>
+    • <strong>Phone:</strong> ${db.profile.countryCode} ${db.profile.mobile}<br>
+    • <strong>Location:</strong> ${db.profile.location}`;
+  }
+
+  // Notifications
+  if (q.includes("notification") || q.includes("alert") || q.includes("log")) {
+    const notifs = db.notifications.slice(0, 4).map(n => `• [${n.type.toUpperCase()}] ${n.msg} (${n.time})`).join("<br>");
+    return `🔔 <strong>Latest Activity Logs:</strong><br>${notifs}`;
+  }
+
+  // Default fallback guidance
+  return `🤖 I am connected directly to your local database! You can ask me about:<br>
+  • <strong>Customers</strong> ("Show me registered customers")<br>
+  • <strong>Orders</strong> ("What are the latest orders?")<br>
+  • <strong>Products & Inventory</strong> ("What is available in stock?")<br>
+  • <strong>Financials</strong> ("What is our active revenue target?")<br>
+  • <strong>Supplies</strong> ("Show me company supply shipments")<br>
+  • <strong>Loans & MSME</strong> ("What loan schemes or applications do I have?")`;
+}
+
+async function processOpenAIChatAPI(rawPrompt) {
+  const apiKey = localStorage.getItem(OPENAI_API_KEY_STORAGE) || "";
   const db = DB.get();
-  const systemContext = `You are Codex AI, an advanced assistant built for the CODEX dashboard managed by ${db.profile.name}. You have access to active products, customers, and revenue metrics.`;
+
+  // If no OpenAI key is configured, fallback to our built-in offline database knowledge engine
+  if (!apiKey || apiKey.trim() === "" || apiKey.includes("YOUR_OPENAI_API_KEY")) {
+    return generateLocalDatabaseQueryResponse(rawPrompt);
+  }
+
+  // Prepare full synchronized database snapshot for GPT-4o
+  const systemContext = `You are Codex AI, the neural intelligence engine for the CODEX dashboard created for ${db.profile.name}.
+You have direct read access to the live website database provided below:
+
+CURRENT DATABASE STATE:
+- Admin Profile: ${JSON.stringify(db.profile)}
+- Selected Global Currency: ${db.currency} (Rate: ${CURRENCY_CONFIG[db.currency]?.rate})
+- Key Metrics: ${JSON.stringify(db.metrics)}
+- Warehouse Inventory Stock: ${JSON.stringify(db.inventoryStock)}
+- Catalog Products: ${JSON.stringify(db.productsCatalog)}
+- Recent eCommerce Orders: ${JSON.stringify(db.orders)}
+- Customers Directory: ${JSON.stringify(db.customers)}
+- Payments Ledger: ${JSON.stringify(db.payments)}
+- Company Wholesale Supplies: ${JSON.stringify(db.companySupplies)}
+- Active Revenue Timeframe & Targets: ${JSON.stringify(db.revenueViews.data[db.revenueViews.active || 'monthly'])}
+- Loan Schemes & Applications: Schemes: ${JSON.stringify(db.loanSchemes)}, Applications: ${JSON.stringify(db.loanApplications)}
+- MSME Requests: ${JSON.stringify(db.msmeRequests)}
+
+Always provide helpful, well-structured, accurate responses referencing the database data whenever requested. Format using HTML tags like <strong>, • bullet points, and <br> for readability.`;
 
   try {
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -1126,21 +1290,22 @@ async function processOpenAIChatAPI(rawPrompt) {
           { role: "system", content: systemContext },
           { role: "user", content: rawPrompt }
         ],
-        temperature: 0.7
+        temperature: 0.6
       })
     });
 
     if (!response.ok) {
       const errJson = await response.json().catch(() => ({}));
-      return `❌ <strong>OpenAI API Error (${response.status}):</strong> ${errJson.error?.message || response.statusText}`;
+      console.warn("OpenAI API call failed, falling back to local DB engine:", errJson);
+      return generateLocalDatabaseQueryResponse(rawPrompt);
     }
 
     const data = await response.json();
     const reply = data.choices?.[0]?.message?.content || "No response received from OpenAI.";
     return reply.replace(/\n/g, '<br>');
   } catch (err) {
-    console.error("OpenAI API connection error:", err);
-    return `❌ Failed to connect to OpenAI API servers. Please check your network connection or API key.`;
+    console.error("OpenAI API connection error, reverting to local database engine:", err);
+    return generateLocalDatabaseQueryResponse(rawPrompt);
   }
 }
 
